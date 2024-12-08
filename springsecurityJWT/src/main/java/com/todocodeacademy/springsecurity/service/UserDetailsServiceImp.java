@@ -72,8 +72,11 @@ public class UserDetailsServiceImp implements UserDetailsService {
         String username = authLoginRequest.username();
         String password = authLoginRequest.password();
 
+
+        // Llamo al método authenticate.
         Authentication authentication = this.authenticate (username, password);
-        //si todo sale bien
+
+        //si es autenticado correctamente se almacena la información SecurityContextHolder y se crea el token.
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String accessToken =jwtUtils.createToken(authentication);
         AuthResponseDTO authResponseDTO = new AuthResponseDTO(username, "login ok", accessToken, true);
@@ -82,15 +85,16 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
 
     public Authentication authenticate (String username, String password) {
-        //con esto debo buscar el usuario
+        //Recupero información del usuario por el username
         UserDetails userDetails = this.loadUserByUsername(username);
 
+        // En caso que sea nulo, se informa que no se pudo encontrar al usuario.
         if (userDetails==null) {
-            throw new BadCredentialsException("Ivalid username or password");
+            throw new BadCredentialsException("Invalid username or password");
         }
-        // si no es igual
+        // En caso que no coincidan las credenciales se informa que la password es incorrecta
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
-            throw new BadCredentialsException("Invalid password");
+            throw new BadCredentialsException("Invalid username or password");
         }
         return new UsernamePasswordAuthenticationToken(username, userDetails.getPassword(), userDetails.getAuthorities());
     }
