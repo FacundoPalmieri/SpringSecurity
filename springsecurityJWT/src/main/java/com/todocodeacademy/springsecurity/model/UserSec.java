@@ -18,6 +18,8 @@ public class UserSec {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+
     @Column(unique = true)
     private String username;
     private String password;
@@ -29,7 +31,7 @@ public class UserSec {
 
     //Usamos Set porque no permite repetidos
     //List permite repetidos
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //el eager me va  a cargar todos los roles
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //el eager carga todos los roles
     @JoinTable (name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns=@JoinColumn(name = "role_id"))
     private Set<Role> rolesList = new HashSet<>();

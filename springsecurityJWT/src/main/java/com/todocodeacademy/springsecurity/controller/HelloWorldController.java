@@ -9,7 +9,8 @@ public class HelloWorldController {
 
     @GetMapping("/holaseg")
     //cambiamos hasAuthority por "hasRole"
-   @PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
+    //@PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
+    @PreAuthorize("isAuthenticated()")
 
     public String secHelloWorld() {
 
