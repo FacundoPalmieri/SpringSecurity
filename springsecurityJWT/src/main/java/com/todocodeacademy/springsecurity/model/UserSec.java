@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,6 +36,10 @@ public class UserSec {
     @JoinTable (name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns=@JoinColumn(name = "role_id"))
     private Set<Role> rolesList = new HashSet<>();
+
+    @Column(length = 500) // Ajustar este valor según sea necesario
+    private String resetPasswordToken;
+
 
 
 }

@@ -1,12 +1,11 @@
 package com.todocodeacademy.springsecurity.controller;
 
 import com.todocodeacademy.springsecurity.model.Permission;
-import com.todocodeacademy.springsecurity.service.IPermissionService;
+import com.todocodeacademy.springsecurity.service.interfaces.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 

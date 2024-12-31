@@ -1,14 +1,13 @@
 package com.todocodeacademy.springsecurity.controller;
 
-import com.todocodeacademy.springsecurity.model.Permission;
 import com.todocodeacademy.springsecurity.model.Role;
 import com.todocodeacademy.springsecurity.model.UserSec;
-import com.todocodeacademy.springsecurity.service.IRoleService;
-import com.todocodeacademy.springsecurity.service.IUserService;
+import com.todocodeacademy.springsecurity.service.interfaces.IRoleService;
+import com.todocodeacademy.springsecurity.service.interfaces.IUserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -27,7 +26,7 @@ public class UserController {
     private IRoleService roleService;
 
 
-    //Endpoint para Obtener  todos los usuarios.
+    //Endpoint para Obtener todos los usuarios.
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<UserSec>> getAllUsers() {
@@ -47,9 +46,9 @@ public class UserController {
 
 
     // Endpoint para crear usuarios
-    @PostMapping
+    @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<UserSec> createUser(@RequestBody UserSec userSec) {
+    public ResponseEntity<UserSec> createUser(@Valid @RequestBody UserSec userSec) {
 
         //Declaración de objetos y listas
         Set<Role> roleList = new HashSet<Role>();

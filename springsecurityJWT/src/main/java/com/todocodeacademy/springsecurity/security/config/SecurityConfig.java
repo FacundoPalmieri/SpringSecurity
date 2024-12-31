@@ -2,6 +2,7 @@ package com.todocodeacademy.springsecurity.security.config;
 import com.todocodeacademy.springsecurity.security.config.filter.JwtTokenValidator;
 import com.todocodeacademy.springsecurity.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -35,15 +36,20 @@ public class SecurityConfig {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private MessageSource messageSource;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
-                .formLogin(Customizer.withDefaults())
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/holaseg",true)) //Redirección luego de autenticación.
                 //sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
-                .oauth2Login(Customizer.withDefaults())
+                .addFilterBefore(new JwtTokenValidator(jwtUtils, messageSource), BasicAuthenticationFilter.class)
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/holaseg",true))//Redirección luego de autenticación.
             .build();
     }
 

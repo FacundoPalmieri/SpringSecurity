@@ -1,8 +1,8 @@
 package com.todocodeacademy.springsecurity.controller;
 import com.todocodeacademy.springsecurity.model.Role;
 import com.todocodeacademy.springsecurity.model.Permission;
-import com.todocodeacademy.springsecurity.service.IPermissionService;
-import com.todocodeacademy.springsecurity.service.IRoleService;
+import com.todocodeacademy.springsecurity.service.interfaces.IPermissionService;
+import com.todocodeacademy.springsecurity.service.interfaces.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

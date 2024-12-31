@@ -1,10 +1,15 @@
 package com.todocodeacademy.springsecurity.service;
 import com.todocodeacademy.springsecurity.dto.AuthLoginRequestDTO;
 import com.todocodeacademy.springsecurity.dto.AuthResponseDTO;
+import com.todocodeacademy.springsecurity.exception.CredentialsException;
 import com.todocodeacademy.springsecurity.model.UserSec;
 import com.todocodeacademy.springsecurity.repository.IUserRepository;
 import com.todocodeacademy.springsecurity.utils.JwtUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,6 +25,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 
@@ -32,10 +38,14 @@ public class UserDetailsServiceImp implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    @Qualifier("messageSource")
+    private MessageSource messageSource;
+
     @Override
     public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException {
 
-        //Contamos con usuario de tipo  Usersec y necesitamos devolver un tipo UserDetails
+        //Contamos con usuario de tipo Usersec y necesitamos devolver un tipo UserDetails
         //Recuperamos el usuario de la bd
         UserSec userSec = userRepo.findUserEntityByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException("El usuario " + username + "no fue encontrado"));
@@ -67,20 +77,41 @@ public class UserDetailsServiceImp implements UserDetailsService {
     }
 
     public AuthResponseDTO loginUser (AuthLoginRequestDTO authLoginRequest){
+        try {
+            //recuperamos nombre de usuario y contraseña
+            String username = authLoginRequest.username();
+            String password = authLoginRequest.password();
 
-        //recuperamos nombre de usuario y contraseña
-        String username = authLoginRequest.username();
-        String password = authLoginRequest.password();
+
+            // Llamo al método authenticate.
+            Authentication authentication = this.authenticate(username, password);
+
+            //si es autenticado correctamente se almacena la información SecurityContextHolder y se crea el token.
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String accessToken = jwtUtils.createToken(authentication);
+            AuthResponseDTO authResponseDTO = new AuthResponseDTO(username, "login ok", accessToken, true);
+            return authResponseDTO;
+        }catch (BadCredentialsException ex) {
+
+            // Cargar el mensaje de error desde properties
+            String logMessage = messageSource.getMessage(
+                    "exception.badCredentials.log", // La clave de la propiedad
+                    new Object[]{authLoginRequest.username()}, // Pasamos el username como parámetro
+                    LocaleContextHolder.getLocale() // Usamos el locale para la localización
+            );
+
+            // Crear mensaje genérico para el usuario
+            String userMessage = messageSource.getMessage(
+                    "exception.badCredentials.user",
+                    null,
+                    LocaleContextHolder.getLocale()
+            );
+
+            // Lanza la excepción con el mensaje genérico
+            throw new CredentialsException(logMessage, userMessage);
+        }
 
 
-        // Llamo al método authenticate.
-        Authentication authentication = this.authenticate (username, password);
-
-        //si es autenticado correctamente se almacena la información SecurityContextHolder y se crea el token.
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String accessToken =jwtUtils.createToken(authentication);
-        AuthResponseDTO authResponseDTO = new AuthResponseDTO(username, "login ok", accessToken, true);
-        return authResponseDTO;
 
     }
 

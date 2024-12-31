@@ -1,4 +1,4 @@
-package com.todocodeacademy.springsecurity.service;
+package com.todocodeacademy.springsecurity.service.interfaces;
 
 import com.todocodeacademy.springsecurity.model.Permission;
 
