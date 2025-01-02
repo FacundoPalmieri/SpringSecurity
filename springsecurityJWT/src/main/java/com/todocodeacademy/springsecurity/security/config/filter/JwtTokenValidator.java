@@ -115,7 +115,7 @@ public class JwtTokenValidator extends OncePerRequestFilter {
 
         // Cargar el mensaje de error desde properties
         String messageLog = messageSource.getMessage("exception.validateToken.log", new Object[]{username}, LocaleContextHolder.getLocale());
-        log.error(messageLog, username);
+        log.error(messageLog, username,ex);
 
         // Crear mensaje genérico para el usuario
         String messageUser = messageSource.getMessage("exception.validateToken.user", null, LocaleContextHolder.getLocale());

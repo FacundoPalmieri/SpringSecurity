@@ -88,7 +88,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({CredentialsException.class})
     public ResponseEntity<Response<String>> handleCredentialsException(CredentialsException ex) {
 
-        log.error(ex.getMessage());
+        log.error(ex.getMessage(),ex);
 
         // Crear la respuesta con el mensaje personalizado
         Response<String> response = new Response<>(false, ex.getMessageUser(), null);
