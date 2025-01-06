@@ -21,11 +21,6 @@ public class PermissionService implements IPermissionService {
     @Autowired
     private IPermissionRepository permissionRepository;
 
-
-    @Qualifier("messageSource")
-    @Autowired
-    private MessageSource messageSource;
-
     @Override
     public List<Permission> findAll() {
         try{

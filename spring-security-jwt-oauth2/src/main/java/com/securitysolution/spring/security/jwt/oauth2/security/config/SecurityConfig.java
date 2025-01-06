@@ -1,5 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.security.config;
 import com.securitysolution.spring.security.jwt.oauth2.security.config.filter.JwtTokenValidator;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -27,7 +28,7 @@ public class SecurityConfig {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private MessageSource messageSource;
+    private IMessageService messageService;
 
 
     @Bean
@@ -37,7 +38,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .defaultSuccessUrl("/holaseg",true)) //Redirección luego de autenticación.
                 //sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(new JwtTokenValidator(jwtUtils, messageSource), BasicAuthenticationFilter.class)
+                .addFilterBefore(new JwtTokenValidator(jwtUtils, messageService), BasicAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> oauth2
                         .defaultSuccessUrl("/holaseg",true))//Redirección luego de autenticación.
             .build();

@@ -15,10 +15,12 @@ public interface IUserService {
      List<UserSec> findAll();
      Optional<UserSec> findById(Long id);
      ResponseEntity<Response<UserSec>> save(UserSecDTO userSecDto);
-     void deleteById(Long id);
-    // void update(UserSec userSec);
      String encriptPassword(String password);
-     ResponseEntity<String> createPasswordResetTokenForUser(String email);
+     ResponseEntity<String> createTokenResetPasswordForUser(String email);
      ResponseEntity<String> updatePassword(ResetPasswordDTO resetPasswordDTO, HttpServletRequest request);
+
+
+    void deleteById(Long id);
+    // void update(UserSec userSec);
 
 }

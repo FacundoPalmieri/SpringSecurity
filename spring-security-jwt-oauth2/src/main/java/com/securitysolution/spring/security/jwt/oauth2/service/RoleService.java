@@ -3,6 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IRoleRepository;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,10 +20,6 @@ public class RoleService implements IRoleService {
 
     @Autowired
     private IRoleRepository roleRepository;
-
-    @Qualifier("messageSource")
-    @Autowired
-    private MessageSource messageSource;
 
     @Override
     public List<Role> findAll() {

@@ -5,6 +5,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -30,11 +31,10 @@ import java.util.Collection;
 //mediante el extends establecemos que es un filtro que se tiene que ejecutar siempre
 public class JwtTokenValidator extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
-    private MessageSource messageSource;
-
-    public JwtTokenValidator(JwtUtils jwtUtils, MessageSource messageSource) {
+    private IMessageService messageService;
+    public JwtTokenValidator(JwtUtils jwtUtils, IMessageService messageService) {
         this.jwtUtils = jwtUtils;
-        this.messageSource = messageSource;
+        this.messageService = messageService;
     }
 
     @Override
@@ -81,17 +81,17 @@ public class JwtTokenValidator extends OncePerRequestFilter {
 
 
 
-
+  //Se realiza acá porque no va al manejador global el filtro.
     private void handleTokenExpiredException(TokenExpiredException ex, HttpServletResponse response) throws IOException {
         // Comprobar si hay una autenticación en el contexto
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = (authentication != null) ? authentication.getName() : "Anónimo";  // Valor por defecto si no se encuentra autenticación
 
-        String messageLog = messageSource.getMessage("exception.expiredToken.log", null, LocaleContextHolder.getLocale());
+        String messageLog = messageService.getMessage("exception.expiredToken.log", null, LocaleContextHolder.getLocale());
         log.error(messageLog, username);
 
         // Crear mensaje genérico para el usuario
-        String messageUser = messageSource.getMessage("exception.expiredToken.user", null, LocaleContextHolder.getLocale());
+        String messageUser = messageService.getMessage("exception.expiredToken.user", null, LocaleContextHolder.getLocale());
 
         // Capturamos la excepción y devolvemos una respuesta personalizada
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -114,11 +114,11 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         String username = (authentication != null) ? authentication.getName() : "Unknown User";  // Default value if no authentication is found
 
         // Cargar el mensaje de error desde properties
-        String messageLog = messageSource.getMessage("exception.validateToken.log", new Object[]{username}, LocaleContextHolder.getLocale());
+        String messageLog = messageService.getMessage("exception.validateToken.log", new Object[]{username}, LocaleContextHolder.getLocale());
         log.error(messageLog, username,ex);
 
         // Crear mensaje genérico para el usuario
-        String messageUser = messageSource.getMessage("exception.validateToken.user", null, LocaleContextHolder.getLocale());
+        String messageUser = messageService.getMessage("exception.validateToken.user", null, LocaleContextHolder.getLocale());
 
         // Capturamos la excepción y devolvemos una respuesta personalizada
         response.setStatus(HttpStatus.UNAUTHORIZED.value());

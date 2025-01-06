@@ -1,15 +1,15 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 import com.securitysolution.spring.security.jwt.oauth2.dto.AuthLoginRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.AuthResponseDTO;
+import com.securitysolution.spring.security.jwt.oauth2.exception.BlockAccountException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.CredentialsException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.UserNameNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IUserRepository;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,8 +41,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    @Qualifier("messageSource")
-    private MessageSource messageSource;
+    private IMessageService messageService;
 
     @Autowired
     private UserService userService;
@@ -108,17 +107,28 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         // En caso que sea nulo, se informa que no se pudo encontrar al usuario.
         if (userDetails == null) {
-            String logMessage = messageSource.getMessage("exception.UsernameNotFound.log", new Object[]{username}, LocaleContextHolder.getLocale());
+            String logMessage = messageService.getMessage("exception.UsernameNotFound.log", new Object[]{username}, LocaleContextHolder.getLocale());
             throw new CredentialsException(username);
         }
-        // En caso que no coincidan las credenciales se informa que la password es incorrecta
+
+        //Si el usuario está OK, verifica intentos de inicio de sesión.
+        boolean status = userService.verifyAttempts(username);
+
+        //Se bloquea en caso de igualar o exceder el limite.
+        if(!status){
+            UserSec userSec = userService.blockAccount(username);
+            throw new BlockAccountException("",userSec.getId(), userSec.getUsername());
+        }
+
+        //En caso que no coincidan las credenciales se informa que la password es incorrecta
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
 
             //Se incrementa intentos fallidos.
             userService.incrementFailedAttempts(username);
             throw new CredentialsException(username);
         }
-        //Se resetea intentos fallidos a 0.
+
+        //Resetea intentos fallidos a 0.
         userService.decrementFailedAttempts(username);
         return new UsernamePasswordAuthenticationToken(username, userDetails.getPassword(), userDetails.getAuthorities());
     }

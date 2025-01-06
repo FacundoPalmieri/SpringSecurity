@@ -1,10 +1,11 @@
 package com.securitysolution.spring.security.jwt.oauth2.exception;
 
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,33 +26,87 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private final MessageSource messageSource;
+    @Autowired
+    private IMessageService messageService;
 
-    public GlobalExceptionHandler(@Qualifier("messageSource") MessageSource messageSource) {
-        this.messageSource = messageSource;
+
+
+    @ExceptionHandler({TokenInvalidException.class})
+    public ResponseEntity<Response> handleTokenInvalidException(TokenInvalidException ex, HttpServletRequest request) {
+        //Obtener IP
+        String ip = request.getRemoteAddr();
+
+        //Cargar mensaje para el log.
+        String logMessage = messageService.getMessage("exception.validateToken.log",new Object[]{ex.getUsername(),ip}, LocaleContextHolder.getLocale());
+
+        log.error(logMessage, ex);
+
+        //Cargar mensaje para el usuario.
+        String userMessage = messageService.getMessage("exception.validateToken.user", null, LocaleContextHolder.getLocale());
+
+        //Construir respuesta y enviar.
+        Response<String> response = new Response<>(false,userMessage,null);
+        return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
     }
 
 
 
 
+    @ExceptionHandler(BlockAccountException.class)
+    public ResponseEntity<Response> handleBlockAccountException(BlockAccountException ex) {
 
-    @ExceptionHandler(UserNameNotFoundException.class)
-    public ResponseEntity<Response<String>> handleUsernameNotFoundException(UserNameNotFoundException ex) {
+        // Cargar el mensaje de error para el log.
+        String logMessege = messageService.getMessage(
+                "exception.blockAccountException.log",
+                new Object[]{ex.getId(),ex.getUsername()},
+                LocaleContextHolder.getLocale()
+        );
 
+        log.error(logMessege,ex);
 
-        // Cargar el mensaje de error desde properties
-        String logMessage = messageSource.getMessage(
-                "exception.UsernameNotFound.log", // La clave de la propiedad
-                new Object[]{ex.getUsername()}, // Pasamos el username como parámetro
+        //Cargar el mensaje de error para el usuario.
+        String userMessege = messageService.getMessage(
+                "exception.blockAccountException.user",
+                null,
+                LocaleContextHolder.getLocale()
+        );
+
+        //Construir respuesta y enviar.
+        Response<String> response = new Response<>(false,userMessege,ex.getUsername());
+        return new ResponseEntity<>(response,HttpStatus.FORBIDDEN);
+
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Response> handleResourceNotFoundException(ResourceNotFoundException ex) {
+
+        // Cargar el mensaje de error desde Base de datos
+        String userMessage = messageService.getMessage(
+                "exception.resourceNotFoundException.user", // La clave de la propiedad
+                new Object[]{ex.getId()}, // Pasamos el username como parámetro
                 LocaleContextHolder.getLocale() // Usamos el locale para la localización
         );
 
+        // Crear la respuesta con el mensaje personalizado
+        Response<String> response = new Response<>(false, userMessage, null);
+
+        // Crear la respuesta con el mensaje personalizado
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+
+
+    }
+
+    @ExceptionHandler(UserNameNotFoundException.class)
+    public ResponseEntity<Response<String>> handleUsernameNotFoundException(UserNameNotFoundException ex, HttpServletRequest request) {
+
+        // Cargar el mensaje de error desde BD
+        String logMessage = messageService.getMessage("exception.usernameNotFound.log", new Object[]{ex.getUsername()}, LocaleContextHolder.getLocale());
         log.error(logMessage);
 
 
         // Crear mensaje genérico para el usuario
-        String userMessage = messageSource.getMessage(
-                "exception.UsernameNotFound.user",
+        String userMessage = messageService.getMessage(
+                "exception.usernameNotFound.user",
                 null,
                 LocaleContextHolder.getLocale()
         );
@@ -73,14 +128,14 @@ public class GlobalExceptionHandler {
 
         // Iteramos sobre los errores de cada campo que falló en la validación
         ex.getBindingResult().getFieldErrors().forEach(error ->{
-            String errorMessage = messageSource.getMessage(error.getDefaultMessage(), null, LocaleContextHolder.getLocale());   // Guardamos el nombre del campo (error.getField()) y el mensaje de error correspondiente (error.getDefaultMessage()) en el mapa
+            String errorMessage = messageService.getMessage(error.getDefaultMessage(), null, LocaleContextHolder.getLocale());   // Guardamos el nombre del campo (error.getField()) y el mensaje de error correspondiente (error.getDefaultMessage()) en el mapa
             errors.put(error.getField(), errorMessage);
 
             //Se guarda Log
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String username = (authentication != null) ? authentication.getName() : "Anónimo";
 
-            String logMessage = messageSource.getMessage("exception.validation.log",new Object[]{error.getField(),errorMessage,username}, LocaleContextHolder.getLocale());
+            String logMessage = messageService.getMessage("exception.validation.log",new Object[]{error.getField(),errorMessage,username}, LocaleContextHolder.getLocale());
             log.error(logMessage);
         });
 
@@ -104,10 +159,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Response<String>> handleDataBaseException(DataBaseException ex) {
 
         //Se construye en el mensaje para el usuario.
-        String userMessage = messageSource.getMessage("exception.database.user", null, LocaleContextHolder.getLocale());
+        String userMessage = messageService.getMessage("exception.database.user", null, LocaleContextHolder.getLocale());
 
         //Se construye en el mensaje para log.
-        String logMessage = messageSource.getMessage(
+        String logMessage = messageService.getMessage(
                 "exception.database.log",
                 new Object[]{ ex.getEntityType(),  ex.getEntityId(), ex.getEntityName(), ex.getOperation(), ex.getRootCause(), userMessage},
                 LocaleContextHolder.getLocale()
@@ -124,7 +179,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({NoHandlerFoundException.class, NoResourceFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response<String>> handleNotFound(Exception ex) {
-        String messageUser = messageSource.getMessage("exception.notFound", null, LocaleContextHolder.getLocale());
+        String messageUser = messageService.getMessage("exception.notFound", null, LocaleContextHolder.getLocale());
         Response<String> response = new Response<>(false, messageUser, null);
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
@@ -143,13 +198,13 @@ public class GlobalExceptionHandler {
         String requestedUrl = request.getRequestURI();
 
         // Obtener el mensaje desde el archivo de propiedades y asignar datos
-        String logMessage = messageSource.getMessage("exception.accessDenied.log", new Object[]{username, requestedUrl, ex.getMessage()}, LocaleContextHolder.getLocale());
+        String logMessage = messageService.getMessage("exception.accessDenied.log", new Object[]{username, requestedUrl, ex.getMessage()}, LocaleContextHolder.getLocale());
 
         // Loguear la excepción para detalles de diagnóstico
         log.error(logMessage, ex);
 
         // Mensaje para el usuario final
-        String messageUser = messageSource.getMessage("exception.accessDenied.user", null, LocaleContextHolder.getLocale());
+        String messageUser = messageService.getMessage("exception.accessDenied.user", null, LocaleContextHolder.getLocale());
         Response<String> response = new Response<>(false, messageUser, null);
         return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
@@ -160,19 +215,21 @@ public class GlobalExceptionHandler {
 
     // Manejo de credenciales invalidad
     @ExceptionHandler({CredentialsException.class})
-    public ResponseEntity<Response<String>> handleCredentialsException(CredentialsException ex) {
+    public ResponseEntity<Response<String>> handleCredentialsException(CredentialsException ex, HttpServletRequest request) {
+        //Obtener IP
+        String ip = request.getRemoteAddr();
 
         // Cargar el mensaje de error para log.
-        String logMessage = messageSource.getMessage(
+        String logMessage = messageService.getMessage(
                 "exception.badCredentials.log", // La clave de la propiedad
-                new Object[]{ex.getUsername()}, // Pasamos el username como parámetro
+                new Object[]{ex.getUsername(),ip}, // Pasamos el username como parámetro
                 LocaleContextHolder.getLocale() // Usamos el locale para la localización
         );
 
         log.error(logMessage);
 
         // Crear mensaje genérico para el usuario
-        String userMessage = messageSource.getMessage(
+        String userMessage = messageService.getMessage(
                 "exception.badCredentials.user",
                 null,
                 LocaleContextHolder.getLocale());
@@ -192,8 +249,8 @@ public class GlobalExceptionHandler {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userCreador = authentication.getName();
 
-        //Construye mensaje para el LOG.
-        String logMessage = messageSource.getMessage(
+        //Construye mensaje para el Log.
+        String logMessage = messageService.getMessage(
                 "userService.save.passwordNotEquals.log",
                 new Object[]{ ex.getUserNuevo(),userCreador},
                 LocaleContextHolder.getLocale());
@@ -202,7 +259,7 @@ public class GlobalExceptionHandler {
         log.error(logMessage);
 
         //Se construye mensaje para usuario.
-        String userMessage = messageSource.getMessage("userService.save.passwordNotEquals.user", null, LocaleContextHolder.getLocale());
+        String userMessage = messageService.getMessage("userService.save.passwordNotEquals.user", null, LocaleContextHolder.getLocale());
 
         Response<String> response = new Response<>(false, userMessage, null);
         return new ResponseEntity<>(response,HttpStatus.CONFLICT);
@@ -229,7 +286,7 @@ public class GlobalExceptionHandler {
         log.error("Error inesperado: " + e.getMessage(), e);
 
         // Respuesta genérica para cualquier excepción no capturada
-        String messageUser = messageSource.getMessage("exception.generic", null, LocaleContextHolder.getLocale());
+        String messageUser = messageService.getMessage("exception.generic", null, LocaleContextHolder.getLocale());
         Response<String> response = new Response<>(false, messageUser, null);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }

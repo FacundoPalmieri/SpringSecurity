@@ -11,16 +11,13 @@ public class HelloWorldController {
     //cambiamos hasAuthority por "hasRole"
     //@PreAuthorize("isAuthenticated() and hasRole('ADMIN')")
     @PreAuthorize("isAuthenticated()")
-
     public String secHelloWorld() {
-
         return "Hola Mundo CON seguridad";
     }
 
     @GetMapping("/holanoseg")
     @PreAuthorize("permitAll()")
     public String noSecHelloWorld() {
-
         return "Hola mundo SIN seguridad";
     }
 

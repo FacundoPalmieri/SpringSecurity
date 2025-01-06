@@ -7,8 +7,6 @@ import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IUserS
 import com.securitysolution.spring.security.jwt.oauth2.service.UserDetailsServiceImp;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +21,7 @@ public class AuthenticationController {
 
     @Autowired
     private IUserService userService;
-    @Qualifier("messageSource")
-    @Autowired
-    private MessageSource messageSource;
+
 
     //Todas estas requests y responses vamos a tratarlas como dto
     @PostMapping("/login")
@@ -33,18 +29,19 @@ public class AuthenticationController {
         return new ResponseEntity<>(this.userDetailsService.loginUser(userRequest), HttpStatus.OK);
     }
 
-    @PostMapping("/request-reset-password")
+    @PostMapping("/request/reset-password")
     public ResponseEntity<String> requestResetPassword(@RequestParam String email) {
-        return userService.createPasswordResetTokenForUser(email);
+        return userService.createTokenResetPasswordForUser(email);
 
     }
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(@Valid @RequestBody ResetPasswordDTO resetPasswordDTO, HttpServletRequest request) {
-
         return  userService.updatePassword(resetPasswordDTO, request);
 
     }
+
+
 
 }
 
