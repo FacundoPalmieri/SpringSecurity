@@ -1,17 +1,25 @@
 package com.securitysolution.spring.security.jwt.oauth2.security.config.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
+import com.securitysolution.spring.security.jwt.oauth2.exception.BlockAccountException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.UserNameNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IUserRepository;
+import com.securitysolution.spring.security.jwt.oauth2.service.MessageService;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
@@ -19,21 +27,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Optional;
-
-@Service
+@Slf4j
 public class OAuth2UserFilter extends OncePerRequestFilter {
 
-        @Autowired
-        JwtUtils jwtUtils;
+        private JwtUtils jwtUtils;
+        private IMessageService messageService;
+        private IUserRepository userRepository;
 
-        @Autowired
-        @Qualifier("messageSource")
-        private MessageSource messageSource;
-
-        private final IUserRepository userRepository;
-
-        public OAuth2UserFilter(IUserRepository userRepository) {
+        public OAuth2UserFilter(JwtUtils jwtUtils,IUserRepository userRepository, IMessageService messageService) {
+            this.jwtUtils = jwtUtils;
             this.userRepository = userRepository;
+            this.messageService = messageService;
         }
 
         @Override
@@ -41,7 +45,6 @@ public class OAuth2UserFilter extends OncePerRequestFilter {
                                         HttpServletResponse response,
                                         FilterChain filterChain) throws ServletException, IOException, IOException {
             try{
-
 
                 // Obtiene la autenticación actual del contexto de seguridad.
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -53,14 +56,15 @@ public class OAuth2UserFilter extends OncePerRequestFilter {
                     // Obtiene el email del usuario autenticado.
                     String email = oAuth2User.getAttribute("email");
 
-
-                    // Verifica si el usuario está registrado en la base de datos.
+                    // Recupera datos del usuario.
                     Optional<UserSec> userOptional = userRepository.findUserEntityByUsername(email);
-                    if (userOptional.isEmpty()) {
-                        // Si el usuario no está registrado, se envía un error 403 (Forbidden) y se termina la solicitud.
-                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Usuario no registrado.");
-                        return;
-                    }
+                    UserSec user = userOptional.orElse(null);
+
+                    //Verifica si existe en la BD o si la cuenta está inactiva.
+                    if(this.handleEnableAccount(user, response))return;
+
+                    //Verifica si la cuenta está bloqueada
+                    if(this.handleBlockAccount(user, response))return;
 
                     // Si el usuario está registrado, se genera un JWT usando el método createToken.
                     String jwt = jwtUtils.createToken(authentication);
@@ -75,5 +79,62 @@ public class OAuth2UserFilter extends OncePerRequestFilter {
                 throw new DataBaseException(e,"OAuth2UserFilter",0L , "", "Método doFilterInternal");
 
             }
+
         }
+
+        //Se realiza acá porque no va al manejador global el filtro.
+        private boolean handleEnableAccount(UserSec user, HttpServletResponse response) throws IOException {
+            if(user == null || !user.isEnabled()) {
+                assert user != null;
+                String logMessage = messageService.getMessage("exception.usernameNotFound.log",new Object[]{user.getUsername()},LocaleContextHolder.getLocale());
+                log.error(logMessage);
+
+                // Crear mensaje genérico para el usuario
+                String messageUser = messageService.getMessage("exception.usernameNotFound.user", null, LocaleContextHolder.getLocale());
+
+                // Capturamos la excepción y devolvemos una respuesta personalizada
+                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                response.setContentType("application/json");
+
+                // Crear la respuesta con el formato adecuado
+                Response<String> customResponse = new Response<>(false, messageUser, null);
+
+                // Convertir el objeto a JSON (usando una librería como Jackson)
+                String jsonResponse = new ObjectMapper().writeValueAsString(customResponse);
+
+                // Escribir la respuesta JSON en el cuerpo de la respuesta HTTP
+                response.getWriter().write(jsonResponse);
+                return true;
+            }
+            return false;
+
+        }
+
+    //Se realiza acá porque no va al manejador global el filtro.
+    private boolean handleBlockAccount(UserSec user, HttpServletResponse response) throws IOException {
+
+        if(!user.isAccountNotLocked()) {
+            String logMessage = messageService.getMessage("exception.blockAccount.log",new Object[]{user.getId(),user.getUsername()},LocaleContextHolder.getLocale());
+            log.error(logMessage);
+
+            // Crear mensaje genérico para el usuario
+            String messageUser = messageService.getMessage("exception.blockAccount.user", null, LocaleContextHolder.getLocale());
+
+            // Capturamos la excepción y devolvemos una respuesta personalizada
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setContentType("application/json");
+
+            // Crear la respuesta con el formato adecuado
+            Response<String> customResponse = new Response<>(false, messageUser, null);
+
+            // Convertir el objeto a JSON (usando una librería como Jackson)
+            String jsonResponse = new ObjectMapper().writeValueAsString(customResponse);
+
+            // Escribir la respuesta JSON en el cuerpo de la respuesta HTTP
+            response.getWriter().write(jsonResponse);
+            return true;
+        }
+        return false;
+
     }
+}

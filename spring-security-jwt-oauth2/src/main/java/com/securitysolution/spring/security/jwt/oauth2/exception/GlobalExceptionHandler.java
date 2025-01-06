@@ -3,7 +3,6 @@ package com.securitysolution.spring.security.jwt.oauth2.exception;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -57,7 +56,7 @@ public class GlobalExceptionHandler {
 
         // Cargar el mensaje de error para el log.
         String logMessege = messageService.getMessage(
-                "exception.blockAccountException.log",
+                "exception.blockAccount.log",
                 new Object[]{ex.getId(),ex.getUsername()},
                 LocaleContextHolder.getLocale()
         );
@@ -66,7 +65,7 @@ public class GlobalExceptionHandler {
 
         //Cargar el mensaje de error para el usuario.
         String userMessege = messageService.getMessage(
-                "exception.blockAccountException.user",
+                "exception.blockAccount.user",
                 null,
                 LocaleContextHolder.getLocale()
         );

@@ -32,6 +32,8 @@ import java.util.Collection;
 public class JwtTokenValidator extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
     private IMessageService messageService;
+
+
     public JwtTokenValidator(JwtUtils jwtUtils, IMessageService messageService) {
         this.jwtUtils = jwtUtils;
         this.messageService = messageService;
@@ -87,18 +89,18 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = (authentication != null) ? authentication.getName() : "Anónimo";  // Valor por defecto si no se encuentra autenticación
 
-        String messageLog = messageService.getMessage("exception.expiredToken.log", null, LocaleContextHolder.getLocale());
-        log.error(messageLog, username);
+        String logMessage = messageService.getMessage("exception.expiredToken.log", null, LocaleContextHolder.getLocale());
+        log.error(logMessage, username);
 
         // Crear mensaje genérico para el usuario
-        String messageUser = messageService.getMessage("exception.expiredToken.user", null, LocaleContextHolder.getLocale());
+        String userMessage = messageService.getMessage("exception.expiredToken.user", null, LocaleContextHolder.getLocale());
 
         // Capturamos la excepción y devolvemos una respuesta personalizada
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json");
 
         // Crear la respuesta con el formato adecuado
-        Response<String> customResponse = new Response<>(false, messageUser, null);
+        Response<String> customResponse = new Response<>(false, userMessage, null);
 
         // Convertir el objeto a JSON (usando una librería como Jackson)
         String jsonResponse = new ObjectMapper().writeValueAsString(customResponse);
@@ -114,17 +116,17 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         String username = (authentication != null) ? authentication.getName() : "Unknown User";  // Default value if no authentication is found
 
         // Cargar el mensaje de error desde properties
-        String messageLog = messageService.getMessage("exception.validateToken.log", new Object[]{username}, LocaleContextHolder.getLocale());
-        log.error(messageLog, username,ex);
+        String logMessage = messageService.getMessage("exception.validateToken.log", new Object[]{username}, LocaleContextHolder.getLocale());
+        log.error(logMessage, username,ex);
 
         // Crear mensaje genérico para el usuario
-        String messageUser = messageService.getMessage("exception.validateToken.user", null, LocaleContextHolder.getLocale());
+        String userMessage = messageService.getMessage("exception.validateToken.user", null, LocaleContextHolder.getLocale());
 
         // Capturamos la excepción y devolvemos una respuesta personalizada
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json");
         // Crear la respuesta con el formato adecuado
-        Response<String> customResponse = new Response<>(false, messageUser, null);
+        Response<String> customResponse = new Response<>(false, userMessage, null);
 
         // Convertir el objeto a JSON (usando una librería como Jackson)
         String jsonResponse = new ObjectMapper().writeValueAsString(customResponse);

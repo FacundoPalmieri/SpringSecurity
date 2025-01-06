@@ -19,8 +19,9 @@ public class MessageService implements IMessageService {
     @Autowired
     private IMessageRepository messageRepository;
 
+
     public String getMessage(String clave,Object[] args, Locale locale) {
-        Message message = messageRepository.findByKeyAndLocale(clave, locale.toString());
+        Message message = messageRepository.findByKeyAndLocale(clave, "es_AR");
         if (message != null) {
             return args == null ? message.getValue() : formatMessage(message.getValue(), args);        }
         return "Mensaje no encontrado";

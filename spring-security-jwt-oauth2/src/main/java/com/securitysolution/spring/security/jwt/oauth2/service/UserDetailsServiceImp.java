@@ -108,8 +108,11 @@ public class UserDetailsServiceImp implements UserDetailsService {
         // En caso que sea nulo, se informa que no se pudo encontrar al usuario.
         if (userDetails == null) {
             String logMessage = messageService.getMessage("exception.UsernameNotFound.log", new Object[]{username}, LocaleContextHolder.getLocale());
-            throw new CredentialsException(username);
+            throw new UserNameNotFoundException(username);
         }
+
+        //Si el usuario está en la base de datos, verifica si está activa la cuenta.
+        userService.enableAccount(username);
 
         //Si el usuario está OK, verifica intentos de inicio de sesión.
         boolean status = userService.verifyAttempts(username);

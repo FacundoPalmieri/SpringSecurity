@@ -302,6 +302,23 @@ public class UserService implements IUserService {
         }
     }
 
+    protected void enableAccount(String username){
+        Long id = 0L;
+        try{
+            Optional<UserSec> userSec = userRepository.findUserEntityByUsername(username);
+            if(userSec.isPresent()) {
+                UserSec userSecOK = userSec.get();
+                id = userSecOK.getId();
+                if(!userSecOK.isEnabled()) {
+                    throw new UserNameNotFoundException(username);
+                }
+            }
+        }catch(DataAccessException | CannotCreateTransactionException e) {
+                throw new DataBaseException(e, "userService", id, username, "enableAccount");
+        }
+
+    }
+
     private void validateTokenResetPassword(String token) {
         try {
             DecodedJWT decodedJWT = jwtUtils.validateToken(token);

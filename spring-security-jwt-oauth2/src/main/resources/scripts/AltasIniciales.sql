@@ -76,19 +76,18 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.expiredToken.log'
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.expiredToken.user', 'Token expirado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.badCredentials.log', 'Intento de inicio de sesión fallido - [Usuario: {0}] [IP:{1}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.badCredentials.user', 'Usuario o contraseña incorrecta.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameNotFound.log', 'UserNameNotFoundException: [ Usuario {0} inexistente.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameNotFound.log', 'UserNameNotFoundException: [ Usuario {0} inexistente o dado de baja.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameNotFound.user', 'Usuario inexistente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.resourceNotFoundException.user', 'No se encontró el ID: {0}', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccountException.log', 'Cuenta Bloqueada: [ID USER:{0} - [USERNAME:{1}].', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccountException.user', 'Su cuenta se encuentra bloqueada. Por favor, restablezca la password para ingresar.', 'es_AR');
-
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccount.log', 'Cuenta Bloqueada: [ID USER:{0} - [USERNAME:{1}].', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccount.user', 'Su cuenta se encuentra bloqueada. Por favor, restablezca la password para ingresar.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.empty', 'La password no puede estar vacía.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.min', 'La password debe contener al menos 10 caracteres.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.pattern', 'La password debe contener al menos un carácter especial, una mayúscula y un número.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.role', 'El usuario debe asignarse al menos 1 Rol.', 'es');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.role', 'El usuario debe asignarse al menos 1 Rol.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getMessage.ok', 'Listado de configuraciones correcto.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateMessage.ok', 'Actualización correcta.', 'es_AR');
