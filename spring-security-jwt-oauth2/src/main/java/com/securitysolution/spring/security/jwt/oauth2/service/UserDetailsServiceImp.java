@@ -111,25 +111,25 @@ public class UserDetailsServiceImp implements UserDetailsService {
             throw new UserNameNotFoundException(username);
         }
 
-        //Si el usuario está en la base de datos, verifica si está activa la cuenta.
-        userService.enableAccount(username);
-
-        //Si el usuario está OK, verifica intentos de inicio de sesión.
-        boolean status = userService.verifyAttempts(username);
-
-        //Se bloquea en caso de igualar o exceder el limite.
-        if(!status){
-            UserSec userSec = userService.blockAccount(username);
-            throw new BlockAccountException("",userSec.getId(), userSec.getUsername());
-        }
-
         //En caso que no coincidan las credenciales se informa que la password es incorrecta
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
 
             //Se incrementa intentos fallidos.
             userService.incrementFailedAttempts(username);
+
+            //Verifica intentos de inicio de sesión.
+            boolean status = userService.verifyAttempts(username);
+
+            //Se bloquea en caso de igualar o exceder el limite.
+            if(!status){
+                UserSec userSec = userService.blockAccount(username);
+                throw new BlockAccountException("",userSec.getId(), userSec.getUsername());
+            }
             throw new CredentialsException(username);
         }
+
+        //Verifica si está activa la cuenta.
+        userService.enableAccount(username);
 
         //Resetea intentos fallidos a 0.
         userService.decrementFailedAttempts(username);
