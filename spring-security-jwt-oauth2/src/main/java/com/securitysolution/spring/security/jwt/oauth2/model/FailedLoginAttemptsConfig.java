@@ -7,7 +7,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="intentos_fallidos")
-public class FailedLoginAttempts {
+public class FailedLoginAttemptsConfig {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

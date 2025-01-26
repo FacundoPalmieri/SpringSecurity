@@ -1,8 +1,11 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 
+import com.securitysolution.spring.security.jwt.oauth2.dto.FailedLoginAttemptsDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.MessageDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.model.Message;
+import com.securitysolution.spring.security.jwt.oauth2.dto.TokenConfigDTO;
+import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
+import com.securitysolution.spring.security.jwt.oauth2.model.TokenConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.ConfigService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -21,12 +24,12 @@ public class ConfigController {
     private ConfigService configService;
 
     @GetMapping("/message/get")
-    public ResponseEntity<Response<List<Message>>> getMessage() {
+    public ResponseEntity<Response<List<MessageConfig>>> getMessage() {
         return configService.getMessage();
     }
 
     @PatchMapping("/message/update")
-    public ResponseEntity<Response<Message>> updateMessage(@Valid @RequestBody MessageDTO messageDTO) {
+    public ResponseEntity<Response<MessageConfig>> updateMessage(@Valid @RequestBody MessageDTO messageDTO) {
         return configService.updateMessage(messageDTO);
     }
 
@@ -38,8 +41,19 @@ public class ConfigController {
 
 
     @PatchMapping("/session/update")
-    public ResponseEntity<Response<Integer>> updateAttempts(@NotNull @RequestParam("attempts") Integer attempts) {
-        return configService.updateAttempts(attempts);
+    public ResponseEntity<Response<Integer>> updateAttempts(@Valid @RequestBody FailedLoginAttemptsDTO failedLoginAttemptsDTO) {
+        return configService.updateAttempts(failedLoginAttemptsDTO);
+    }
+
+    // Expiración de Token
+    @GetMapping ("token/get")
+    public ResponseEntity<Response<Long>> getTokenExpiration() {
+        return configService.getTokenExpiration();
+    }
+
+    @PatchMapping("token/update")
+    public ResponseEntity<Response<Long>> updateTokenExpiration(@Valid @RequestBody TokenConfigDTO tokenConfigDTO) {
+        return configService.updateTokenExpiration(tokenConfigDTO);
     }
 
 }

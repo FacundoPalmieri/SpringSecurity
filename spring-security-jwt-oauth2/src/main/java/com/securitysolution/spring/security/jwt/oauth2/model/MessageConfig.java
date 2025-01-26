@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "Mensajes")
-public class Message {
+public class MessageConfig {
 
 
     @Id

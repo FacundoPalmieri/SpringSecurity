@@ -4,6 +4,9 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.securitysolution.spring.security.jwt.oauth2.model.TokenConfig;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -27,6 +30,9 @@ public class JwtUtils {
     @Value("${security.jwt.user.generator}")
     private String userGenerator;
 
+    @Autowired
+    private ITokenService tokenService;
+
     public JwtUtils(@Qualifier("messageSource") MessageSource messageSource) {
         this.messageSource = messageSource;
     }
@@ -45,13 +51,17 @@ public class JwtUtils {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
+        // Obtener y convertir el tiempo de expiración a un objeto Date antes de crear el Token.
+        Date expirationDate = new Date(System.currentTimeMillis() + tokenService.getExpiration());
+
         //a partir de esto generamos el token
         String jwtToken = JWT.create()
                 .withIssuer(this.userGenerator) //acá va el usuario que genera el token
                 .withSubject(username) // a quien se le genera el token
                 .withClaim("authorities", authorities) //claims son los datos contraidos en el JWT
                 .withIssuedAt(new Date()) //fecha de generación del token
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1800000)) //fecha de expiración, tiempo en milisegundos
+                .withExpiresAt(expirationDate) //fecha de expiración, tiempo en milisegundos
+                //.withExpiresAt(new Date(System.currentTimeMillis() + 1800000)) //fecha de expiración, tiempo en milisegundos
                 .withJWTId(UUID.randomUUID().toString()) //id al token - que genere una random
                 .withNotBefore(new Date (System.currentTimeMillis())) //desde cuando es válido (desde ahora en este caso)
                 .sign(algorithm); //nuestra firma es la que creamos con la clave secreta

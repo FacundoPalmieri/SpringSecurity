@@ -2,7 +2,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.ResourceNotFoundException;
-import com.securitysolution.spring.security.jwt.oauth2.model.Message;
+import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IMessageRepository;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class MessageService implements IMessageService {
 
 
     public String getMessage(String clave,Object[] args, Locale locale) {
-        Message message = messageRepository.findByKeyAndLocale(clave, "es_AR");
+        MessageConfig message = messageRepository.findByKeyAndLocale(clave, "es_AR");
         if (message != null) {
             return args == null ? message.getValue() : formatMessage(message.getValue(), args);        }
         return "Mensaje no encontrado";
@@ -35,7 +35,7 @@ public class MessageService implements IMessageService {
 
 
     @Override
-    public List<Message> listMessage() {
+    public List<MessageConfig> listMessage() {
         try {
             return messageRepository.findAll();
         }catch (DataAccessException | CannotCreateTransactionException e) {
@@ -44,7 +44,7 @@ public class MessageService implements IMessageService {
     }
 
     @Override
-    public Message getById(Long id) {
+    public MessageConfig getById(Long id) {
         try{
             return messageRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("",id));
 
@@ -54,7 +54,7 @@ public class MessageService implements IMessageService {
     }
 
     @Override
-    public Message updateMessage(Message message) {
+    public MessageConfig updateMessage(MessageConfig message) {
         return messageRepository.save(message);
     }
 

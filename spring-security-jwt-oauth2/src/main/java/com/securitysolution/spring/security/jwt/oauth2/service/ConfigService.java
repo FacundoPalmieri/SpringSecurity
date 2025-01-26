@@ -1,13 +1,16 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 
+import com.securitysolution.spring.security.jwt.oauth2.dto.FailedLoginAttemptsDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.MessageDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
+import com.securitysolution.spring.security.jwt.oauth2.dto.TokenConfigDTO;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.model.Message;
+import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IConfigService;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IFailedLoginAttemptsService;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataAccessException;
@@ -28,24 +31,27 @@ public class ConfigService implements IConfigService {
     @Autowired
     private IFailedLoginAttemptsService failedLoginAttemptsService;
 
+    @Autowired
+    private ITokenService tokenService;
+
     @Override
-    public ResponseEntity<Response<List<Message>>>getMessage(){
+    public ResponseEntity<Response<List<MessageConfig>>>getMessage(){
 
         //Obtiene el listado.
-        List<Message> listMessage = messageService.listMessage();
+        List<MessageConfig> listMessage = messageService.listMessage();
 
         //Se construye Mensaje para usuario.
         String userMessage = messageService.getMessage("config.getMessage.ok", null, LocaleContextHolder.getLocale());
-        Response<List<Message>> response = new Response<>(true, userMessage,listMessage);
+        Response<List<MessageConfig>> response = new Response<>(true, userMessage,listMessage);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
     @Transactional
-    public ResponseEntity<Response<Message>> updateMessage(MessageDTO messageDto) {
+    public ResponseEntity<Response<MessageConfig>> updateMessage(MessageDTO messageDto) {
         try{
             //Obtiene mensaje de BD
-            Message message = messageService.getById(messageDto.id());
+            MessageConfig message = messageService.getById(messageDto.id());
 
             //Actualiza campo
             message = messageService.updateMessage(message);
@@ -53,7 +59,7 @@ public class ConfigService implements IConfigService {
             //Prepara y envía respuesta.
             String userMessage = messageService.getMessage("config.updateMessage.ok",null,LocaleContextHolder.getLocale());
 
-            Response<Message> response = new Response<>(true, userMessage,message);
+            Response<MessageConfig> response = new Response<>(true, userMessage,message);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "configRepository",messageDto.id(), "", "updateMessage");
@@ -74,17 +80,54 @@ public class ConfigService implements IConfigService {
     }
 
     @Override
-    public ResponseEntity<Response<Integer>> updateAttempts(Integer attempt) {
+    public ResponseEntity<Response<Integer>> updateAttempts(FailedLoginAttemptsDTO failedLoginAttemptsDTO) {
 
         //Actualiza valor
-        failedLoginAttemptsService.update(attempt);
+        failedLoginAttemptsService.update(failedLoginAttemptsDTO.value());
 
         //Recupera valor actualizado.
         Integer attempts = failedLoginAttemptsService.get();
 
         //Se construye Mensaje para usuario.
-        String userMessage = messageService.getMessage("config.updateAttempts.ok", new Object[]{attempt}, LocaleContextHolder.getLocale());
+        String userMessage = messageService.getMessage("config.updateAttempts.ok", new Object[]{attempts}, LocaleContextHolder.getLocale());
         Response<Integer> response = new Response<>(true, userMessage,attempts);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Response<Long>> getTokenExpiration() {
+
+        // Obtener el valor en milisegundos
+        Long expiration = tokenService.getExpiration();
+
+        //Convertir a minutos
+        Long expirationMinutes = (expiration / 1000) / 60;
+
+        //Se construye Mensaje para usuario.
+        String userMessage = messageService.getMessage("config.getExpirationToken.ok", null, LocaleContextHolder.getLocale());
+        Response<Long> response = new Response<>(true, userMessage,expirationMinutes);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Response<Long>> updateTokenExpiration(TokenConfigDTO tokenConfigDTO) {
+
+        //Convertir minutos a milisegundos
+        Long milliseconds = (tokenConfigDTO.expiration() * 60) * 1000;
+
+        //Actualizar tiempo de expiración.
+        tokenService.updateExpiration(milliseconds);
+
+        //Recuperar valor actualizado y convertirlo a minutos
+        Long expiration = tokenService.getExpiration();
+        Long expirationMinutes = (expiration / 1000) / 60;
+
+        //Se construye Mensaje para usuario.
+        String userMessage = messageService.getMessage("config.updateExpirationToken.ok", new Object[]{expirationMinutes}, LocaleContextHolder.getLocale());
+        Response<Long> response = new Response<>(true, userMessage,expirationMinutes);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
+
+
 }

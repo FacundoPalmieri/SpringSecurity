@@ -1,8 +1,8 @@
 -- Creamos Permisos--
-Insert into permissions (permission_name) values ('Create');
-Insert into permissions (permission_name) values ('Read');
-Insert into permissions (permission_name) values ('Update');
-Insert into permissions (permission_name) values ('Delete');
+Insert into permisos (permission_name) values ('Create');
+Insert into permisos (permission_name) values ('Read');
+Insert into permisos (permission_name) values ('Update');
+Insert into permisos (permission_name) values ('Delete');
 
 -- Creamos Roles --
 Insert into roles (role) values('USER');
@@ -51,7 +51,7 @@ insert into user_roles (user_id, role_id) values(1,3);
 
 
 
---Messages
+-- Messages
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.passwordNotEquals.user', 'Las password deben coincidir.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.passwordNotEquals.log', 'No coinciden las password - [UsuarioCreador: {0}] - [UsuarioNuevo: {0}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.ok', 'Usuario creado correctamente.', 'es_AR');
@@ -93,8 +93,14 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getMessage.ok', 'Lis
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateMessage.ok', 'Actualización correcta.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getAttempts.ok', 'Registro recuperado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateAttempts.ok', 'Se actualizaron los intentos de sessión a: {0}.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getExpirationToken.ok', 'Registro recuperado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateExpirationToken.ok', 'Se actualizó el tiempo de expiración del token a {0} minutos.', 'es_AR');
 
 
 
---Intentos fallidos
+-- Intentos fallidos
 insert into intentos_fallidos (id,valor) values(1,3);
+
+
+-- Expiración Token
+insert into token_config (id,expiracion) values(1,60000);
