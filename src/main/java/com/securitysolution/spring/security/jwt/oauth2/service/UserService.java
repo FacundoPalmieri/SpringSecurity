@@ -4,10 +4,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.securitysolution.spring.security.jwt.oauth2.dto.ResetPasswordDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecDTO;
-import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.PasswordMismatchException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.TokenInvalidException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.UserNameNotFoundException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IUserRepository;
@@ -31,11 +28,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -93,6 +87,7 @@ public class UserService implements IUserService {
 
         //Asigna Roles.
         userSec.setRolesList(getRolesForUser(userSecDto.getRolesList()));
+
         try{
             UserSec userSecOK = userRepository.save(userSec);
 
@@ -338,11 +333,19 @@ public class UserService implements IUserService {
         }
     }
 
-    private Set<Role> getRolesForUser(Set<Role> rolesList){
-        return rolesList.stream()
-                .map(role -> roleService.findById(role.getId()).orElse(null))
-                .collect(Collectors.toSet());
+    private Set<Role> getRolesForUser(Set<Role> rolesList) {
+        Set<Role> validRoles = new HashSet<>();
+        for (Role role : rolesList) {
+            Role foundRole = roleService.findById(role.getId()).orElseThrow(() ->
+                    new RoleNotFoundException("",role.getId(), role.getRole())
+            );
+            validRoles.add(foundRole);
+        }
+        return validRoles;
     }
+
+
+
 
     private UserSec buildUserSec(UserSecDTO userSecDto) {
         return UserSec.builder()

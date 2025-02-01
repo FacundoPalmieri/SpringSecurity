@@ -71,6 +71,7 @@ public class JwtTokenValidator extends OncePerRequestFilter {
                 SecurityContextHolder.setContext(context);
 
             }
+
             // Continuar con el siguiente filtro
             filterChain.doFilter(request, response);
         }catch (TokenExpiredException ex){
@@ -81,9 +82,7 @@ public class JwtTokenValidator extends OncePerRequestFilter {
     }
 
 
-
-
-  //Se realiza acá porque no va al manejador global el filtro.
+    //Se realiza acá porque no va al manejador global el filtro.
     private void handleTokenExpiredException(TokenExpiredException ex, HttpServletResponse response) throws IOException {
         // Comprobar si hay una autenticación en el contexto
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

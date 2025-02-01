@@ -115,6 +115,14 @@
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
 
+		<!-- Dependencia de Springdoc OpenAPI -->
+		<!-- Permite generar documentación de la API en una aplicación Spring Web MVC, incluye la interfaz de usuario Swagger UI -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
 
 		<!-- Dependencia para Spring Boot Test Starter -->
 		<!-- Proporciona herramientas y bibliotecas necesarias para realizar pruebas unitarias y de integración en aplicaciones Spring Boot -->
@@ -151,5 +159,8 @@
 			</plugin>
 		</plugins>
 	</build>
+
+
+
 
 </project>

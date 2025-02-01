@@ -7,6 +7,7 @@ import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 
+import javax.management.relation.RoleNotFoundException;
 import java.util.List;
 import java.util.Optional;
 

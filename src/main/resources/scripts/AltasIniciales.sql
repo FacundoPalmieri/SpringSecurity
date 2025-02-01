@@ -64,10 +64,12 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPas
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPassword.asunto', 'Solicitud de Restablecimiento de Contraseña.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.log', 'Error al acceder a la base de datos: [ENTIDAD: {0}] - [ID OBJETO {1}] -  [NOMBRE OBJETO:{2}] - [OPERACIÓN:{3}] -  [CAUSA RAÍZ: {4}] - [MENSAJE USUARIO: {5}]', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.user', 'Error al obtener todos los permisos.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.user', 'Ocurrió un error al procesar la solicitud en la base de datos. Por favor, intente nuevamente más tarde.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validation.log', 'Validación error [Campo: {0}] - [Mensaje: {1}] - [Usuario: - {2}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.generic', 'Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.notFound', 'La URL que has solicitado no existe. Por favor verifica y volvé a intentarlo.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.authenticationRequired.log', 'Usuario no autenticado [Usuario : {0}] - [URL: {1}] - [Mensaje: {2}].', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.authenticationRequired.user', 'Debes autenticarte primero antes de ingresar a esta página.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.accessDenied.log', 'No tiene permiso para acceder a este recurso [Usuario : {0}] - [URL: {1}] - [Mensaje: {2}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.accessDenied.user', 'No tienes permiso para acceder a este recurso.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateToken.log', 'Token inválido para el usuario [{0}] - [IP:{1}].', 'es_AR');
@@ -81,6 +83,8 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameNotFound.
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.resourceNotFoundException.user', 'No se encontró el ID: {0}', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccount.log', 'Cuenta Bloqueada: [ID USER:{0} - [USERNAME:{1}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccount.user', 'Su cuenta se encuentra bloqueada. Por favor, restablezca la password para ingresar.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFound.user', 'Error al intentar asignar rol.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFound.log ', 'Error al intentar asignar rol no válido: [ID: {0}] - [Rol: {1}].', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
