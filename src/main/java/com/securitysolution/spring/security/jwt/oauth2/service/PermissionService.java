@@ -3,6 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 import com.securitysolution.spring.security.jwt.oauth2.dto.PermissionResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.PermissionNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IPermissionRepository;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
@@ -56,6 +57,25 @@ public class PermissionService implements IPermissionService {
     }
 
     @Override
+    public Response<PermissionResponseDTO> getById(Long id) {
+        try{
+            Optional<Permission> permissionOptional = permissionRepository.findById(id);
+            if(permissionOptional.isPresent()) {
+                Permission permission = permissionOptional.get();
+                PermissionResponseDTO permissionResponseDTO = convertToDTO(permission);
+
+                String messageUser = messageService.getMessage("permissionService.findById.ok", null, LocaleContextHolder.getLocale());
+                return new Response<>(true, messageUser, permissionResponseDTO);
+            }else{
+                throw new PermissionNotFoundException("",id,"PermissionService", "getById");
+            }
+        }catch (DataAccessException | CannotCreateTransactionException e) {
+            throw new DataBaseException(e,"PermissionService", id,"","getById");
+
+        }
+    }
+
+    @Override
     public Optional<Permission> findById(Long id) {
         try{
             return permissionRepository.findById(id);
@@ -65,6 +85,7 @@ public class PermissionService implements IPermissionService {
         }
     }
 
+/*
     @Override
     public Permission save(Permission permission) {
         try {
@@ -74,7 +95,7 @@ public class PermissionService implements IPermissionService {
 
         }
     }
-/*
+
     @Override
     public void deleteById(Long id) {
         try{

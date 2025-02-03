@@ -1,6 +1,7 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.MessageNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.ResourceNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IMessageRepository;
@@ -46,7 +47,7 @@ public class MessageService implements IMessageService {
     @Override
     public MessageConfig getById(Long id) {
         try{
-            return messageRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("",id));
+            return messageRepository.findById(id).orElseThrow(()->new MessageNotFoundException("", id, "MessageService", "getById"));
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "configRepository", 0L, "", "findAll");

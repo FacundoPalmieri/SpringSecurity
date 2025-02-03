@@ -10,17 +10,17 @@ import java.util.List;
 
 public interface IConfigService {
     //Mensajes
-    ResponseEntity<Response<List<MessageConfig>>> getMessage();
-    ResponseEntity<Response<MessageConfig>> updateMessage(MessageDTO messageDto);
+    Response<List<MessageConfig>> getMessage();
+    Response<MessageConfig> updateMessage(MessageDTO messageDto);
 
 
     //Intentos de inicio de sesión
-    ResponseEntity<Response<Integer>> getAttempts();
-    ResponseEntity<Response<Integer>> updateAttempts(FailedLoginAttemptsDTO failedLoginAttemptsDTO);
+    Response<Integer> getAttempts();
+    Response<Integer> updateAttempts(FailedLoginAttemptsDTO failedLoginAttemptsDTO);
 
     //Expiración de Token.
-    ResponseEntity<Response<Long>> getTokenExpiration();
-    ResponseEntity<Response<Long>> updateTokenExpiration(TokenConfigDTO tokenConfigDTO);
+    Response<Long> getTokenExpiration();
+    Response<Long> updateTokenExpiration(TokenConfigDTO tokenConfigDTO);
 
 
 }

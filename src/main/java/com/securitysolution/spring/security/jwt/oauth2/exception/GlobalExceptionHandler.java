@@ -3,6 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.exception;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.PushBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -263,6 +264,19 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler({PermissionNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Response<String>> handlePermissionNotFoundException(PermissionNotFoundException ex) {
+        //Se construye mensaje para el log
+        String messageLog = messageService.getMessage("exception.permissionNotFound.log", new Object[]{ex.getEntityType(),ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(messageLog);
+
+        //Se construye mensaje para el usuario.
+        String messageUser = messageService.getMessage("exception.permissionNotFound.user", null, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, messageUser, null);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
     // Manejo de 404 Not Found
     @ExceptionHandler({NoHandlerFoundException.class, NoResourceFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -381,6 +395,19 @@ public class GlobalExceptionHandler {
     }
 
 
+    //para el update de message
+    @ExceptionHandler({MessageNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Response<String>> handleMessageNotFoundException(MessageNotFoundException ex) {
+        //Se construye mensaje para el log
+        String messageLog = messageService.getMessage("exception.messageNotFound.log", new Object[]{ex.getEntityType(),ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(messageLog);
+
+        //Se construye mensaje para el usuario.
+        String messageUser = messageService.getMessage("exception.messageNotFound.user", null, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, messageUser, null);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 
 
 

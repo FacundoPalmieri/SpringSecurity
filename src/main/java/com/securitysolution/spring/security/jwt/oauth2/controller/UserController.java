@@ -1,9 +1,7 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
-
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecResponseDTO;
-import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IRoleService;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,9 +17,9 @@ import java.util.List;
 
 
 /**
- * Controlador para gestionar los usuarios del sistema.
- * Proporciona endpoints para listar, obtener y crear usuarios.
- * Todos los endpoints requieren autenticación con rol ADMIN.
+ * <p>Controlador para gestionar los usuarios del sistema.</p>
+ * <p>Proporciona endpoints para listar, obtener y crear usuarios.</p>
+ * <p>Todos los endpoints requieren autenticación con rol <b>ADMIN</b>.</p>
  */
 @RestController
 @RequestMapping("/api/users")
@@ -35,10 +33,13 @@ public class UserController {
 
     /**
      * Lista todos los usuarios.
-     * Requiere rol ADMIN para acceder.
-     * @return Retorna 200 con la lista de usuarios
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
+     * <p>Requiere rol <b>ADMIN</b> para acceder.</p>
+     * @return ResponseEntity con:
+     * <ul>
+     *     <li><b>200 OK</b> Lista de usuarios recuperada exitosamente.</li>
+     *     <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *     <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     * </ul>
      */
     @Operation(summary = "Obtener listado de usuarios", description = "Lista todos los usuarios.")
     @ApiResponses({
@@ -55,18 +56,24 @@ public class UserController {
 
 
     /**
-     * Obtiene Usuario por ID
-     * Requiere rol ADMIN para acceder.
+     /**
+     * Obtiene un usuario por su ID.
+     * <p>
+     * Requiere el rol <b>ADMIN</b> para acceder.
+     * </p>
      *
      * @param id ID del usuario a buscar.
-     * @return Retorna 200 si el usuario existe, junto con sus detalles.
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
-     *         Retorna UserNotFound si no es encontrado.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Usuario encontrado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>404 Not Found</b>: Usuario no encontrado.</li>
+     *         </ul>
      */
     @Operation(summary = "Obtener usuario", description = "Obtiene un usuario por su ID")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuario Creado."),
+            @ApiResponse(responseCode = "200", description = "Usuario encontrado exitosamente."),
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
             @ApiResponse(responseCode = "404", description = "Usuario no encontrado.")
@@ -83,20 +90,28 @@ public class UserController {
 
     /**
      * Crea un nuevo usuario en el sistema.
-     * Requiere rol ADMIN para acceder.
+     * <p>
+     * Requiere el rol <b>ADMIN</b> para acceder.
+     * </p>
      *
      * @param userSecDto Datos del usuario a crear.
-     * @return Retorna 200 si crea el usuario, junto con sus detalles.
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
-     *         Retorna 404 si no encuentra roles o permisos asociados.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>201 Created</b>: Usuario creado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>404 Not Found</b>: Roles y/o permisos requeridos no encontrados.</li>
+     *         <li><b>409 Conflict</b>: Usuario existente en el sistema.</li>
+     *         </ul>
      */
+
     @Operation(summary = "Crear usuario", description = "Crea un nuevo usuario en el sistema.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuario Creado exitosamente."),
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
-            @ApiResponse(responseCode = "404", description = "Roles y/o permisos requeridos no encontrados.")
+            @ApiResponse(responseCode = "404", description = "Roles y/o permisos requeridos no encontrados."),
+            @ApiResponse(responseCode = "409", description = "Usuario existente en el sistema.")
     })
     @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")

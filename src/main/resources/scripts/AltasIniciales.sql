@@ -69,7 +69,8 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPas
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.save.ok', 'Rol creado correctamente.', 'es_AR');
 
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findAll.ok', ' Permisos recuperados correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findAll.ok', 'Permisos recuperados correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findById.ok', 'Permiso encontrado correctamente.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.log', 'Error al acceder a la base de datos: [ENTIDAD: {0}] - [ID OBJETO {1}] -  [NOMBRE OBJETO:{2}] - [OPERACIÓN:{3}] -  [CAUSA RAÍZ: {4}] - [MENSAJE USUARIO: {5}]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.user', 'Ocurrió un error al procesar la solicitud en la base de datos. Por favor, intente nuevamente más tarde.', 'es_AR');
@@ -101,6 +102,14 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleExisting.log'
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleExisting.user', 'El Rol {0} ya se encuentra registrado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFoundRoleCreationException.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: ROL NO CREADO - Permiso con id {2} No encontrado.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFoundRoleCreationException.user', 'Rol no creado, no se pudo asociar el permiso.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFound.user', 'Permiso no encontrado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFound.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: Permiso id {2} No encontrado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.messageNotFound.user', 'Mensaje no encontrado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.messageNotFound.log', '[Clase: {0}] - [Método: {1}] - [Detalle: Mensaje id {2} No encontrado.]', 'es_AR');
+
+
+
+
 
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
@@ -116,6 +125,11 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.findAll.user.ok', '
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.findById.user.ok', 'Rol encontrado correctamente.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionDTO.name.empty', 'El nombre del permiso no puede estar vacío.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('tokenDTO.expiration.empty', 'El tiempo de expiración no puede estar vacío.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('FailedLoginAttemptsDTO.value.empty', 'La cantidad de inicios de sesión no puede estar vacía.', 'es_AR');
+
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getMessage.ok', 'Listado de configuraciones correcto.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateMessage.ok', 'Actualización correcta.', 'es_AR');

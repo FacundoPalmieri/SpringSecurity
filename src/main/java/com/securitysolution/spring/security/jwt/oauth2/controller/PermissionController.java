@@ -15,7 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador para la gestión de permisos.
+ * <p>Proporciona endpoints para listar y obtener permisos por ID.</p>
+ *
+ * Todos los endpoints requieren autenticación con rol DEV.
+ */
 @RestController
+@PreAuthorize("denyAll()")
 @RequestMapping("/api/permissions")
 public class PermissionController {
 
@@ -23,11 +30,17 @@ public class PermissionController {
     private IPermissionService permissionService;
 
     /**
-     * Lista todos los permisos-
-     * Requiere rol ADMIN para acceder.
-     * @return retorna 200 con la lista de permisos.
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
+     * Lista todos los permisos disponibles en el sistema.
+     * <p>
+     * Requiere el rol <b>DEV</b> para acceder.
+     * </p>
+     *
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Listado de permisos recuperado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         </ul>
      */
     @Operation(summary = "Obtener listado de Permisos", description = "Lista todos los permisos.")
     @ApiResponses({
@@ -36,21 +49,43 @@ public class PermissionController {
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
     @GetMapping("get/all")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('DEV')")
     public ResponseEntity<Response<List<PermissionResponseDTO>>> getAllPermissions() {
         Response<List<PermissionResponseDTO>> response = permissionService.findAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
-    //Endpoint para obtener permisos por ID.
+    /**
+     * Obtiene un permiso por su ID.
+     * <p>
+     * Requiere el rol <b>DEV</b> para acceder.
+     * </p>
+     *
+     * @param id ID del permiso a buscar.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Permiso encontrado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>404 Not Found</b>: Permiso no encontrado.</li>
+     *         </ul>
+     */
+    @Operation(summary = "Obtener Permiso", description = "Obtiene un permiso por su ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Permiso encontrado exitosamente."),
+            @ApiResponse(responseCode = "401", description = "No autenticado."),
+            @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
+            @ApiResponse(responseCode = "404", description = "Permiso no encontrado.")
+    })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public ResponseEntity<Permission> getPermissionById(@PathVariable Long id) {
-        Optional<Permission> permission = permissionService.findById(id);
-        return permission.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @PreAuthorize("hasAnyRole('DEV')")
+    public ResponseEntity<Response<PermissionResponseDTO>> getPermissionById(@PathVariable Long id) {
+        Response<PermissionResponseDTO> response = permissionService.getById(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /*
 
     // Endpoint para crear permisos.
     @PostMapping
@@ -59,6 +94,8 @@ public class PermissionController {
         Permission newPermission = permissionService.save(permission);
         return ResponseEntity.ok(newPermission);
     }
+
+     */
 
 
 }

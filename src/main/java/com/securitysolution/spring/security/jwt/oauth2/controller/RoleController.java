@@ -24,9 +24,11 @@ import java.util.Set;
 
 /**
  * Controlador para gestionar los roles del sistema.
- * Proporciona endpoints para listar, obtener, crear y actualizar roles.
- * Todos los endpoints requieren autenticación con rol DEV.
+ * <p> Proporciona endpoints para listar, obtener, crear y actualizar roles. </p>
+ * Todos los endpoints requieren autenticación con rol <b>DEV</b>.
+ *
  */
+
 @RestController
 @PreAuthorize("denyAll()")
 @RequestMapping("/api/roles")
@@ -40,12 +42,19 @@ public class RoleController {
 
 
     /**
-     * Lista todos los roles.
-     * Requiere rol DEV para acceder.
-     * @return Retorna 200 con la lista de roles.
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
+     * Lista todos los roles disponibles en el sistema.
+     * <p>
+     * Requiere el rol <b>DEV</b> para acceder.
+     * </p>
+     *
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Listado de roles recuperado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         </ul>
      */
+
     @Operation(summary = "Obtener listado de roles", description = "Lista todos los roles.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Listado recuperado exitosamente."),
@@ -61,15 +70,21 @@ public class RoleController {
 
 
     /**
-     * Obtiene Rol por ID
-     * Requiere rol DEV para acceder.
+     * Obtiene un rol por su ID.
+     * <p>
+     * Requiere el rol <b>DEV</b> para acceder.
+     * </p>
      *
-     * @param id ID del Rol a buscar.
-     * @return Retorna 200 si el rol existe, junto con sus detalles.
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
-     *         Retorna 400 si no lo encuentra.
+     * @param id ID del rol a buscar.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Rol encontrado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>404 Not Found</b>: Rol no encontrado.</li>
+     *         </ul>
      */
+
     @Operation(summary = "Obtener Rol", description = "Obtiene un Rol por su ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Rol encontrado."),
@@ -86,21 +101,29 @@ public class RoleController {
 
 
     /**
-     * Crea un nuevo Rol en el sistema.
-     * Requiere rol DEV para acceder.
+     * Crea un nuevo rol en el sistema.
+     * <p>
+     * Requiere el rol <b>DEV</b> para acceder.
+     * </p>
      *
-     * @param roleDto Datos del Rol a crear.
-     * @return Retorna 200 si crea el rol, junto con sus detalles.
-     *         Retorna 400 si no encuentra permisos asociados.
-     *         Retorna 401 si no está autenticado.
-     *         Retorna 403 si no está autorizado.
+     * @param roleDto Datos del rol a crear.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Rol creado exitosamente.</li>
+     *         <li><b>400 Bad Request</b>: No se encuentran los permisos asociados.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>409 Conflict</b>: Rol existente en el sistema.</li>
+     *         </ul>
      */
+
     @Operation(summary = "Crear Rol", description = "Crea un nuevo rol en el sistema.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "rol Creado exitosamente."),
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
-            @ApiResponse(responseCode = "404", description = "Permisos requeridos no encontrados.")
+            @ApiResponse(responseCode = "404", description = "Permisos requeridos no encontrados."),
+            @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
     @PostMapping("/create")
     @PreAuthorize("hasRole('DEV')")
