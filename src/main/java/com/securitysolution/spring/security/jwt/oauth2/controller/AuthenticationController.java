@@ -31,14 +31,15 @@ public class AuthenticationController {
 
     @PostMapping("/request/reset-password")
     public ResponseEntity<String> requestResetPassword(@RequestParam String email) {
-        return userService.createTokenResetPasswordForUser(email);
+        String message = userService.createTokenResetPasswordForUser(email);
+        return new ResponseEntity<>(message, HttpStatus.OK);
 
     }
 
     @PostMapping("/reset-password")
     public ResponseEntity<String> resetPassword(@Valid @RequestBody ResetPasswordDTO resetPasswordDTO, HttpServletRequest request) {
-        return  userService.updatePassword(resetPasswordDTO, request);
-
+        String message = userService.updatePassword(resetPasswordDTO, request);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
 

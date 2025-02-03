@@ -4,6 +4,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.securitysolution.spring.security.jwt.oauth2.dto.ResetPasswordDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
@@ -18,8 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,18 +57,35 @@ public class UserService implements IUserService {
 
 
     @Override
-    public List<UserSec> findAll() {
+    public Response<List<UserSecResponseDTO>>findAll() {
         try{
-            return userRepository.findAll();
+            List<UserSec> userList = userRepository.findAll();
+
+            List<UserSecResponseDTO> userSecResponseDTOList = new ArrayList<>();
+            for(UserSec userSec : userList) {
+                userSecResponseDTOList.add(convertToDTO(userSec));
+            }
+            String messageUser = messageService.getMessage("userService.findAll.ok", null, LocaleContextHolder.getLocale());
+            return new Response<>(true, messageUser, userSecResponseDTOList);
+
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "userService", 0L, "", "findAll");
         }
     }
 
     @Override
-    public Optional<UserSec> findById(Long id) {
+    public Response<UserSecResponseDTO> findById (Long id) {
         try{
-            return userRepository.findById(id);
+             Optional<UserSec> user = userRepository.findById(id);
+             if(user.isPresent()){
+                 UserSecResponseDTO dto = convertToDTO(user.get());
+
+                 String messageUser = messageService.getMessage("userService.findById.ok.user", null, LocaleContextHolder.getLocale());
+
+                 return new Response<>(true, messageUser, dto);
+             }else{
+                 throw new UserNotFoundException("","UserService", "FindById", id);
+             }
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "userService", id, "", "findById");
         }
@@ -77,7 +93,10 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public ResponseEntity<Response<UserSec>> save(UserSecDTO userSecDto) {
+    public Response<UserSecResponseDTO>save(UserSecDTO userSecDto) {
+
+        //Valída que el usuario no exista en la base de datos.
+        validateUsername(userSecDto.getUsername());
 
         //Valída que las pass sean coincidentes.
         validatePasswords(userSecDto.getPassword1(), userSecDto.getPassword2(),userSecDto.getUsername());
@@ -89,16 +108,40 @@ public class UserService implements IUserService {
         userSec.setRolesList(getRolesForUser(userSecDto.getRolesList()));
 
         try{
-            UserSec userSecOK = userRepository.save(userSec);
+            //Guarda el objeto en la base de datos.
+            UserSec userSecSaved = userRepository.save(userSec);
+
+            //Conviente la entidad a un DTO
+            UserSecResponseDTO UserSecResponse = convertToDTO(userSecSaved);
 
             //Se construye Mensaje para usuario.
             String userMessage = messageService.getMessage("userService.save.ok", null, LocaleContextHolder.getLocale());
-            Response<UserSec> response = new Response<>(true, userMessage,userSecOK);
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
+            return new Response<>(true, userMessage,UserSecResponse);
+
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "userService", userSec.getId(), userSec.getUsername(), "save");
         }
+    }
+
+    private void validateUsername(String username) {
+        Optional<UserSec>user = userRepository.findUserEntityByUsername(username);
+        if(user.isPresent()){
+            UserSec userSec = user.get();
+            if(userSec.getUsername().equals(username)) {
+                throw new UserNameExistingException(username, "UserService", "Save");
+            }
+        }
+
+
+    }
+
+    private UserSecResponseDTO convertToDTO(UserSec userSec) {
+        UserSecResponseDTO userSecResponseDTO = new UserSecResponseDTO();
+        userSecResponseDTO.setId(userSec.getId());
+        userSecResponseDTO.setUsername(userSec.getUsername());
+        userSecResponseDTO.setRolesList(userSec.getRolesList());
+        return userSecResponseDTO;
     }
 
     @Override
@@ -126,7 +169,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public ResponseEntity<String> createTokenResetPasswordForUser(String email) {
+    public String createTokenResetPasswordForUser(String email) {
         try {
             Optional<UserSec> userOptional = userRepository.findUserEntityByUsername(email);
             if (userOptional.isEmpty()) {
@@ -167,8 +210,7 @@ public class UserService implements IUserService {
             emailService.sendEmail(user.getUsername(), asunto, message);
 
             //Elaborar respuesta para el controller.
-            String messageUser = messageService.getMessage("userService.requestResetPassword.success", null, LocaleContextHolder.getLocale());
-            return ResponseEntity.ok(messageUser);
+            return messageService.getMessage("userService.requestResetPassword.success", null, LocaleContextHolder.getLocale());
 
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
@@ -178,7 +220,7 @@ public class UserService implements IUserService {
 
     @Override
     @Transactional
-    public ResponseEntity<String> updatePassword(ResetPasswordDTO resetPasswordDTO, HttpServletRequest request) {
+    public String updatePassword(ResetPasswordDTO resetPasswordDTO, HttpServletRequest request) {
         try {
                 //Valída Token de restablecimiento.
                 validateTokenResetPassword(resetPasswordDTO.token());
@@ -210,8 +252,8 @@ public class UserService implements IUserService {
                 log.atInfo().log("[Mensaje: {}] - [USUARIO: {}] -[IP {}]", message,usuario.getUsername(), ipAddress);
 
                 //Elabora Response a controller.
-                String messageUser = messageService.getMessage("userService.resetPassword.success", null, LocaleContextHolder.getLocale());
-                return ResponseEntity.ok(messageUser);
+                return messageService.getMessage("userService.resetPassword.success", null, LocaleContextHolder.getLocale());
+
 
         } catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "userService", 0L, "", "updatePassword");
@@ -337,15 +379,12 @@ public class UserService implements IUserService {
         Set<Role> validRoles = new HashSet<>();
         for (Role role : rolesList) {
             Role foundRole = roleService.findById(role.getId()).orElseThrow(() ->
-                    new RoleNotFoundException("",role.getId(), role.getRole())
+                    new RoleNotFoundUserCreationException("",role.getId(), role.getRole(), "UserService", "getRolesForUser")
             );
             validRoles.add(foundRole);
         }
         return validRoles;
     }
-
-
-
 
     private UserSec buildUserSec(UserSecDTO userSecDto) {
         return UserSec.builder()

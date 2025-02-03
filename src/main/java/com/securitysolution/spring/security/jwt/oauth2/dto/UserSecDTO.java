@@ -24,7 +24,7 @@ public class UserSecDTO {
             message = "userSecDTO.password.pattern")
     private String password2;
 
-    @NotNull(message = "userSecDTO.password.role")
+    @NotNull(message = "userSecDTO.role.empty")
     private Set<Role> rolesList;
 }
 

@@ -5,15 +5,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RoleNotFoundException extends RuntimeException {
+public class PermissionNotFoundRoleCreationException extends RuntimeException {
     private Long id;
-    private String role;
     private  String entityType;  // Tipo de la entidad (CursosService, Tema, etc.)
     private  String operation; // Operación (Ejemplo: Save, update)
-    public RoleNotFoundException(String message, Long id, String role, String entityType, String operation) {
+
+    public PermissionNotFoundRoleCreationException(String message, Long id, String entityType, String operation) {
         super(message);
         this.id = id;
-        this.role = role;
         this.entityType = entityType;
         this.operation = operation;
     }

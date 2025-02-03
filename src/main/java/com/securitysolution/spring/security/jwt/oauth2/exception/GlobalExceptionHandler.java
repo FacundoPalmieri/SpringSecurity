@@ -94,7 +94,22 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(UserNameExistingException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<Response> handleUsernameExistingException(UserNameExistingException ex) {
+        //Construir mensaje para el log
+        String logMessage = messageService.getMessage("exception.usernameExisting.log", new Object[]{ex.getEntityType(), ex.getOperation(), ex.getUsername()}, LocaleContextHolder.getLocale());
+        log.error(logMessage);
+
+        //Construir mensaje para el usuario
+        String userMessage = messageService.getMessage("exception.usernameExisting.user", new Object[]{ex.getUsername()}, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, userMessage, null);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    //Para autenticar
     @ExceptionHandler(UserNameNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Response<String>> handleUsernameNotFoundException(UserNameNotFoundException ex, HttpServletRequest request) {
 
         // Cargar el mensaje de error desde BD
@@ -113,9 +128,26 @@ public class GlobalExceptionHandler {
         Response<String> response = new Response<>(false, userMessage, null);
 
         // Crear la respuesta con el mensaje personalizado
-        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
 
     }
+
+    //Para buscar como findbyId
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Response> handleUserNotFoundException(UserNotFoundException ex) {
+
+        //Construye mensaje para el log
+        String logMessage = messageService.getMessage("userService.findById.error.log", new Object[]{ex.getEntityType(), ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(logMessage);
+
+        //Cargar mensaje para usuario.
+        String userMessage = messageService.getMessage("userService.findById.error.user", null, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, userMessage, null);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+
+    }
+
 
     // Manejo de excepción por validaciones de anotaciones en los DTOs
     @ExceptionHandler(MethodArgumentNotValidException.class)  // Esta excepción se lanza cuando hay una violación de validación de un objeto (por ejemplo, DTO)
@@ -174,16 +206,59 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler({RoleNotFoundException.class})
+    @ExceptionHandler({RoleNotFoundUserCreationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Response<String>> handleRoleNotFoundUserCreationException(RoleNotFoundUserCreationException ex) {
+
+        //Se construye mensaje para el log
+        String messageLog = messageService.getMessage("exception.roleNotFoundUserCreationException.log", new Object[]{ex.getId(), ex.getRole()}, LocaleContextHolder.getLocale());
+        log.error(messageLog);
+
+        //Se construye mensaje para el usuario.
+        String messageUser = messageService.getMessage("exception.roleNotFoundUserCreationException.user", null, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, messageUser, null);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({RoleNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response<String>> handleRoleNotFoundException(RoleNotFoundException ex) {
 
-        //Se construye el mensaje para el log
+        //Se construye mensaje para el log
         String messageLog = messageService.getMessage("exception.roleNotFound.log", new Object[]{ex.getId(), ex.getRole()}, LocaleContextHolder.getLocale());
         log.error(messageLog);
 
-        //Se construye el mensaje para el usuario.
+        //Se construye mensaje para el usuario.
         String messageUser = messageService.getMessage("exception.roleNotFound.user", null, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, messageUser, null);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+
+    @ExceptionHandler({RoleExistingException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<Response<String>> handleRoleExistingException(RoleExistingException ex) {
+
+        //Se construye mensaje para el log.
+        String messageLog = messageService.getMessage("exception.roleExisting.log", new Object[]{ex.getEntityType(), ex.getOperation(), ex.getRole()}, LocaleContextHolder.getLocale());
+        log.error(messageLog);
+
+        //Se construye mensaje para el usuario.
+        String messageUser = messageService.getMessage("exception.roleExisting.user", new Object[]{ex.getRole()}, LocaleContextHolder.getLocale());
+        Response<String> response = new Response<>(false, messageUser, null);
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @ExceptionHandler({PermissionNotFoundRoleCreationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Response<String>> handlePermissionNotFoundRoleCreationException(PermissionNotFoundRoleCreationException ex) {
+        //Se construye mensaje para el log
+        String messageLog = messageService.getMessage("exception.permissionNotFoundRoleCreationException.log", new Object[]{ex.getEntityType(),ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(messageLog);
+
+        //Se construye mensaje para el usuario.
+        String messageUser = messageService.getMessage("exception.permissionNotFoundRoleCreationException.user", null, LocaleContextHolder.getLocale());
         Response<String> response = new Response<>(false, messageUser, null);
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

@@ -55,6 +55,10 @@ insert into user_roles (user_id, role_id) values(1,3);
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.passwordNotEquals.user', 'Las password deben coincidir.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.passwordNotEquals.log', 'No coinciden las password - [UsuarioCreador: {0}] - [UsuarioNuevo: {0}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.ok', 'Usuario creado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findAll.ok', 'Usuarios recuperados correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findById.ok.user', 'Usuario encontrado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findById.error.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: Usuario con id {2} No encontrado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findById.error.user', 'Usuario no encontrado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPassword.success', 'Solicitud de restablecimiento de contraseña procesada. Por favor, revisa tu correo electrónico.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.resetPassword.success', 'Se ha restablecido la contraseña exitosamente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.resetPassword.asunto', 'Restablecimiento de Contraseña', 'es_AR');
@@ -62,6 +66,10 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.resetPassword.e
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.dominio', 'https://tu-dominio.com/reset-password', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPassword.mensaje', 'Para restablecer tu contraseña, haz clic en el siguiente enlace: {0} \n\n IMPORTANTE! \n\n - SI USTED NO SOLICITÓ RESTABLECERLA, COMUNIQUESE CON EL ÁREA DE SOPORTE DE MANERA INMEDIATA - .', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPassword.asunto', 'Solicitud de Restablecimiento de Contraseña.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.save.ok', 'Rol creado correctamente.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findAll.ok', ' Permisos recuperados correctamente.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.log', 'Error al acceder a la base de datos: [ENTIDAD: {0}] - [ID OBJETO {1}] -  [NOMBRE OBJETO:{2}] - [OPERACIÓN:{3}] -  [CAUSA RAÍZ: {4}] - [MENSAJE USUARIO: {5}]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.user', 'Ocurrió un error al procesar la solicitud en la base de datos. Por favor, intente nuevamente más tarde.', 'es_AR');
@@ -78,20 +86,36 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.expiredToken.log'
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.expiredToken.user', 'Token expirado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.badCredentials.log', 'Intento de inicio de sesión fallido - [Usuario: {0}] [IP:{1}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.badCredentials.user', 'Usuario o contraseña incorrecta.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameExisting.log ', 'Usuario [{0}] ya se encuentra registrado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameExisting.user ', 'El Usuario {0} ya se encuentra registrado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameNotFound.log', 'UserNameNotFoundException: [ Usuario {0} inexistente o dado de baja.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.usernameNotFound.user', 'Usuario inexistente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.resourceNotFoundException.user', 'No se encontró el ID: {0}', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccount.log', 'Cuenta Bloqueada: [ID USER:{0} - [USERNAME:{1}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.blockAccount.user', 'Su cuenta se encuentra bloqueada. Por favor, restablezca la password para ingresar.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFound.user', 'Error al intentar asignar rol.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFound.log ', 'Error al intentar asignar rol no válido: [ID: {0}] - [Rol: {1}].', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFound.user', 'Rol no encontrado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFound.log ', '[Clase: {0}] - [Método: {1}] - [Mensaje: Rol con id {2} No encontrado].', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFoundUserCreationException.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: Usuario NO CREADO -  Rol con id {2} No encontrado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleNotFoundUserCreationException.user', 'No se pudo crear el usuario. No se encontró el Rol.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleExisting.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: Rol {2} ya se encuentra registrado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.roleExisting.user', 'El Rol {0} ya se encuentra registrado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFoundRoleCreationException.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: ROL NO CREADO - Permiso con id {2} No encontrado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFoundRoleCreationException.user', 'Rol no creado, no se pudo asociar el permiso.', 'es_AR');
+
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.empty', 'La password no puede estar vacía.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.min', 'La password debe contener al menos 10 caracteres.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.pattern', 'La password debe contener al menos un carácter especial, una mayúscula y un número.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.role', 'El usuario debe asignarse al menos 1 Rol.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.role.empty', 'El usuario debe asignarse al menos 1 Rol.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.role.empty', 'El nombre del rol no puede estar vacío.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.permission.empty', 'El rol debe contar con al menos un permiso.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.findAll.user.ok', 'Roles encontrado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.findById.user.ok', 'Rol encontrado correctamente.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionDTO.name.empty', 'El nombre del permiso no puede estar vacío.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getMessage.ok', 'Listado de configuraciones correcto.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateMessage.ok', 'Actualización correcta.', 'es_AR');

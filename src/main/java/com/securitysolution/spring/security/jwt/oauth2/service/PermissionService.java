@@ -1,8 +1,11 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
+import com.securitysolution.spring.security.jwt.oauth2.dto.PermissionResponseDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
 import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IPermissionRepository;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +15,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +25,34 @@ public class PermissionService implements IPermissionService {
     @Autowired
     private IPermissionRepository permissionRepository;
 
+    @Autowired
+    private IMessageService messageService;
+
     @Override
-    public List<Permission> findAll() {
+    public Response<List<PermissionResponseDTO>> findAll() {
         try{
-            return permissionRepository.findAll();
+
+            List<Permission> permissionList = permissionRepository.findAll();
+
+            List<PermissionResponseDTO> permissionResponseDTOList = new ArrayList<>();
+            for(Permission permission : permissionList) {
+                permissionResponseDTOList.add(convertToDTO(permission));
+            }
+
+            String messageUser = messageService.getMessage("permissionService.findAll.ok", null, LocaleContextHolder.getLocale());
+            return new Response<>(true, messageUser, permissionResponseDTOList);
+
         } catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e,"PermissionService", 0L,"","findAll");
 
         }
+    }
+
+    private PermissionResponseDTO convertToDTO(Permission permission) {
+        PermissionResponseDTO permissionResponseDTO = new PermissionResponseDTO();
+        permissionResponseDTO.setId(permission.getId());
+        permissionResponseDTO.setPermission(permission.getPermissionName());
+        return permissionResponseDTO;
     }
 
     @Override
@@ -50,7 +74,7 @@ public class PermissionService implements IPermissionService {
 
         }
     }
-
+/*
     @Override
     public void deleteById(Long id) {
         try{
@@ -68,4 +92,6 @@ public class PermissionService implements IPermissionService {
             throw new DataBaseException(e,"PermissionService", permission.getId(), permission.getPermissionName(), "update");
         }
     }
+
+ */
 }

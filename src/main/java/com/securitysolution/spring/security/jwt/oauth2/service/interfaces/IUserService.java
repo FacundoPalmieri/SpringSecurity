@@ -3,6 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service.interfaces;
 import com.securitysolution.spring.security.jwt.oauth2.dto.ResetPasswordDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,12 @@ import java.util.Optional;
 
 public interface IUserService {
 
-     List<UserSec> findAll();
-     Optional<UserSec> findById(Long id);
-     ResponseEntity<Response<UserSec>> save(UserSecDTO userSecDto);
+     Response<List<UserSecResponseDTO>> findAll();
+     Response<UserSecResponseDTO> findById(Long id);
+     Response<UserSecResponseDTO> save(UserSecDTO userSecDto);
      String encriptPassword(String password);
-     ResponseEntity<String> createTokenResetPasswordForUser(String email);
-     ResponseEntity<String> updatePassword(ResetPasswordDTO resetPasswordDTO, HttpServletRequest request);
+     String createTokenResetPasswordForUser(String email);
+     String updatePassword(ResetPasswordDTO resetPasswordDTO, HttpServletRequest request);
 
 
     void deleteById(Long id);
