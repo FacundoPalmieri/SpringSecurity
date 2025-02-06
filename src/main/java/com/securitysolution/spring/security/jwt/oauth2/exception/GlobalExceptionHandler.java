@@ -29,7 +29,17 @@ public class GlobalExceptionHandler {
     private IMessageService messageService;
 
 
-
+    /**
+     * Maneja las excepciones de tipo {@link TokenInvalidException} que ocurren cuando un token es inválido.
+     * <p>
+     * Este manejador de excepciones captura los casos en los que un token de autenticación no es válido,
+     * registrando la excepción para el análisis y proporcionando una respuesta apropiada para el usuario.
+     * </p>
+     *
+     * @param ex La excepción {@link TokenInvalidException} que contiene los detalles sobre el token inválido.
+     * @param request La solicitud HTTP que contiene la información de la petición, incluyendo la IP del usuario.
+     * @return Una respuesta con un mensaje de error para el usuario, indicando que el token es inválido.
+     */
     @ExceptionHandler({TokenInvalidException.class})
     public ResponseEntity<Response> handleTokenInvalidException(TokenInvalidException ex, HttpServletRequest request) {
         //Obtener IP
@@ -45,12 +55,23 @@ public class GlobalExceptionHandler {
 
         //Construir respuesta y enviar.
         Response<String> response = new Response<>(false,userMessage,null);
+
+        // Retornar la respuesta con el código de estado 401 (Unauthorized).
         return new ResponseEntity<>(response,HttpStatus.UNAUTHORIZED);
     }
 
 
 
-
+    /**
+     * Maneja las excepciones de tipo {@link BlockAccountException} que ocurren cuando una cuenta de usuario está bloqueada.
+     * <p>
+     * Este manejador de excepciones captura los casos en los que una cuenta de usuario es bloqueada,
+     * registrando la excepción para el análisis y proporcionando una respuesta adecuada para el usuario.
+     * </p>
+     *
+     * @param ex La excepción {@link BlockAccountException} que contiene los detalles sobre la cuenta bloqueada.
+     * @return Una respuesta con un mensaje de error para el usuario, indicando que la cuenta está bloqueada.
+     */
     @ExceptionHandler(BlockAccountException.class)
     public ResponseEntity<Response> handleBlockAccountException(BlockAccountException ex) {
 
@@ -72,10 +93,23 @@ public class GlobalExceptionHandler {
 
         //Construir respuesta y enviar.
         Response<String> response = new Response<>(false,userMessege,ex.getUsername());
+
+        // Retornar la respuesta con el código de estado 403 (Forbidden), ya que el acceso está prohibido debido a la cuenta bloqueada.
         return new ResponseEntity<>(response,HttpStatus.FORBIDDEN);
 
     }
 
+
+    /**
+     * Maneja las excepciones de tipo {@link ResourceNotFoundException} que ocurren cuando un recurso no se encuentra.
+     * <p>
+     * Este manejador de excepciones captura los casos en los que un recurso específico no es encontrado en la base de datos,
+     * proporcionando una respuesta adecuada para el usuario y registrando el error para su análisis.
+     * </p>
+     *
+     * @param ex La excepción {@link ResourceNotFoundException} que contiene el ID del recurso no encontrado.
+     * @return Una respuesta con un mensaje de error para el usuario, indicando que el recurso no fue encontrado.
+     */
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Response> handleResourceNotFoundException(ResourceNotFoundException ex) {
 
@@ -89,12 +123,22 @@ public class GlobalExceptionHandler {
         // Crear la respuesta con el mensaje personalizado
         Response<String> response = new Response<>(false, userMessage, null);
 
-        // Crear la respuesta con el mensaje personalizado
+        // Retornar la respuesta con el código de estado 404 (Not Found), indicando que el recurso no fue encontrado.
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-
-
     }
 
+
+    /**
+     * Maneja las excepciones de tipo {@link UserNameExistingException} que ocurren cuando un nombre de usuario ya está registrado.
+     * <p>
+     * Este manejador de excepciones captura los casos en los que se intenta registrar o usar un nombre de usuario
+     * que ya existe en el sistema. Proporciona una respuesta con un mensaje adecuado para el usuario y registra el error
+     * para su posterior análisis.
+     * </p>
+     *
+     * @param ex La excepción {@link UserNameExistingException} que contiene el nombre de usuario, tipo de entidad y operación.
+     * @return Una respuesta con un mensaje de error para el usuario, indicando que el nombre de usuario ya está en uso.
+     */
     @ExceptionHandler(UserNameExistingException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<Response> handleUsernameExistingException(UserNameExistingException ex) {
@@ -102,13 +146,28 @@ public class GlobalExceptionHandler {
         String logMessage = messageService.getMessage("exception.usernameExisting.log", new Object[]{ex.getEntityType(), ex.getOperation(), ex.getUsername()}, LocaleContextHolder.getLocale());
         log.error(logMessage);
 
-        //Construir mensaje para el usuario
+        // Crear la respuesta con el mensaje para el usuario y un estado HTTP 409 (Conflict).
         String userMessage = messageService.getMessage("exception.usernameExisting.user", new Object[]{ex.getUsername()}, LocaleContextHolder.getLocale());
         Response<String> response = new Response<>(false, userMessage, null);
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-    //Para autenticar
+
+
+
+
+    /**
+     * Maneja las excepciones de tipo {@link UserNameNotFoundException} que ocurren cuando no se encuentra un nombre de usuario al intentar autenticar.
+     * <p>
+     * Este manejador de excepciones se activa cuando el sistema no encuentra el nombre de usuario proporcionado durante
+     * el proceso de autenticación. El método registra el error para su posterior análisis y proporciona un mensaje genérico
+     * para el usuario indicando que el nombre de usuario no fue encontrado.
+     * </p>
+     *
+     * @param ex La excepción {@link UserNameNotFoundException} que contiene el nombre de usuario no encontrado.
+     * @param request La solicitud HTTP que se realiza, útil para obtener detalles adicionales como la IP.
+     * @return Una respuesta con un mensaje de error para el usuario, indicando que el nombre de usuario no fue encontrado.
+     */
     @ExceptionHandler(UserNameNotFoundException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<Response<String>> handleUsernameNotFoundException(UserNameNotFoundException ex, HttpServletRequest request) {
@@ -128,12 +187,24 @@ public class GlobalExceptionHandler {
         // Crear la respuesta con el mensaje personalizado
         Response<String> response = new Response<>(false, userMessage, null);
 
-        // Crear la respuesta con el mensaje personalizado
+        // Enviar la respuesta con el código de estado 401.
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
 
     }
 
-    //Para buscar como findbyId
+
+    /**
+     * Maneja las excepciones de tipo {@link UserNotFoundException} que ocurren cuando no se encuentra un usuario en la base de datos
+     * durante un intento de búsqueda por ID (por ejemplo, con un método como {@code findById}).
+     * <p>
+     * Este manejador de excepciones se activa cuando el sistema no puede encontrar el usuario especificado en la base de datos
+     * por su ID. El método registra el error para su posterior análisis y proporciona un mensaje genérico para el usuario
+     * indicando que el recurso no fue encontrado.
+     * </p>
+     *
+     * @param ex La excepción {@link UserNotFoundException} que contiene la información sobre el usuario no encontrado.
+     * @return Una respuesta con un mensaje de error para el usuario, indicando que el usuario no fue encontrado.
+     */
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response> handleUserNotFoundException(UserNotFoundException ex) {
@@ -145,12 +216,26 @@ public class GlobalExceptionHandler {
         //Cargar mensaje para usuario.
         String userMessage = messageService.getMessage("userService.findById.error.user", null, LocaleContextHolder.getLocale());
         Response<String> response = new Response<>(false, userMessage, null);
+
+        // Devolver la respuesta con un código de estado HTTP NOT_FOUND (404).
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 
     }
 
 
-    // Manejo de excepción por validaciones de anotaciones en los DTOs
+    /**
+     * Maneja las excepciones de tipo {@link MethodArgumentNotValidException}, que se lanzan cuando hay violaciones de validación
+     * en los objetos de transferencia de datos (DTOs), como cuando los datos no cumplen con las restricciones establecidas en
+     * las anotaciones de validación (por ejemplo, `@NotNull`, `@Size`, etc.).
+     * <p>
+     * Este manejador de excepciones captura los errores de validación de los campos de los DTOs, los traduce a mensajes
+     * legibles para el usuario y los devuelve en una respuesta con el estado HTTP {@code 400 Bad Request}.
+     * Además, registra los errores de validación en los logs para realizar un seguimiento.
+     * </p>
+     *
+     * @param ex La excepción {@link MethodArgumentNotValidException} que contiene los detalles de las violaciones de validación.
+     * @return Una respuesta con un mapa de los errores de validación y un código de estado HTTP {@code 400 Bad Request}.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)  // Esta excepción se lanza cuando hay una violación de validación de un objeto (por ejemplo, DTO)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
@@ -173,18 +258,22 @@ public class GlobalExceptionHandler {
 
         // Devolvemos una respuesta con un código de estado HTTP 400 (Bad Request) y el mapa de errores como cuerpo de la respuesta
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)  // Establecemos el estado HTTP a 400 (petición incorrecta)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(errors);  // Enviamos los errores de validación como cuerpo de la respuesta
     }
 
 
 
     /**
-     * Maneja las excepciones de tipo {@link DataBaseException}.
-     * Esta excepción se lanza cuando ocurre un error específico relacionado con la persistencia en la base de datos.
+     * Maneja las excepciones de tipo {@link DataBaseException}, que se lanzan cuando ocurre un error relacionado con la base de datos,
+     * como fallos en las operaciones de persistencia o cuando se intenta acceder a una entidad no válida.
+     * <p>
+     * Este manejador captura los detalles de la excepción, los traduce a un mensaje amigable para el usuario y los registra en los logs
+     * para realizar un seguimiento. Luego, responde al cliente con un mensaje de error y un estado HTTP {@code 500 Internal Server Error}.
+     * </p>
      *
-     * @param ex La excepción lanzada cuando ocurre un error en la base de datos.
-     * @return Una respuesta HTTP con el código de estado 500 (INTERNAL_SERVER_ERROR) y el mensaje de error.
+     * @param ex La excepción {@link DataBaseException} que contiene los detalles del error en la base de datos.
+     * @return Una respuesta con un mensaje genérico de error para el usuario y un código de estado HTTP {@code 500 Internal Server Error}.
      */
     @ExceptionHandler(DataBaseException.class)
     public ResponseEntity<Response<String>> handleDataBaseException(DataBaseException ex) {
@@ -207,6 +296,18 @@ public class GlobalExceptionHandler {
     }
 
 
+
+    /**
+     * Maneja las excepciones de tipo {@link RoleNotFoundUserCreationException}, que se lanzan cuando no se encuentra un rol
+     * especificado al crear un usuario o asignar un rol.
+     * <p>
+     * Este manejador captura los detalles de la excepción, los traduce a un mensaje amigable para el usuario y los registra en los logs
+     * para realizar un seguimiento. Luego, responde al cliente con un mensaje de error y un estado HTTP {@code 400 Bad Request}.
+     * </p>
+     *
+     * @param ex La excepción {@link RoleNotFoundUserCreationException} que contiene los detalles sobre el error relacionado con la creación de un usuario y el rol.
+     * @return Una respuesta con un mensaje genérico de error para el usuario y un código de estado HTTP {@code 400 Bad Request}.
+     */
     @ExceptionHandler({RoleNotFoundUserCreationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Response<String>> handleRoleNotFoundUserCreationException(RoleNotFoundUserCreationException ex) {
@@ -221,6 +322,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+
+
+
+    /**
+     * Maneja las excepciones de tipo {@link RoleNotFoundException}, que se lanzan cuando no se encuentra un rol
+     * especificado en la base de datos o en el sistema.
+     * <p>
+     * Este manejador captura los detalles de la excepción, los traduce a un mensaje para el usuario y los registra en los logs
+     * para realizar un seguimiento. Luego, responde al cliente con un mensaje de error y un estado HTTP {@code 404 Not Found}.
+     * </p>
+     *
+     * @param ex La excepción {@link RoleNotFoundException} que contiene los detalles sobre el error relacionado con la búsqueda de un rol.
+     * @return Una respuesta con un mensaje genérico de error para el usuario y un código de estado HTTP {@code 404 Not Found}.
+     */
     @ExceptionHandler({RoleNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response<String>> handleRoleNotFoundException(RoleNotFoundException ex) {
@@ -236,6 +351,18 @@ public class GlobalExceptionHandler {
     }
 
 
+
+    /**
+     * Maneja las excepciones de tipo {@link RoleExistingException}, que se lanzan cuando se intenta crear o actualizar
+     * un rol que ya existe en el sistema o en la base de datos.
+     * <p>
+     * Este manejador captura los detalles de la excepción, los traduce a un mensaje para el usuario y los registra en los logs
+     * para realizar un seguimiento. Luego, responde al cliente con un mensaje de error y un estado HTTP {@code 409 Conflict}.
+     * </p>
+     *
+     * @param ex La excepción {@link RoleExistingException} que contiene los detalles sobre el error relacionado con la existencia del rol.
+     * @return Una respuesta con un mensaje específico para el usuario y un código de estado HTTP {@code 409 Conflict}.
+     */
     @ExceptionHandler({RoleExistingException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResponseEntity<Response<String>> handleRoleExistingException(RoleExistingException ex) {
@@ -251,6 +378,18 @@ public class GlobalExceptionHandler {
     }
 
 
+
+    /**
+     * Maneja las excepciones de tipo {@link PermissionNotFoundRoleCreationException}, que se lanzan cuando no se encuentra
+     * un permiso necesario durante la creación de un rol en el sistema.
+     * <p>
+     * Este manejador captura los detalles de la excepción, los traduce a un mensaje para el usuario y los registra en los logs
+     * para realizar un seguimiento. Luego, responde al cliente con un mensaje de error y un estado HTTP {@code 400 Bad Request}.
+     * </p>
+     *
+     * @param ex La excepción {@link PermissionNotFoundRoleCreationException} que contiene los detalles sobre el error relacionado con permisos faltantes.
+     * @return Una respuesta con un mensaje específico para el usuario y un código de estado HTTP {@code 400 Bad Request}.
+     */
     @ExceptionHandler({PermissionNotFoundRoleCreationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Response<String>> handlePermissionNotFoundRoleCreationException(PermissionNotFoundRoleCreationException ex) {
@@ -264,6 +403,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+
+
+
+    /**
+     * Maneja las excepciones de tipo {@link PermissionNotFoundException}, que se lanzan cuando no se encuentra un permiso
+     * necesario en el sistema.
+     * <p>
+     * Este manejador captura los detalles de la excepción, los traduce a un mensaje para el usuario y los registra en los logs
+     * para realizar un seguimiento. Luego, responde al cliente con un mensaje de error y un estado HTTP {@code 404 Not Found}.
+     * </p>
+     *
+     * @param ex La excepción {@link PermissionNotFoundException} que contiene los detalles sobre el error relacionado con permisos no encontrados.
+     * @return Una respuesta con un mensaje específico para el usuario y un código de estado HTTP {@code 404 Not Found}.
+     */
     @ExceptionHandler({PermissionNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response<String>> handlePermissionNotFoundException(PermissionNotFoundException ex) {
@@ -277,7 +430,22 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
-    // Manejo de 404 Not Found
+
+
+
+
+
+    /**
+     * Maneja las excepciones {@link NoHandlerFoundException} y {@link NoResourceFoundException}, que se lanzan cuando
+     * no se puede encontrar un manejador adecuado para una solicitud o cuando un recurso solicitado no existe.
+     * <p>
+     * Este manejador captura las excepciones lanzadas en casos donde no se encuentra el recurso o el manejador de la solicitud,
+     * registra el error y devuelve un mensaje amigable para el usuario, con un estado HTTP {@code 404 Not Found}.
+     * </p>
+     *
+     * @param ex La excepción {@link Exception} que representa un error de recurso no encontrado o un manejador no encontrado.
+     * @return Una respuesta con un mensaje específico para el usuario y un código de estado HTTP {@code 404 Not Found}.
+     */
     @ExceptionHandler({NoHandlerFoundException.class, NoResourceFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response<String>> handleNotFound(Exception ex) {
@@ -341,7 +509,18 @@ public class GlobalExceptionHandler {
 
 
 
-    // Manejo de credenciales invalidad
+    /**
+     * Maneja la excepción {@link CredentialsException}, que se lanza cuando las credenciales proporcionadas son inválidas
+     * durante el proceso de autenticación.
+     * <p>
+     * Este manejador captura las excepciones de credenciales incorrectas, registra el error junto con la dirección IP del
+     * cliente que intenta autenticarse y devuelve un mensaje genérico al usuario con un estado HTTP {@code 401 Unauthorized}.
+     * </p>
+     *
+     * @param ex La excepción {@link CredentialsException} que contiene detalles sobre el error de autenticación.
+     * @param request La solicitud HTTP que contiene la información de la dirección IP del cliente que realizó la solicitud.
+     * @return Una respuesta con un mensaje personalizado para el usuario y un código de estado HTTP {@code 401 Unauthorized}.
+     */
     @ExceptionHandler({CredentialsException.class})
     public ResponseEntity<Response<String>> handleCredentialsException(CredentialsException ex, HttpServletRequest request) {
         //Obtener IP
@@ -369,7 +548,18 @@ public class GlobalExceptionHandler {
 
 
 
-
+    /**
+     * Maneja la excepción {@link PasswordMismatchException}, que se lanza cuando las contraseñas proporcionadas no coinciden
+     * durante la operación de cambio de contraseña o actualización de usuario.
+     * <p>
+     * Este manejador captura la excepción de que las contraseñas no coinciden, registra el error en el log incluyendo el nombre
+     * del usuario afectado y el creador de la operación, y devuelve un mensaje genérico al usuario con un estado HTTP
+     * {@code 409 Conflict}.
+     * </p>
+     *
+     * @param ex La excepción {@link PasswordMismatchException} que contiene detalles sobre el error de las contraseñas que no coinciden.
+     * @return Una respuesta con un mensaje personalizado para el usuario y un código de estado HTTP {@code 409 Conflict}.
+     */
     @ExceptionHandler (PasswordMismatchException.class)
     public ResponseEntity<Response<String>> handlePasswordMismatchException(PasswordMismatchException ex) {
 
@@ -395,7 +585,19 @@ public class GlobalExceptionHandler {
     }
 
 
-    //para el update de message
+    /**
+     * Maneja la excepción {@link MessageNotFoundException}, que se lanza cuando no se encuentra un mensaje específico
+     * durante una operación de actualización.
+     * <p>
+     * Este manejador captura la excepción de no encontrar el mensaje solicitado, registra el error en el log incluyendo
+     * el tipo de entidad, la operación y el ID relacionado, y devuelve un mensaje genérico al usuario con un estado HTTP
+     * {@code 404 Not Found}.
+     * </p>
+     *
+     * @param ex La excepción {@link MessageNotFoundException} que contiene detalles sobre el mensaje no encontrado
+     *           y los parámetros relacionados con la entidad y operación.
+     * @return Una respuesta con un mensaje personalizado para el usuario y un código de estado HTTP {@code 404 Not Found}.
+     */
     @ExceptionHandler({MessageNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Response<String>> handleMessageNotFoundException(MessageNotFoundException ex) {
@@ -411,16 +613,19 @@ public class GlobalExceptionHandler {
 
 
 
+
+
     /**
-     * Maneja todas las excepciones no previstas en los controladores y servicios.
-     * Esta excepción sirve como un manejo genérico de cualquier error no controlado previamente.
+     * Maneja cualquier excepción no capturada, proporcionando una respuesta genérica para errores inesperados.
+     * <p>
+     * Este manejador captura excepciones generales que no sean específicas, registra el error en el log con los detalles
+     * relevantes para el diagnóstico y devuelve un mensaje de error genérico al usuario, con un código de estado HTTP
+     * {@code 500 Internal Server Error}.
+     * </p>
      *
-     * @param e La excepción no controlada que se ha lanzado.
-     * @return Una respuesta HTTP con el código de estado 500 (INTERNAL_SERVER_ERROR) y un mensaje genérico de error.
+     * @param e La excepción {@link Exception} que representa un error inesperado que ocurrió en el sistema.
+     * @return Una respuesta con un mensaje genérico para el usuario y un código de estado HTTP {@code 500 Internal Server Error}.
      */
-
-
-    // Manejo de exception Generales
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response<String>> handleGeneralException(Exception e) {
         // Loguear la excepción para detalles de diagnóstico

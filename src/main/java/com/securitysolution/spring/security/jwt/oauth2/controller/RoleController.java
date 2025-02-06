@@ -23,10 +23,23 @@ import java.util.Set;
 
 
 /**
- * Controlador para gestionar los roles del sistema.
- * <p> Proporciona endpoints para listar, obtener, crear y actualizar roles. </p>
- * Todos los endpoints requieren autenticación con rol <b>DEV</b>.
- *
+ * Controlador encargado de gestionar los roles en el sistema. Proporciona operaciones para obtener
+ * el listado de roles, obtener un rol específico por su ID y crear nuevos roles.
+ * <p>
+ * Este controlador está restringido por el rol <b>DEV</b>, y todos los accesos están bloqueados por defecto
+ * debido a la configuración de seguridad.
+ * </p>
+ * <p>
+ * Los métodos disponibles son:
+ * <ul>
+ *   <li><b>GET /api/roles/get/all</b>: Obtiene el listado completo de roles.</li>
+ *   <li><b>GET /api/roles/{id}</b>: Obtiene un rol específico por su ID.</li>
+ *   <li><b>POST /api/roles/create</b>: Crea un nuevo rol en el sistema.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * <b>Roles necesarios:</b> <b>DEV</b>
+ * </p>
  */
 
 @RestController

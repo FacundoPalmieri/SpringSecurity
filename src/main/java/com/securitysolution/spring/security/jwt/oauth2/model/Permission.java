@@ -18,17 +18,13 @@ import lombok.Setter;
 @Table(name="permisos")
 public class Permission {
 
-    /**
-     * Identificador único del permiso.
-     */
+    /**Identificador único del permiso.*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-    /**
-     * Nombre único del permiso.
-     */
+    /**Nombre único del permiso.*/
     @Column(unique = true, nullable = false)
     private String permissionName;
 

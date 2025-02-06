@@ -11,16 +11,12 @@ import lombok.Data;
 @Table(name = "token_config")
 public class TokenConfig {
 
-    /**
-     * Identificador único del rol.
-     */
+    /**Identificador único del rol.*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Tiempo de expiración del Token.
-     */
+    /**Tiempo de expiración del Token.*/
     @Column(name="Expiracion",  nullable = false)
     private Long expiration;
 }

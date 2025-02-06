@@ -1,7 +1,11 @@
 package com.securitysolution.spring.security.jwt.oauth2.exception;
 
 import lombok.Getter;
-
+/**
+ * Excepción lanzada cuando una cuenta es bloqueada.
+ * <p>Esta excepción es utilizada cuando una cuenta de usuario ha sido bloqueada debido a
+ * intentos fallidos de inicio de sesión o cualquier otro motivo relacionado con la seguridad.</p>
+ */
 @Getter
 public class BlockAccountException extends RuntimeException {
     private final Long id;

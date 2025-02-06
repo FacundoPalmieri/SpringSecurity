@@ -18,6 +18,40 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador encargado de manejar la configuración de mensajes, los intentos fallidos de sesión
+ * y la expiración de tokens. Todas las operaciones requieren el rol <b>DEV</b> para ser accesibles.
+ * <p>
+ * Los métodos proporcionados permiten:
+ * <ul>
+ *   <li>Obtener y actualizar la configuración de mensajes.</li>
+ *   <li>Obtener y actualizar los intentos fallidos de sesión.</li>
+ *   <li>Obtener y actualizar la expiración del token.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * Las respuestas corresponden a los siguientes casos:
+ *  <ul>
+ * <li><b>200 OK</b>:éxito</li>
+ * <li><b>401 Unauthorized</b>: falta de autenticación (401 Unauthorized)</li>
+ *  <li><b>403 Forbidden</b>:falta de autorización (403 Forbidden)<</li>
+ *  </ul>
+ * </p>
+ <p>
+ * Este controlador utiliza las siguientes operaciones:
+ * <ul>
+ *   <li><b>GET /dev/message/get</b>: Obtiene la configuración de mensajes.</li>
+ *   <li><b>PATCH /dev/message/update</b>: Actualiza la configuración de un mensaje.</li>
+ *   <li><b>GET /dev/session/get</b>: Obtiene la cantidad de intentos fallidos de sesión.</li>
+ *   <li><b>PATCH /dev/session/update</b>: Actualiza la cantidad de intentos fallidos de sesión.</li>
+ *   <li><b>GET /dev/token/get</b>: Obtiene la expiración del token.</li>
+ *   <li><b>PATCH /dev/token/update</b>: Actualiza la expiración del token.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * <b>Roles necesarios:</b> <b>DEV</b>
+ * </p>
+ */
 @RestController
 @RequestMapping("/dev")
 @PreAuthorize("hasRole('DEV')")

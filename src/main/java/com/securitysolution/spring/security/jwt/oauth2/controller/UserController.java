@@ -17,9 +17,22 @@ import java.util.List;
 
 
 /**
- * <p>Controlador para gestionar los usuarios del sistema.</p>
- * <p>Proporciona endpoints para listar, obtener y crear usuarios.</p>
- * <p>Todos los endpoints requieren autenticación con rol <b>ADMIN</b>.</p>
+ * Controlador encargado de gestionar los usuarios en el sistema. Proporciona operaciones para obtener
+ * el listado de usuarios, obtener un usuario específico por su ID y crear nuevos usuarios.
+ * <p>
+ * Este controlador requiere el rol <b>ADMIN</b> para acceder a sus métodos.
+ * </p>
+ * <p>
+ * Los métodos disponibles son:
+ * <ul>
+ *   <li><b>GET /api/users/get/all</b>: Obtiene el listado completo de usuarios.</li>
+ *   <li><b>GET /api/users/{id}</b>: Obtiene un usuario específico por su ID.</li>
+ *   <li><b>POST /api/users/create</b>: Crea un nuevo usuario en el sistema.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * <b>Roles necesarios:</b> <b>ADMIN</b>
+ * </p>
  */
 @RestController
 @RequestMapping("/api/users")

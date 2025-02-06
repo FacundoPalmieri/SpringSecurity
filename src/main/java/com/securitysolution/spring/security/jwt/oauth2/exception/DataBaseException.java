@@ -1,17 +1,28 @@
 package com.securitysolution.spring.security.jwt.oauth2.exception;
 
 import lombok.Getter;
-
+/**
+ * Excepción personalizada para errores relacionados con la base de datos.
+ * <p>
+ * Se lanza cuando ocurre un error en la manipulación de entidades dentro de la base de datos.
+ * </p>
+ */
 @Getter
 public class DataBaseException extends RuntimeException {
+    /** Tipo de la entidad afectada (Ejemplo: "UsuarioService"). */
+    private final String entityType;
 
-    private final String entityType;  // Tipo de la entidad (Curso, Tema, etc.)
-    private final Long entityId;      // ID de la entidad (Curso, Tema, etc.)
-    private final String entityName;  // Nombre de la entidad (por ejemplo, "Curso de Java")
-    private final String operation; // Operación (Ejemplo: Save, update)
+    /** ID de la entidad afectada. */
+    private final Long entityId;
+
+    /** Nombre descriptivo de la entidad afectada. */
+    private final String entityName;
+
+    /** Operación en la que ocurrió el error (Ejemplo: "Save", "Update"). */
+    private final String operation;
 
 
-    // Constructor con detalles de la entidad y causa raíz
+     /** Constructor que inicializa la excepción con detalles de la entidad y la causa raíz del error.*/
     public DataBaseException(Throwable cause, String entityType, Long entityId, String entityName, String operation) {
         super(cause);
         this.entityType = entityType;
@@ -21,7 +32,11 @@ public class DataBaseException extends RuntimeException {
     }
 
 
-
+    /**
+     * Obtiene la causa raíz del error en forma de cadena.
+     *
+     * @return Descripción de la causa raíz o "Desconocida" si no hay información disponible.
+     */
     public String getRootCause() {
         return getCause() != null ? getCause().toString() : "Desconocida";
     }

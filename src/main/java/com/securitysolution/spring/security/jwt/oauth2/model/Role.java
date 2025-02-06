@@ -19,20 +19,15 @@ import java.util.Set;
 @Table(name="roles")
 public class Role {
 
-    /**
-     * Identificador único del rol.
-     */
+    /**Identificador único del rol.*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Nombre del rol.
-     */
+    /**Nombre del rol.*/
     private String role;
 
-    /**
-     * Lista de permisos asociados al rol.
+    /**Lista de permisos asociados al rol.
      * Se utiliza Set porque no permite repetidos.
      */
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

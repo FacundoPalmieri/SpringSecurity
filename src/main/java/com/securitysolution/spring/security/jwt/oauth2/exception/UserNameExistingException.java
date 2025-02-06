@@ -4,18 +4,27 @@ package com.securitysolution.spring.security.jwt.oauth2.exception;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Excepción personalizada que indica que el nombre de usuario ya existe en el sistema.
+ * <p>
+ * Esta excepción se lanza cuando se intenta crear una entidad con un nombre de usuario que ya está registrado en el sistema.
+ * </p>
+ */
 @Setter
 @Getter
 public class UserNameExistingException extends RuntimeException {
-    private  String entityType;  // Tipo de la entidad (CursosService, Tema, etc.)
-    private  String operation; // Operación (Ejemplo: Save, update)
+
+    /** Tipo de la entidad (por ejemplo, CursosService). */
+    private  String entityType;
+
+    /** Operación realizada (por ejemplo, Save, Update). */
+    private  String operation;
+
+    /** Nombre de usuario que ya existe. */
     private String username;
 
 
-    public UserNameExistingException(String message) {
-        super(message);
-    }
-
+    /** Constructor que inicializa la excepción */
     public UserNameExistingException( String username, String entityType, String operation) {
         this.username = username;
         this.entityType = entityType;

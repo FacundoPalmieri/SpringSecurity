@@ -13,6 +13,7 @@ import lombok.Data;
 @Table(name="intentos_fallidos")
 public class FailedLoginAttemptsConfig {
 
+    /** Identificador único del mensaje.*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

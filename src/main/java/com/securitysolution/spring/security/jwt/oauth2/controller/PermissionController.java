@@ -16,10 +16,22 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Controlador para la gestión de permisos.
- * <p>Proporciona endpoints para listar y obtener permisos por ID.</p>
- *
- * Todos los endpoints requieren autenticación con rol DEV.
+ * Controlador encargado de gestionar los permisos en el sistema. Proporciona operaciones para obtener
+ * el listado de permisos y un permiso específico por su ID.
+ * <p>
+ * Este controlador está restringido por el rol <b>DEV</b>, y todos los accesos están bloqueados por defecto
+ * debido a la configuración de seguridad.
+ * </p>
+ * <p>
+ * Los métodos disponibles son:
+ * <ul>
+ *   <li><b>GET /api/permissions/get/all</b>: Obtiene el listado completo de permisos.</li>
+ *   <li><b>GET /api/permissions/{id}</b>: Obtiene un permiso específico por su ID.</li>
+ * </ul>
+ * </p>
+ * <p>
+ * <b>Roles necesarios:</b> <b>DEV</b>
+ * </p>
  */
 @RestController
 @PreAuthorize("denyAll()")
