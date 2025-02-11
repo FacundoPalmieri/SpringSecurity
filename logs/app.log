@@ -503,3 +503,6 @@ Caused by: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot d
 2025-02-11T08:50:26.470-03:00  INFO 5652 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
 2025-02-11T08:50:26.483-03:00  INFO 5652 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Started SpringsecurityApplication in 8.379 seconds (process running for 9.726)
 2025-02-11T08:53:24.666-03:00  INFO 5652 --- [security-template] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-11T08:53:53.421-03:00 ERROR 5652 --- [security-template] [http-nio-8080-exec-3] c.s.s.s.j.o.e.GlobalExceptionHandler     : [Clase: UserService] - [Método: validateNotDevRole] - [Detalle: No puede actualizarse al usuario con ID 3 al Rol de tipo DEV.]
+2025-02-11T08:54:07.949-03:00 ERROR 5652 --- [security-template] [http-nio-8080-exec-4] c.s.s.s.j.o.e.GlobalExceptionHandler     : [Clase: UserService] - [Método: validateNotDevRole] - [Detalle: No puede actualizarse al usuario con ID 3 al Rol de tipo DEV.]
+2025-02-11T10:02:52.664-03:00  INFO 5652 --- [security-template] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

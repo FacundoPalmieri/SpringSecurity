@@ -133,7 +133,28 @@ public class UserController {
     }
 
 
-
+    /**
+     * Actualiza la información de un usuario.
+     * Este endpoint permite a los usuarios con rol de "ADMIN" actualizar los datos de un usuario existente.
+     * @param userSecUpdateDto Objeto que contiene los datos del usuario a actualizar. Debe ser válido según las
+     * restricciones de la clase {@link UserSecUpdateDTO}.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Usuario actualizado exitosamente.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>404 Not Found</b>: Roles y/o permisos requeridos no encontrados.</li>
+     *         <li><b>409 Conflict</b>: Usuario existente en el sistema o se intenta actualizar a un rol DEV.</li>
+     *         </ul>
+     */
+    @Operation(summary = "Actualizar usuario", description = "Actualizar un usuario en el sistema.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Usuario Actualizado exitosamente."),
+            @ApiResponse(responseCode = "401", description = "No autenticado."),
+            @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
+            @ApiResponse(responseCode = "404", description = "Roles y/o permisos requeridos no encontrados."),
+            @ApiResponse(responseCode = "409", description = "Usuario existente en el sistema o se intenta actualizar a un rol DEV.")
+    })
     @PatchMapping("/update")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Response<UserSecResponseDTO>> updateUser(@Valid @RequestBody UserSecUpdateDTO userSecUpdateDto) {
