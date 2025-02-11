@@ -20,6 +20,40 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * Manejador global de excepciones para capturar y gestionar diferentes tipos de excepciones lanzadas en la aplicación.
+ * <p>
+ * Esta clase captura excepciones de diferentes tipos, las registra en los logs y proporciona respuestas personalizadas
+ * para el usuario con códigos de estado HTTP apropiados. Se utiliza la anotación {@link ControllerAdvice} para manejar
+ * las excepciones globalmente en toda la aplicación.
+ * </p>
+ *
+ * Las excepciones manejadas incluyen:
+ * - {@link TokenInvalidException}: Excepciones relacionadas con tokens de autenticación inválidos.
+ * - {@link BlockAccountException}: Excepciones cuando una cuenta de usuario está bloqueada.
+ * - {@link ResourceNotFoundException}: Excepciones cuando un recurso no se encuentra.
+ * - {@link UserNameExistingException}: Excepciones cuando el nombre de usuario ya está en uso.
+ * - {@link UserNameNotFoundException}: Excepciones cuando no se encuentra un nombre de usuario.
+ * - {@link UserNotFoundException}: Excepciones cuando no se encuentra un usuario por su ID.
+ * - {@link MethodArgumentNotValidException}: Excepciones de validación de parámetros en objetos de transferencia de datos (DTOs).
+ * - {@link DataBaseException}: Excepciones relacionadas con la base de datos.
+ * - {@link RoleNotFoundUserCreationException}: Excepciones relacionadas con roles no encontrados al crear un usuario o asignar un rol.
+ * - {@link RoleNotFoundException}: Excepciones relacionadas con roles no encontrados en la base de datos o en el sistema.
+ * - {@link RoleExistingException}: Excepciones relacionadas con roles que ya existen en el sistema o en la base de datos al intentar crear o actualizar un rol.
+ * - {@link PermissionNotFoundRoleCreationException}: Excepciones relacionadas con permisos faltantes al crear un rol en el sistema.
+ * - {@link PermissionNotFoundException}: Excepciones relacionadas con permisos no encontrados en el sistema.
+ * - {@link NoHandlerFoundException}: Excepciones relacionadas con la falta de un manejador adecuado para una solicitud.
+ * - {@link NoResourceFoundException}: Excepciones relacionadas con recursos solicitados que no existen en el sistema.
+ * - {@link AccessDeniedException}: Excepciones relacionadas con el acceso denegado debido a permisos insuficientes o autenticación fallida.
+ * - {@link CredentialsException}: Excepciones relacionadas con credenciales incorrectas durante el proceso de autenticación.
+ * - {@link PasswordMismatchException}: Excepciones relacionadas con el incumplimiento de la coincidencia de contraseñas durante operaciones de cambio de contraseña o actualización de usuario.
+ * - {@link UserUpdateSelfUpdateException}: Excepciones relacionadas con un usuario que intenta actualizar sus propios datos, lo cual no está permitido.
+ * - {@link UserSaveNotDevRoleException}: Excepciones que ocurren cuando se intenta asignar un rol de desarrollador.
+ * - {@link UserUpdateNotDevRoleException}: Excepciones relacionadas con un intento de actualización de un usuario que posee un rol no permitido o está intentando asignarse un rol de desarrollador.
+ * - {@link UserUpdateException}: Excepciones relacionadas con errores durante el proceso de actualización de un usuario.
+ * - {@link MessageNotFoundException}: Excepciones que ocurren cuando no se encuentra un mensaje específico durante una operación de actualización.
+ * - {@link ExceptionHandler}: Maneja cualquier excepción no capturada, proporcionando una respuesta genérica para errores inesperados.
+ */
 
 @Slf4j
 @ControllerAdvice
@@ -582,6 +616,112 @@ public class GlobalExceptionHandler {
         Response<String> response = new Response<>(false, userMessage, null);
         return new ResponseEntity<>(response,HttpStatus.CONFLICT);
 
+    }
+
+
+
+    /**
+     * Manejador de excepciones para actualizaciones de usuarios que intentan modificarse a sí mismos.
+     * Este método se ejecuta cuando se lanza una excepción de tipo {@link UserUpdateSelfUpdateException}.
+     * El manejador captura la excepción, registra el mensaje de error en los logs y devuelve una respuesta con un mensaje
+     * amigable para el usuario indicando que la operación de actualización no está permitida en este caso.
+     *
+     * @param ex La excepción {@link UserUpdateSelfUpdateException} que se ha lanzado cuando un usuario intenta actualizar
+     *           sus propios datos, lo cual no está permitido.
+     * @return Una {@link ResponseEntity} con un objeto {@link Response} que contiene el mensaje para el usuario
+     * y el estado HTTP {@link HttpStatus#CONFLICT} (409) que indica un conflicto durante la operación.
+     */
+    @ExceptionHandler(UserUpdateSelfUpdateException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<Response<String>> handleUserUpdateException(UserUpdateSelfUpdateException ex) {
+        //Carga el mensaje para el log.
+        String logMessage = messageService.getMessage("exception.validateSelfUpdate.log",new Object[]{ex.getEntityType(), ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(logMessage);
+
+        //Se construye mensaje para usuario.
+        String userMessage = messageService.getMessage("exception.validateSelfUpdate.user", null, LocaleContextHolder.getLocale());
+
+        Response<String> response = new Response<>(false, userMessage, null);
+        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+    }
+
+
+    /**
+     * Manejador de excepciones para la creación o guardado de usuario cuando se le quiere asignar rol de desarrollador.
+     * Este método se ejecuta cuando se lanza una excepción de tipo {@link UserSaveNotDevRoleException}.
+     * El manejador captura la excepción, registra el mensaje de error en los logs y devuelve una respuesta con un mensaje
+     * amigable para el usuario.
+     *
+     * @param ex La excepción {@link UserSaveNotDevRoleException} que se ha lanzado cuando el rol del usuario no es de desarrollador.
+     * @return Una {@link ResponseEntity} con un objeto {@link Response} que contiene el mensaje para el usuario
+     *         y el estado HTTP {@link HttpStatus#CONFLICT} (409) que indica un conflicto durante la operación.
+     *
+     * @see Response
+     * @see UserSaveNotDevRoleException
+     * @see HttpStatus#CONFLICT
+     */
+    @ExceptionHandler(UserSaveNotDevRoleException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<Response<String>> handleUserSaveNotDevRoleException(UserSaveNotDevRoleException ex) {
+        //Carga el mensaje para el log.
+        String logMessage = messageService.getMessage("exception.save.validateNotDevRole.log",new Object[]{ex.getEntityType(), ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(logMessage);
+
+        //Se construye mensaje para usuario.
+        String userMessage = messageService.getMessage("exception.save.validateNotDevRole.user", null, LocaleContextHolder.getLocale());
+
+        Response<String> response = new Response<>(false, userMessage, null);
+        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+    }
+
+
+
+    /**
+     * Manejador de excepciones para la actualización de usuarios cuando el usuario a actualizar poseé un rol de desarrollador o quiere actualizarse a ese rol.
+     * Este método se ejecuta cuando se lanza una excepción de tipo {@link UserUpdateNotDevRoleException}.
+     * El manejador captura la excepción, registra el mensaje de error en los logs y devuelve una respuesta con un mensaje
+     * amigable para el usuario.
+     *
+     * @param ex La excepción {@link UserUpdateNotDevRoleException} que se ha lanzado cuando el rol del usuario no es de desarrollador.
+     * @return Una {@link ResponseEntity} con un objeto {@link Response} que contiene el mensaje para el usuario
+     * y el estado HTTP {@link HttpStatus#CONFLICT} (409) que indica un conflicto durante la operación.
+     */
+    @ExceptionHandler(UserUpdateNotDevRoleException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<Response<String>> handleUserUpdateNotDevRoleException(UserUpdateNotDevRoleException ex) {
+        //Carga el mensaje para el log.
+        String logMessage = messageService.getMessage("exception.update.validateNotDevRole.log",new Object[]{ex.getEntityType(), ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(logMessage);
+
+        //Se construye mensaje para usuario.
+        String userMessage = messageService.getMessage("exception.update.validateNotDevRole.user", null, LocaleContextHolder.getLocale());
+
+        Response<String> response = new Response<>(false, userMessage, null);
+        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+    }
+
+
+    /**
+     * Manejador de excepciones para la actualización de usuarios. Este método se ejecuta cuando se lanza una
+     * excepción de tipo {@link UserUpdateException}. El manejador captura la excepción, registra el mensaje de
+     * error en los logs y devuelve una respuesta con un mensaje amigable para el usuario.
+     *
+     * @param ex La excepción {@link UserUpdateException} que se ha lanzado durante la actualización de un usuario.
+     * @return Una {@link ResponseEntity} con un objeto {@link Response} que contiene el mensaje para el usuario
+     * y el estado HTTP {@link HttpStatus#CONFLICT} (409) que indica un conflicto durante la operación.
+     */
+    @ExceptionHandler(UserUpdateException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<Response<String>> handleUserUpdateException(UserUpdateException ex){
+        //Carga el mensaje para el log.
+        String logMessage = messageService.getMessage("exception.validateUpdateUser.log", new Object[]{ex.getEntityType(), ex.getOperation(), ex.getId()}, LocaleContextHolder.getLocale());
+        log.error(logMessage);
+
+        //Se construye mensaje para usuario.
+        String userMessage = messageService.getMessage("exception.validateUpdateUser.user", null, LocaleContextHolder.getLocale());
+
+        Response<String> response = new Response<>(false, userMessage, null);
+        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
     }
 
 

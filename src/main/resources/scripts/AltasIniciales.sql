@@ -48,6 +48,7 @@ VALUES(
 
 -- Asociamos Usuarios y roles
 insert into user_roles (user_id, role_id) values(1,3);
+insert into user_roles (user_id, role_id) values(1,2);
 
 
 
@@ -55,6 +56,7 @@ insert into user_roles (user_id, role_id) values(1,3);
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.passwordNotEquals.user', 'Las password deben coincidir.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.passwordNotEquals.log', 'No coinciden las password - [UsuarioCreador: {0}] - [UsuarioNuevo: {0}].', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.save.ok', 'Usuario creado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.update.ok', 'Usuario actualizado correctamente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findAll.ok', 'Usuarios recuperados correctamente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findById.ok.user', 'Usuario encontrado correctamente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.findById.error.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: Usuario con id {2} No encontrado.]', 'es_AR');
@@ -106,18 +108,26 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFoun
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.permissionNotFound.log', '[Clase: {0}] - [Método: {1}] - [Mensaje: Permiso id {2} No encontrado.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.messageNotFound.user', 'Mensaje no encontrado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.messageNotFound.log', '[Clase: {0}] - [Método: {1}] - [Detalle: Mensaje id {2} No encontrado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateSelfUpdate.log', '[Clase: {0}] - [Método: {1}] - [Detalle: El usuario con ID {2} a actualizar es el mismo que el autenticado.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateSelfUpdate.user', 'La actualización del propio usuario no está permitida.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.save.validateNotDevRole.log', '[Clase: {0}] - [Método: {1}] - [Detalle: No puede actualizarse al usuario con ID {2} al Rol de tipo DEV.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.save.validateNotDevRole.user', 'La actualización a un Rol de tipo -Desarrollador- no está permitida.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNotDevRole.log', '[Clase: {0}] - [Método: {1}] - [Detalle: No puede actualizarse al usuario con ID {2} al Rol de tipo DEV.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNotDevRole.user', 'La actualización a un Rol de tipo -Desarrollador- no está permitida.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.log', '[Clase: {0}] - [Método: {1}] - [Detalle: Usuario ID{2} - El valor a actualizar es igual al que ya cuenta.]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.user ', 'El valor proporcionado es igual al actual, no se realizaron cambios.', 'es_AR');
 
 
 
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.password.empty', 'La password no puede estar vacía.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.password.min', 'La password debe contener al menos 10 caracteres.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.password.pattern', 'La password debe contener al menos un carácter especial, una mayúscula y un número.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.role.empty', 'El usuario debe asignarse al menos 1 Rol.', 'es_AR');
 
-
-
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.empty', 'La password no puede estar vacía.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.min', 'La password debe contener al menos 10 caracteres.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.password.pattern', 'La password debe contener al menos un carácter especial, una mayúscula y un número.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecDTO.role.empty', 'El usuario debe asignarse al menos 1 Rol.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecUpdateDTO.id.empty', 'El ID no puede estar vacío.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.role.empty', 'El nombre del rol no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.permission.empty', 'El rol debe contar con al menos un permiso.', 'es_AR');

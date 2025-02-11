@@ -3,7 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.exception;
 import lombok.Getter;
 
 /**
- * Excepción personalizada que indica que el nombre de usuario no se ha encontrado en el sistema.
+ * Excepción personalizada que indica que el nombre de usuario no se ha encontrado en el sistema al momento de autenticar.
  * <p>
  * Esta excepción se lanza cuando se intenta realizar una operación sobre un usuario que no existe en el sistema.
  * </p>

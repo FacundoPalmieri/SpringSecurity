@@ -27,18 +27,53 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Collection;
 
+/**
+ * Filtro encargado de validar el token JWT en las solicitudes HTTP para asegurar que el usuario esté autenticado.
+ * Este filtro intercepta las solicitudes, extrae el token JWT desde el encabezado de autorización, valida su autenticidad,
+ * y, si es válido, establece la autenticación en el contexto de seguridad para que el usuario pueda acceder a los recursos protegidos.
+ * Si el token está expirado o es inválido, se maneja la excepción correspondiente y se devuelve un mensaje de error adecuado.
+ *
+ * <p>
+ * La clase extiende {@link OncePerRequestFilter} para garantizar que se ejecute una vez por solicitud y se encargue de la validación del token JWT.
+ * </p>
+ *
+ * <p>
+ * Los mensajes de error y éxito se obtienen del servicio de mensajes {@link IMessageService}, lo que permite la internacionalización
+ * y personalización de los mensajes de respuesta.
+ * </p>
+ *
+ * @see JwtUtils Utiliza este servicio para la validación del token y la extracción de datos del mismo.
+ * @see IMessageService Servicio utilizado para obtener los mensajes de error y respuesta personalizados.
+ */
+
 @Slf4j
-//mediante el extends establecemos que es un filtro que se tiene que ejecutar siempre
 public class JwtTokenValidator extends OncePerRequestFilter {
     private JwtUtils jwtUtils;
     private IMessageService messageService;
-
 
     public JwtTokenValidator(JwtUtils jwtUtils, IMessageService messageService) {
         this.jwtUtils = jwtUtils;
         this.messageService = messageService;
     }
 
+
+
+
+
+    /**
+     * Filtra las solicitudes HTTP para autenticar el token JWT presente en el encabezado de autorización.
+     * <p>
+     * Este filtro extrae el token JWT del encabezado de la solicitud, valida su autenticidad y extrae la información
+     * del usuario y los roles asociados. Si el token es válido, se establece la autenticación en el contexto de seguridad
+     * para que el usuario pueda acceder a los recursos protegidos.
+     * </p>
+     *
+     * @param request La solicitud HTTP que contiene el encabezado de autorización con el token JWT.
+     * @param response La respuesta HTTP que se envía al cliente.
+     * @param filterChain La cadena de filtros que permite continuar con el procesamiento de la solicitud después de la autenticación.
+     * @throws ServletException Si ocurre un error en el procesamiento del filtro.
+     * @throws IOException Si ocurre un error de entrada/salida.
+     */
     @Override
     //importante: el nonnull debe ser de sringframework, no lombok
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -82,7 +117,19 @@ public class JwtTokenValidator extends OncePerRequestFilter {
     }
 
 
-    //Se realiza acá porque no va al manejador global el filtro.
+
+    /**
+     * Maneja la excepción de un token JWT expirado.
+     * <p>
+     * Este método captura la excepción de un token expirado, registra un mensaje de error en el log,
+     * y proporciona una respuesta personalizada al cliente informando que el token ha expirado.
+     * Se realiza dentro de esta clase ya que el filtro no permite que el manejador global capture la excepción.
+     * </p>
+     *
+     * @param ex La excepción que indica que el token ha expirado.
+     * @param response La respuesta HTTP que se enviará al cliente.
+     * @throws IOException Si ocurre un error al escribir la respuesta JSON en el cuerpo de la respuesta HTTP.
+     */
     private void handleTokenExpiredException(TokenExpiredException ex, HttpServletResponse response) throws IOException {
         // Comprobar si hay una autenticación en el contexto
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -108,6 +155,19 @@ public class JwtTokenValidator extends OncePerRequestFilter {
         response.getWriter().write(jsonResponse);
     }
 
+
+
+    /**
+     * Maneja la excepción cuando un token JWT es inválido.
+     * <p>
+     * Este método captura la excepción que indica que el token JWT es inválido, registra un mensaje de error en el log,
+     * y proporciona una respuesta personalizada al cliente informando que el token es inválido.
+     * </p>
+     *
+     * @param ex La excepción de tipo `JWTVerificationException` que indica que el token JWT es inválido.
+     * @param response La respuesta HTTP que se enviará al cliente.
+     * @throws IOException Si ocurre un error al escribir la respuesta JSON en el cuerpo de la respuesta HTTP.
+     */
     private void handleTokenInvalidException(JWTVerificationException ex, HttpServletResponse response) throws IOException {
 
         // Comprobar si hay una autenticación en el contexto

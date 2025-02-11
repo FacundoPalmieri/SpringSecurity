@@ -1,8 +1,8 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecCreateDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecResponseDTO;
-import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IRoleService;
+import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecUpdateDTO;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -41,8 +41,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private IRoleService roleService;
+
 
     /**
      * Lista todos los usuarios.
@@ -107,7 +106,7 @@ public class UserController {
      * Requiere el rol <b>ADMIN</b> para acceder.
      * </p>
      *
-     * @param userSecDto Datos del usuario a crear.
+     * @param userSecCreateDto Datos del usuario a crear.
      * @return ResponseEntity con:
      *         <ul>
      *         <li><b>201 Created</b>: Usuario creado exitosamente.</li>
@@ -128,8 +127,21 @@ public class UserController {
     })
     @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public  ResponseEntity<Response<UserSecResponseDTO>> createUser(@Valid @RequestBody UserSecDTO userSecDto) {
-        Response<UserSecResponseDTO>response = userService.save(userSecDto);
+    public  ResponseEntity<Response<UserSecResponseDTO>> createUser(@Valid @RequestBody UserSecCreateDTO userSecCreateDto) {
+        Response<UserSecResponseDTO>response = userService.save(userSecCreateDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+
+
+    @PatchMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Response<UserSecResponseDTO>> updateUser(@Valid @RequestBody UserSecUpdateDTO userSecUpdateDto) {
+       Response<UserSecResponseDTO> response =  userService.update(userSecUpdateDto);
+       return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
+
+
+
 }

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Excepción personalizada que indica que no se ha encontrado un usuario en el sistema .
+ * Excepción personalizada que indica que no se ha encontrado un usuario en el sistema en búsquedas internas ajenas a la autenticación.
  * <p>
  * Esta excepción se utiliza generalmente en métodos como {@code findById}, donde se espera que un recurso
  * (en este caso, un usuario) sea encontrado, pero no se encuentra en la base de datos. El código de estado

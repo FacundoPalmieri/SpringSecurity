@@ -35,7 +35,20 @@ public class SecurityConfig {
     private IMessageService messageService;
 
 
-
+    /**
+     * Configura el filtro de seguridad de la aplicación.
+     *
+     * <p>
+     * Este método configura la seguridad HTTP para la aplicación. Se desactiva la protección CSRF y se configura
+     * el comportamiento del inicio de sesión tanto para formularios como para autenticación OAuth2. Además, se añaden
+     * filtros personalizados para validar el token JWT y manejar la autenticación de usuarios mediante OAuth2.
+     * El inicio de sesión redirige a la URL "/holaseg" después de una autenticación exitosa.
+     * </p>
+     *
+     * @param httpSecurity El objeto que se usa para configurar la seguridad HTTP en la aplicación.
+     * @return Un {@link SecurityFilterChain} que define la configuración de seguridad para la aplicación.
+     * @throws Exception Si ocurre algún error al configurar la seguridad.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -51,15 +64,37 @@ public class SecurityConfig {
     }
 
 
-    //creamos authentication manager
+    /**
+     * Crea el gestor de autenticación para la aplicación.
+     *
+     * <p>
+     * Este método define un {@link AuthenticationManager} que es responsable de manejar los procesos de autenticación
+     * en la aplicación. El gestor de autenticación es necesario para validar las credenciales de los usuarios durante
+     * el proceso de inicio de sesión. Se obtiene utilizando la configuración de autenticación proporcionada por Spring.
+     * </p>
+     *
+     * @param authenticationConfiguration La configuración de autenticación proporcionada por Spring.
+     * @return Un {@link AuthenticationManager} que maneja la autenticación de los usuarios en la aplicación.
+     * @throws Exception Si ocurre un error al crear el gestor de autenticación.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
 
-    //creamos authentication provider
-    //Agregamos el user Details Service como parámetro
+    /**
+     * Crea un proveedor de autenticación para la aplicación.
+     *
+     * <p>
+     * Este método configura un {@link AuthenticationProvider} que utiliza un {@link UserDetailsService} para obtener
+     * los detalles del usuario durante el proceso de autenticación. El proveedor también establece un codificador de
+     * contraseñas para garantizar que las contraseñas almacenadas en el sistema estén correctamente codificadas y validadas.
+     * </p>
+     *
+     * @param userDetailsService El servicio que proporciona los detalles del usuario para la autenticación.
+     * @return Un {@link AuthenticationProvider} configurado con el servicio de detalles del usuario y el codificador de contraseñas.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -70,7 +105,19 @@ public class SecurityConfig {
         return provider;
     }
 
-    //password encoder
+
+
+    /**
+     * Crea un codificador de contraseñas para la aplicación.
+     *
+     * <p>
+     * Este método configura un {@link PasswordEncoder} utilizando el algoritmo {@link BCryptPasswordEncoder}.
+     * El codificador BCrypt proporciona un mecanismo robusto para almacenar contraseñas de manera segura,
+     * aplicando un proceso de hashing con sal (salt) para mejorar la seguridad.
+     * </p>
+     *
+     * @return Un {@link PasswordEncoder} configurado para codificar las contraseñas de forma segura.
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
          return new BCryptPasswordEncoder();
