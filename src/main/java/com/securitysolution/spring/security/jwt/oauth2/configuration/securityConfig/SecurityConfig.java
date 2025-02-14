@@ -1,11 +1,10 @@
-package com.securitysolution.spring.security.jwt.oauth2.security.config;
+package com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IUserRepository;
-import com.securitysolution.spring.security.jwt.oauth2.security.config.filter.JwtTokenValidator;
-import com.securitysolution.spring.security.jwt.oauth2.security.config.filter.OAuth2UserFilter;
+import com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator;
+import com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
 import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
