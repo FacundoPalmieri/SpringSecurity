@@ -26,6 +26,6 @@ public class Permission {
 
     /**Nombre único del permiso.*/
     @Column(unique = true, nullable = false)
-    private String permissionName;
+    private String permission;
 
 }
