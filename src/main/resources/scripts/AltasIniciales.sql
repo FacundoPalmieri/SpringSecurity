@@ -1,8 +1,8 @@
 -- Creamos Permisos--
-Insert into permisos (permission_name) values ('Create');
-Insert into permisos (permission_name) values ('Read');
-Insert into permisos (permission_name) values ('Update');
-Insert into permisos (permission_name) values ('Delete');
+Insert into permisos (permission,name) values ('Create', 'Create');
+Insert into permisos (permission,name) values ('Read', 'Read');
+Insert into permisos (permission,name) values ('Update','Update');
+Insert into permisos (permission,name) values ('Delete', 'Delete');
 
 -- Creamos Roles --
 Insert into roles (role) values('USER');

@@ -166,6 +166,7 @@ public class PermissionService implements IPermissionService {
         PermissionResponseDTO permissionResponseDTO = new PermissionResponseDTO();
         permissionResponseDTO.setId(permission.getId());
         permissionResponseDTO.setPermission(permission.getPermission());
+        permissionResponseDTO.setName(permission.getName());
         return permissionResponseDTO;
     }
 
