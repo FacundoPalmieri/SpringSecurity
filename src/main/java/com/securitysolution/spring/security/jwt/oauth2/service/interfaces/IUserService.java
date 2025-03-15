@@ -3,6 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service.interfaces;
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
@@ -24,6 +25,15 @@ public interface IUserService {
       * @return Una respuesta que contiene el objeto {@link UserSecResponseDTO} correspondiente al usuario.
       */
      Response<UserSecResponseDTO> findById(Long id);
+
+
+     /**
+      * Obtiene un usuario por su username.
+      * @param username El username del usuario a recuperar.
+      * @return el objeto {@link UserSec} correspondiente al usuario.
+      */
+     UserSec findByUsername(String username);
+
 
      /**
       * Guarda un nuevo usuario.

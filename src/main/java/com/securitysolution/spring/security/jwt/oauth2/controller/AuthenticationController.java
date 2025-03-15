@@ -1,9 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 
-import com.securitysolution.spring.security.jwt.oauth2.dto.AuthLoginRequestDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.AuthResponseDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.ResetPasswordDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
+import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IUserService;
 import com.securitysolution.spring.security.jwt.oauth2.service.UserDetailsServiceImp;
 import io.swagger.v3.oas.annotations.Operation;
@@ -64,6 +61,32 @@ public class AuthenticationController {
     public ResponseEntity<AuthResponseDTO> login(@RequestBody @Valid AuthLoginRequestDTO userRequest) {
         return new ResponseEntity<>(this.userDetailsService.loginUser(userRequest), HttpStatus.OK);
     }
+
+
+
+    @PostMapping("/refresh-token")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Response<String>> refreshToken(@RequestBody @Valid RefreshTokenDTO refreshTokenDTO) {
+        Response<String>response = userDetailsService.refreshToken(refreshTokenDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**

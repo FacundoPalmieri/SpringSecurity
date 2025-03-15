@@ -54,8 +54,7 @@ import java.util.stream.Collectors;
  *   <li>{@link #validateNotDevRole(UserSecCreateDTO)}</li>
  *   <li>{@link #validateSelfUpdate(Long)}</li>
  *   <li>{@link #validateNotDevRole(UserSec, UserSecUpdateDTO)}</li>
- *   <li>{@link #validateUpdateAccount(UserSec, UserSecUpdateDTO)}</li>
- *   <li>{@link #validateUpdateRole(UserSecUpdateDTO, Set<Role>)}</li>
+ *   <li>{@link #validateUpdate(UserSec, UserSecUpdateDTO, Set)}</li>
  *   <li>{@link #updateUserSec(UserSec, UserSecUpdateDTO)}</li>
  * </ul>
  *
@@ -104,23 +103,21 @@ public class UserService implements IUserService {
      * @throws DataBaseException Si ocurre un error en la consulta a la base de datos.
      */
     @Override
-    public Response<List<UserSecResponseDTO>>findAll() {
-        try{
+    public Response<List<UserSecResponseDTO>> findAll() {
+        try {
             List<UserSec> userList = userRepository.findAll();
 
             List<UserSecResponseDTO> userSecResponseDTOList = new ArrayList<>();
-            for(UserSec userSec : userList) {
+            for (UserSec userSec : userList) {
                 userSecResponseDTOList.add(convertToDTO(userSec));
             }
             String messageUser = messageService.getMessage("userService.findAll.ok", null, LocaleContextHolder.getLocale());
             return new Response<>(true, messageUser, userSecResponseDTOList);
 
-        }catch (DataAccessException | CannotCreateTransactionException e) {
+        } catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "userService", 0L, "", "findAll");
         }
     }
-
-
 
 
     /**
@@ -137,27 +134,36 @@ public class UserService implements IUserService {
      * @param id Identificador único del usuario a buscar.
      * @return Un objeto {@link Response} que contiene los datos del usuario encontrado.
      * @throws UserNotFoundException Si no se encuentra un usuario con el ID proporcionado.
-     * @throws DataBaseException Si ocurre un error al acceder a la base de datos.
+     * @throws DataBaseException     Si ocurre un error al acceder a la base de datos.
      */
     @Override
-    public Response<UserSecResponseDTO> findById (Long id) {
-        try{
-             Optional<UserSec> user = userRepository.findById(id);
-             if(user.isPresent()){
-                 UserSecResponseDTO dto = convertToDTO(user.get());
+    public Response<UserSecResponseDTO> findById(Long id) {
+        try {
+            Optional<UserSec> user = userRepository.findById(id);
+            if (user.isPresent()) {
+                UserSecResponseDTO dto = convertToDTO(user.get());
 
-                 String messageUser = messageService.getMessage("userService.findById.ok.user", null, LocaleContextHolder.getLocale());
+                String messageUser = messageService.getMessage("userService.findById.ok.user", null, LocaleContextHolder.getLocale());
 
-                 return new Response<>(true, messageUser, dto);
-             }else{
-                 throw new UserNotFoundException("","UserService", "FindById", id);
-             }
-        }catch (DataAccessException | CannotCreateTransactionException e) {
+                return new Response<>(true, messageUser, dto);
+            } else {
+                throw new UserNotFoundException("", "UserService", "FindById", id);
+            }
+        } catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "userService", id, "", "findById");
         }
     }
 
+    @Override
+    public UserSec findByUsername(String username) {
+        try {
+           return userRepository.findUserEntityByUsername(username).orElseThrow(() -> new UserNotFoundException("", "UserService", "findByUsername", 0L));
 
+        }catch (DataAccessException | CannotCreateTransactionException e) {
+            throw new DataBaseException(e, "userService", 0L, "", "findByUsername");
+        }
+
+    }
 
 
 

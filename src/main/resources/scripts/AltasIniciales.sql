@@ -117,7 +117,8 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNo
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNotDevRole.user', 'La actualización a un Rol de tipo -Desarrollador- no está permitida.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.log', '[Clase: {0}] - [Método: {1}] - [Detalle: Usuario ID{2} - El valor a actualizar es igual al que ya cuenta.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.user ', 'El valor proporcionado es igual al actual, no se realizaron cambios.', 'es_AR');
-
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshToken.refreshEmpty', 'El campo RefreshToken está vacío.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshToken.userEmpty', 'El usuario no puede ser nulo.', 'es_AR');
 
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
