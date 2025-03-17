@@ -1,22 +1,13 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 
-import com.securitysolution.spring.security.jwt.oauth2.dto.FailedLoginAttemptsDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.MessageDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.dto.TokenConfigDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.MessageNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
-import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IConfigService;
-import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IFailedLoginAttemptsService;
-import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
-import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenService;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +25,7 @@ import java.util.List;
  * <p>
  * Este servicio proporciona métodos para obtener y actualizar configuraciones como los intentos fallidos de inicio de sesión,
  * la expiración del token y los mensajes almacenados. Utiliza los servicios {@link IMessageService}, {@link IFailedLoginAttemptsService},
- * y {@link ITokenService} para interactuar con las configuraciones subyacentes, construyendo respuestas que incluyen mensajes
+ * y {@link ITokenConfigService} para interactuar con las configuraciones subyacentes, construyendo respuestas que incluyen mensajes
  * para el usuario y los valores actualizados de las configuraciones.
  * </p>
  */
@@ -48,7 +39,10 @@ public class ConfigService implements IConfigService {
     private IFailedLoginAttemptsService failedLoginAttemptsService;
 
     @Autowired
-    private ITokenService tokenService;
+    private ITokenConfigService tokenService;
+
+    @Autowired
+    private IRefreshTokenConfigService refreshTokenConfigService;
 
 
     /**
@@ -157,7 +151,7 @@ public class ConfigService implements IConfigService {
      * Obtiene la expiración del token en minutos.
      *<p>
      * Este método obtiene la configuración de expiración del token en milisegundos
-     * utilizando el servicio {@link ITokenService}, la convierte a minutos y construye
+     * utilizando el servicio {@link ITokenConfigService}, la convierte a minutos y construye
      * un mensaje para el usuario. Luego retorna una respuesta con el valor de expiración
      * en minutos y el mensaje correspondiente.
      *</p>
@@ -183,7 +177,7 @@ public class ConfigService implements IConfigService {
      * Actualiza la expiración del token en minutos.
      *<p>
      * Este método convierte la expiración proporcionada en minutos a milisegundos,
-     * actualiza el valor de expiración utilizando el servicio {@link ITokenService},
+     * actualiza el valor de expiración utilizando el servicio {@link ITokenConfigService},
      * recupera el valor actualizado, lo convierte de nuevo a minutos y construye
      * un mensaje para el usuario. Luego retorna una respuesta con el valor actualizado
      * de la expiración en minutos y el mensaje correspondiente.
@@ -200,14 +194,63 @@ public class ConfigService implements IConfigService {
         //Actualizar tiempo de expiración.
         tokenService.updateExpiration(milliseconds);
 
+        /*
         //Recuperar valor actualizado y convertirlo a minutos
         Long expiration = tokenService.getExpiration();
         Long expirationMinutes = (expiration / 1000) / 60;
 
+         */
+
+
         //Se construye Mensaje para usuario.
-        String userMessage = messageService.getMessage("config.updateExpirationToken.ok", new Object[]{expirationMinutes}, LocaleContextHolder.getLocale());
-        return new Response<>(true, userMessage,expirationMinutes);
+        String userMessage = messageService.getMessage("config.updateExpirationToken.ok", new Object[]{tokenConfigDTO.expiration()}, LocaleContextHolder.getLocale());
+        return new Response<>(true, userMessage,tokenConfigDTO.expiration());
     }
 
+    /**
+     * Obtiene la expiración del Refresh token en minutos.
+     *<p>
+     * Este método obtiene la configuración de expiración del Refresh token en días.
+     * utilizando el servicio {@link IRefreshTokenConfigService}, obtiene el dato y construye
+     * un mensaje para el usuario. Luego retorna una respuesta con el valor de expiración
+     * y el mensaje correspondiente.
+     *</p>
+     * @return Una respuesta que contiene el valor de la expiración del token en días y un mensaje de éxito para el usuario.
+     */
+    @Override
+    public Response<Long> getRefreshTokenExpiration() {
+
+        //Obtiene el valor.
+        Long expiration = refreshTokenConfigService.getExpiration();
+
+        //Construye respuesta.
+        String userMessege = messageService.getMessage("config.getExpirationRefreshToken.ok", null, LocaleContextHolder.getLocale());
+        return new Response<>(true, userMessege,expiration);
+    }
+
+
+
+
+
+    /**
+     * Actualiza la expiración del Refresh token en días.
+     *<p>
+     * Este método actualiza el valor de expiración utilizando el servicio {@link IRefreshTokenConfigService}, y construye
+     * un mensaje para el usuario. Luego retorna una respuesta con el valor actualizado
+     * de la expiración en días y el mensaje correspondiente.
+     *</p>
+     * @param refreshTokenConfigDTO Objeto que contiene el valor de la expiración en días a actualizar.
+     * @return Una respuesta que contiene el valor actualizado de la expiración del token en días y un mensaje de éxito para el usuario.
+     */
+    @Override
+    public Response<Long> updateRefreshTokenExpiration(RefreshTokenConfigDTO refreshTokenConfigDTO) {
+
+        // Llama al servicio de refresh Token y actualiza el valor
+        refreshTokenConfigService.updateExpiration(refreshTokenConfigDTO);
+
+        // Construye respuesta
+        String userMessage = messageService.getMessage("config.updateExpirationRefreshToken.ok", new Object[]{refreshTokenConfigDTO.expiration()}, LocaleContextHolder.getLocale());
+        return new Response<>(true, userMessage,refreshTokenConfigDTO.expiration());
+    }
 
 }

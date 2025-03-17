@@ -4,7 +4,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service.interfaces;
  * Interfaz que define los métodos para el servicio de gestión de expiración de tokens.
  * Proporciona métodos para obtener y actualizar la expiración de un token.
  */
-public interface ITokenService {
+public interface ITokenConfigService {
 
     /**
      * Obtiene la duración de expiración del token en milisegundos.

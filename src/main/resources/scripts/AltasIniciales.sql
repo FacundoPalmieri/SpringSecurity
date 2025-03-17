@@ -117,9 +117,6 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNo
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNotDevRole.user', 'La actualización a un Rol de tipo -Desarrollador- no está permitida.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.log', '[Clase: {0}] - [Método: {1}] - [Detalle: Usuario ID{2} - El valor a actualizar es igual al que ya cuenta.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.user ', 'El valor proporcionado es igual al actual, no se realizaron cambios.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshToken.refreshEmpty', 'El campo RefreshToken está vacío.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshToken.userEmpty', 'El usuario no puede ser nulo.', 'es_AR');
-
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
@@ -141,6 +138,11 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('tokenDTO.expiration.empty',
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('FailedLoginAttemptsDTO.value.empty', 'La cantidad de inicios de sesión no puede estar vacía.', 'es_AR');
 
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenDTO.refreshEmpty', 'El campo RefreshToken está vacío.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenDTO.userEmpty', 'El usuario no puede ser nulo.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenConfigDTO.invalidExpiration', 'El tiempo de expiración debe ser mayor o igual a 1.', 'es_AR');
+
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getMessage.ok', 'Listado de configuraciones correcto.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateMessage.ok', 'Actualización correcta.', 'es_AR');
@@ -148,6 +150,8 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getAttempts.ok', 'Re
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateAttempts.ok', 'Se actualizaron los intentos de sessión a: {0}.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getExpirationToken.ok', 'Registro recuperado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateExpirationToken.ok', 'Se actualizó el tiempo de expiración del token a {0} minutos.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getExpirationRefreshToken.ok', 'Registro recuperado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.updateExpirationRefreshToken.ok', 'Se actualizó el tiempo de expiración del Refresh token a {0} días.', 'es_AR');
 
 
 
@@ -157,3 +161,6 @@ insert into intentos_fallidos (id,valor) values(1,3);
 
 -- Expiración Token
 insert into token_config (id,expiracion) values(1,60000);
+
+-- Expiración Refresh Token
+insert into Refresh_Token_Config(id,expiracion) values (1, 14);

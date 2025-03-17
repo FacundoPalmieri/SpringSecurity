@@ -1,9 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.service.interfaces;
 
-import com.securitysolution.spring.security.jwt.oauth2.dto.FailedLoginAttemptsDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.MessageDTO;
-import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.dto.TokenConfigDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import org.springframework.http.ResponseEntity;
 import java.util.List;
@@ -55,6 +52,21 @@ public interface IConfigService {
      * @return Una respuesta que contiene el nuevo valor de expiración del token en minutos.
      */
     Response<Long> updateTokenExpiration(TokenConfigDTO tokenConfigDTO);
+
+
+    /**
+     * Obtiene la duración en días del tiempo de expiración del Refresh Token
+     * @return Una respuesta que contiene la duración del token en días
+     */
+    Response<Long> getRefreshTokenExpiration();
+
+
+    /**
+     * Actualiza la duración de expiración del Refresh Token
+     * @param refreshTokenConfigDTO
+     * @return Una respuesta que contiene el nuevo valor de expiración del token en días.
+     */
+    Response<Long> updateRefreshTokenExpiration(RefreshTokenConfigDTO refreshTokenConfigDTO);
 
 
 }

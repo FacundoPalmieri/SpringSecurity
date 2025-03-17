@@ -1,7 +1,9 @@
 package com.securitysolution.spring.security.jwt.oauth2.dto;
 
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 /**
@@ -12,9 +14,9 @@ public class RefreshTokenDTO {
 
     private String token;
 
-    @NotNull(message = "exception.refreshToken.refreshEmpty")
+    @NotNull(message = "refreshTokenDTO.refreshEmpty")
     private String refreshToken;
 
-    @NotNull(message = "exception.refreshToken.userEmpty")
+    @NotNull(message = "refreshTokenDTO.userEmpty")
     private String user;
 }

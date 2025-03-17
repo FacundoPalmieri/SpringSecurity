@@ -1,13 +1,17 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.TokenConfigNotFound;
+import com.securitysolution.spring.security.jwt.oauth2.model.TokenConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.ITokenRepository;
-import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenService;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 /**
@@ -18,10 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
  * lanzando excepciones específicas en caso de fallos.
  * </p>
  *
- * <p>Este servicio implementa la interfaz {@link ITokenService}.</p>
+ * <p>Este servicio implementa la interfaz {@link ITokenConfigService}.</p>
  */
 @Service
-public class TokenService implements ITokenService {
+public class TokenConfigService implements ITokenConfigService {
     @Autowired
     private ITokenRepository tokenRepository;
 
@@ -40,9 +44,16 @@ public class TokenService implements ITokenService {
     @Override
     public Long getExpiration() {
         try{
-           return tokenRepository.findFirst();
+            Optional<TokenConfig> optional = tokenRepository.findFirstByOrderByIdAsc();
+            if(optional.isPresent()){
+                return optional.get().getExpiration();
+            }
+
+            throw new TokenConfigNotFound(0L, "Token Config Service","getExpiration");
+
+
         }catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "TokenService", 1L, "", "getExpiration");
+            throw new DataBaseException(e, "TokenConfigService", 1L, "", "getExpiration");
         }
     }
 
@@ -62,8 +73,9 @@ public class TokenService implements ITokenService {
     public void updateExpiration(Long milliseconds) {
         try{
             tokenRepository.update(milliseconds);
+
         }catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "TokenService", 1L, "", "updateExpiration");
+            throw new DataBaseException(e, "TokenConfigService", 1L, "", "updateExpiration");
         }
     }
 }

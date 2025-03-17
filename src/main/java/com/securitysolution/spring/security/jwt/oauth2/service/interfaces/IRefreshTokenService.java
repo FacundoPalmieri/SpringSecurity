@@ -13,6 +13,6 @@ public interface IRefreshTokenService {
 
     void deleteRefreshTokenByUsername(String token,String username);
 
-    RefreshToken getRefreshToken(String token, String username);
+    RefreshToken getRefreshTokenByUsername(String token, String username);
 
 }
