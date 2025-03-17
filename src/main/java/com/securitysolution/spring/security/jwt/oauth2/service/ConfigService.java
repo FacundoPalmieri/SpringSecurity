@@ -3,6 +3,8 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.RefreshTokenConfigNotFoundException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.TokenConfigNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,9 @@ import java.util.List;
  * </ul>
  * <p>
  * Este servicio proporciona métodos para obtener y actualizar configuraciones como los intentos fallidos de inicio de sesión,
- * la expiración del token y los mensajes almacenados. Utiliza los servicios {@link IMessageService}, {@link IFailedLoginAttemptsService},
- * y {@link ITokenConfigService} para interactuar con las configuraciones subyacentes, construyendo respuestas que incluyen mensajes
+ * la expiración del token y los mensajes almacenados. Utiliza los servicios {@link IMessageService}, {@link IFailedLoginAttemptsService},{@link ITokenConfigService} para interactuar con las configuraciones subyacentes, construyendo respuestas que incluyen mensajes
+ *  * para el usuario y los valore
+ * y {@link IRefreshTokenConfigService} para interactuar con las configuraciones subyacentes, construyendo respuestas que incluyen mensajes
  * para el usuario y los valores actualizados de las configuraciones.
  * </p>
  */
@@ -192,7 +195,16 @@ public class ConfigService implements IConfigService {
         Long milliseconds = (tokenConfigDTO.expiration() * 60) * 1000;
 
         //Actualizar tiempo de expiración.
-        tokenService.updateExpiration(milliseconds);
+        int filasAfectadas = tokenService.updateExpiration(milliseconds);
+
+        if(filasAfectadas > 0){
+
+            //Se construye Mensaje para usuario.
+            String userMessage = messageService.getMessage("config.updateExpirationToken.ok", new Object[]{tokenConfigDTO.expiration()}, LocaleContextHolder.getLocale());
+            return new Response<>(true, userMessage,tokenConfigDTO.expiration());
+        }
+
+        throw new TokenConfigNotFoundException(0L,"ConfigService", "updateTokenExpiration");
 
         /*
         //Recuperar valor actualizado y convertirlo a minutos
@@ -202,9 +214,6 @@ public class ConfigService implements IConfigService {
          */
 
 
-        //Se construye Mensaje para usuario.
-        String userMessage = messageService.getMessage("config.updateExpirationToken.ok", new Object[]{tokenConfigDTO.expiration()}, LocaleContextHolder.getLocale());
-        return new Response<>(true, userMessage,tokenConfigDTO.expiration());
     }
 
     /**
@@ -246,11 +255,16 @@ public class ConfigService implements IConfigService {
     public Response<Long> updateRefreshTokenExpiration(RefreshTokenConfigDTO refreshTokenConfigDTO) {
 
         // Llama al servicio de refresh Token y actualiza el valor
-        refreshTokenConfigService.updateExpiration(refreshTokenConfigDTO);
+       int filasAfectadas = refreshTokenConfigService.updateExpiration(refreshTokenConfigDTO);
 
-        // Construye respuesta
-        String userMessage = messageService.getMessage("config.updateExpirationRefreshToken.ok", new Object[]{refreshTokenConfigDTO.expiration()}, LocaleContextHolder.getLocale());
-        return new Response<>(true, userMessage,refreshTokenConfigDTO.expiration());
+       if(filasAfectadas > 0){
+           // Construye respuesta
+           String userMessage = messageService.getMessage("config.updateExpirationRefreshToken.ok", new Object[]{refreshTokenConfigDTO.expiration()}, LocaleContextHolder.getLocale());
+           return new Response<>(true, userMessage,refreshTokenConfigDTO.expiration());
+       }
+
+       throw new RefreshTokenConfigNotFoundException(0L,"ConfigService","updateRefreshTokenExpiration");
+
     }
 
 }

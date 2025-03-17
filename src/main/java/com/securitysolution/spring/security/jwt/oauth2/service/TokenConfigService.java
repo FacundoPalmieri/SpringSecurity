@@ -1,7 +1,7 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.TokenConfigNotFound;
+import com.securitysolution.spring.security.jwt.oauth2.exception.TokenConfigNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.TokenConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.ITokenRepository;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenConfigService;
@@ -49,7 +49,7 @@ public class TokenConfigService implements ITokenConfigService {
                 return optional.get().getExpiration();
             }
 
-            throw new TokenConfigNotFound(0L, "Token Config Service","getExpiration");
+            throw new TokenConfigNotFoundException(0L, "Token Config Service","getExpiration");
 
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
@@ -70,9 +70,9 @@ public class TokenConfigService implements ITokenConfigService {
      */
     @Transactional
     @Override
-    public void updateExpiration(Long milliseconds) {
+    public int updateExpiration(Long milliseconds) {
         try{
-            tokenRepository.update(milliseconds);
+           return tokenRepository.update(milliseconds);
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "TokenConfigService", 1L, "", "updateExpiration");

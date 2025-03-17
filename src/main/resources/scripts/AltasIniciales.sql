@@ -118,6 +118,12 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.update.validateNo
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.log', '[Clase: {0}] - [Método: {1}] - [Detalle: Usuario ID{2} - El valor a actualizar es igual al que ya cuenta.]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.validateUpdateUser.user ', 'El valor proporcionado es igual al actual, no se realizaron cambios.', 'es_AR');
 
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.tokenConfigNotFoundException.log', 'No se encuentra registro en la base de datos para actualizar el valor [Clase: {0}] - [Método: {1}]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.tokenConfigNotFoundException.user', 'No se encuentra registro en la base de datos para actualizar el valor.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshTokenConfigNotFoundException.log', 'No se encuentra registro en la base de datos para actualizar o recuperar el valor [Clase: {0}] - [Método: {1}]', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshTokenConfigNotFoundException.user', 'No se encuentra registro en la base de datos para actualizar o recuperar el valor.', 'es_AR');
+
+
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.password.empty', 'La password no puede estar vacía.', 'es_AR');

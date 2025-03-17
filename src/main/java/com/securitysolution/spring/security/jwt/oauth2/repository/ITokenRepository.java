@@ -18,6 +18,6 @@ public interface ITokenRepository extends JpaRepository<TokenConfig, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE TokenConfig t SET t.expiration = :expiration")
-    void update(@Param("expiration") Long expiration);
+    int update(@Param("expiration") Long expiration);
 
 }

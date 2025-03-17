@@ -18,6 +18,6 @@ public interface IRefreshTokenConfigRepository extends JpaRepository<RefreshToke
     @Transactional
     @Modifying
     @Query("UPDATE RefreshTokenConfig t SET t.expiration =:expiration")
-    void update(@Param("expiration") Long expiration);
+    int update(@Param("expiration") Long expiration);
 
 }

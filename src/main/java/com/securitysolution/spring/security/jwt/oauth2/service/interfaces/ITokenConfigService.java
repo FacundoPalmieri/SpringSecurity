@@ -16,5 +16,5 @@ public interface ITokenConfigService {
      * Actualiza la duración de expiración del token.
      * @param milliseconds El nuevo valor de la duración de expiración del token en milisegundos.
      */
-    void updateExpiration(Long milliseconds);
+    int updateExpiration(Long milliseconds);
 }

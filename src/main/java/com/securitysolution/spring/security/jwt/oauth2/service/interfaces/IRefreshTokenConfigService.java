@@ -20,5 +20,5 @@ public interface IRefreshTokenConfigService {
      * @param refreshTokenConfigDTO El nuevo valor de la duración de expiración del token en días.
      * @return El tiempo de expiración actualizado.
      */
-    void updateExpiration (RefreshTokenConfigDTO refreshTokenConfigDTO);
+    int updateExpiration (RefreshTokenConfigDTO refreshTokenConfigDTO);
 }
