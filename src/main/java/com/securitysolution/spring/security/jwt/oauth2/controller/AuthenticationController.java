@@ -66,26 +66,10 @@ public class AuthenticationController {
 
     @PostMapping("/refresh-token")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Response<String>> refreshToken(@RequestBody @Valid RefreshTokenDTO refreshTokenDTO) {
-        Response<String>response = userDetailsService.refreshToken(refreshTokenDTO);
+    public ResponseEntity<Response<RefreshTokenDTO>> refreshToken(@RequestBody @Valid RefreshTokenDTO refreshTokenDTO) {
+        Response<RefreshTokenDTO>response = userDetailsService.refreshToken(refreshTokenDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -128,9 +112,6 @@ public class AuthenticationController {
         Response <String> response = userService.updatePassword(resetPasswordDTO, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
-
 }
 
 

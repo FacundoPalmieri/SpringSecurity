@@ -69,6 +69,11 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.dominio', 'http
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPassword.mensaje', 'Para restablecer tu contraseña, haz clic en el siguiente enlace: {0} \n\n IMPORTANTE! \n\n - SI USTED NO SOLICITÓ RESTABLECERLA, COMUNIQUESE CON EL ÁREA DE SOPORTE DE MANERA INMEDIATA - .', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPassword.asunto', 'Solicitud de Restablecimiento de Contraseña.', 'es_AR');
 
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.refreshToken.invalidCode', 'Código inválido.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.refreshToken.refreshTokenExpired', 'Refresh Token Expirado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.refreshToken.ok', 'Refresh Token actualizado y jwt creado.', 'es_AR');
+
+
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.save.ok', 'Rol creado correctamente.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findAll.ok', 'Permisos recuperados correctamente.', 'es_AR');
@@ -123,6 +128,8 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.tokenConfigNotFou
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshTokenConfigNotFoundException.log', 'No se encuentra registro en la base de datos para actualizar o recuperar el valor [Clase: {0}] - [Método: {1}]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshTokenConfigNotFoundException.user', 'No se encuentra registro en la base de datos para actualizar o recuperar el valor.', 'es_AR');
 
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.refreshToken.log', 'Refresh Token no encontrado, inválido o expirado. [Clase: {0}] - [Método:{1}] - [IdUser: {2}]- [Mensaje:{3}]', 'es_AR');
+
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.empty', 'El username no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecCreateDTO.username.email', 'El username debe ser un correo válido.', 'es_AR');
@@ -145,9 +152,12 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('tokenDTO.expiration.empty',
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('FailedLoginAttemptsDTO.value.empty', 'La cantidad de inicios de sesión no puede estar vacía.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenDTO.refreshEmpty', 'El campo RefreshToken está vacío.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenDTO.userEmpty', 'El usuario no puede ser nulo.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenDTO.userIdEmpty', 'El ID del usuario no puede ser nulo.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenDTO.usernameEmpty', 'El username no puede ser nulo.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenConfigDTO.invalidExpiration', 'El tiempo de expiración debe ser mayor o igual a 1.', 'es_AR');
+
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('refreshTokenService.deleteRefreshToken', 'Error al eliminar el Refresh Token', 'es_AR');
 
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('config.getMessage.ok', 'Listado de configuraciones correcto.', 'es_AR');
@@ -166,7 +176,7 @@ insert into intentos_fallidos (id,valor) values(1,3);
 
 
 -- Expiración Token
-insert into token_config (id,expiracion) values(1,60000);
+insert into token_config (id,expiracion) values(1,3600000);
 
 -- Expiración Refresh Token
 insert into Refresh_Token_Config(id,expiracion) values (1, 14);
