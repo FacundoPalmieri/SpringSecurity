@@ -15,6 +15,7 @@ import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -290,6 +291,18 @@ public class UserDetailsServiceImp implements UserDetailsService {
         //Descifra la clave del mensaje.
         String message = messageService.getMessage("userDetailServiceImpl.refreshToken.ok", null, LocaleContextHolder.getLocale());
         return  new Response<>(true,message ,refreshTokenResponse);
+    }
+
+
+    public Response<String> logout(RefreshTokenDTO refreshTokenDTO){
+
+        //Elimina el refresh token del usuario
+        refreshTokenService.deleteRefreshToken(refreshTokenDTO.getRefreshToken());
+
+        //Descifra la clave del mensaje
+        String message = messageService.getMessage("userDetailServiceImpl.logout.ok", null, LocaleContextHolder.getLocale());
+
+        return new Response<>(true,message ,null);
     }
 
 }

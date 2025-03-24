@@ -72,6 +72,7 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userService.requestResetPas
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.refreshToken.invalidCode', 'Código inválido.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.refreshToken.refreshTokenExpired', 'Refresh Token Expirado.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.refreshToken.ok', 'Refresh Token actualizado y jwt creado.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.logout.ok', 'Sesión cerrada correctamente.', 'es_AR');
 
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.save.ok', 'Rol creado correctamente.', 'es_AR');

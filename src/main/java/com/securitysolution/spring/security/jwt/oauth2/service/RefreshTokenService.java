@@ -13,7 +13,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -126,4 +125,5 @@ public class RefreshTokenService implements IRefreshTokenService {
             throw new DataBaseException(e, "userService",id, "Nulo", "getRefreshTokenByUserId");
         }
     }
+
 }
