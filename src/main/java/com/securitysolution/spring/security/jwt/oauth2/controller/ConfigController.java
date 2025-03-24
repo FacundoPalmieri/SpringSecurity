@@ -1,8 +1,10 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 
+import com.securitysolution.spring.security.jwt.oauth2.configuration.appConfig.UserRolesConfig;
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.ConfigService;
+import com.securitysolution.spring.security.jwt.oauth2.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -51,10 +53,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/dev")
-@PreAuthorize("hasRole('DEV')")
+@PreAuthorize("hasRole(@userRolesConfig.devRole)")
 public class ConfigController {
     @Autowired
     private ConfigService configService;
+
+    @Autowired
+    private UserRolesConfig userRolesConfig;
 
 
     /**

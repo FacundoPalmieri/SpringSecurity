@@ -1,4 +1,5 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
+import com.securitysolution.spring.security.jwt.oauth2.configuration.appConfig.UserRolesConfig;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleResponseDTO;
@@ -46,6 +47,8 @@ import java.util.Set;
 @PreAuthorize("denyAll()")
 @RequestMapping("/api/roles")
 public class RoleController {
+    @Autowired
+    private UserRolesConfig userRolesConfig;
 
     @Autowired
     private IRoleService roleService;
@@ -75,7 +78,7 @@ public class RoleController {
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
     @GetMapping("/get/all")
-    @PreAuthorize("hasAnyRole('DEV')")
+    @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<List<Role>>> getAllRoles() {
         Response<List<Role>> response = roleService.findAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -106,7 +109,7 @@ public class RoleController {
             @ApiResponse(responseCode = "404", description = "Rol no encontrado."),
     })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('DEV')")
+    @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>> getRoleById(@Valid @PathVariable Long id) {
         Response<RoleResponseDTO> response = roleService.getById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -139,7 +142,7 @@ public class RoleController {
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
     @PostMapping("/create/role")
-    @PreAuthorize("hasRole('DEV')")
+    @PreAuthorize("hasRole(userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleDTO roleDto) {
         Response<RoleResponseDTO> response = roleService.save(roleDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -174,7 +177,7 @@ public class RoleController {
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
     @PatchMapping("/update/role")
-    @PreAuthorize("hasRole('DEV')")
+    @PreAuthorize("hasRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>> updateRole(@Valid @RequestBody RoleDTO roleDto) {
         Response<RoleResponseDTO> response = roleService.update(roleDto);
         return new ResponseEntity<>(response, HttpStatus.OK);

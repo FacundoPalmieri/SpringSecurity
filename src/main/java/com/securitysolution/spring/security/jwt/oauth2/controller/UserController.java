@@ -1,4 +1,5 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
+import com.securitysolution.spring.security.jwt.oauth2.configuration.appConfig.UserRolesConfig;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecCreateDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.UserSecResponseDTO;
@@ -37,6 +38,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
+    @Autowired
+    private UserRolesConfig userRolesConfig;
 
     @Autowired
     private IUserService userService;
@@ -60,7 +63,7 @@ public class UserController {
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
     @GetMapping("/get/all")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole(@userRolesConfig.adminRole)")
     public ResponseEntity<Response<List<UserSecResponseDTO>>> getAllUsers() {
         Response<List<UserSecResponseDTO>> response = userService.findAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -91,7 +94,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Usuario no encontrado.")
     })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole(@userRolesConfig.adminRole)")
     public ResponseEntity<Response<UserSecResponseDTO>> getUserById(@PathVariable Long id) {
         Response<UserSecResponseDTO>response = userService.findById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -126,7 +129,7 @@ public class UserController {
             @ApiResponse(responseCode = "409", description = "Usuario existente en el sistema.")
     })
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole(@userRolesConfig.adminRole)")
     public  ResponseEntity<Response<UserSecResponseDTO>> createUser(@Valid @RequestBody UserSecCreateDTO userSecCreateDto) {
         Response<UserSecResponseDTO>response = userService.save(userSecCreateDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -156,7 +159,7 @@ public class UserController {
             @ApiResponse(responseCode = "409", description = "Usuario existente en el sistema o se intenta actualizar a un rol DEV.")
     })
     @PatchMapping("/update")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole(@userRolesConfig.adminRole)")
     public ResponseEntity<Response<UserSecResponseDTO>> updateUser(@Valid @RequestBody UserSecUpdateDTO userSecUpdateDto) {
        Response<UserSecResponseDTO> response =  userService.update(userSecUpdateDto);
        return new ResponseEntity<>(response, HttpStatus.OK);
