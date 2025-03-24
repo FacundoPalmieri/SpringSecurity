@@ -2,6 +2,7 @@ package com.securitysolution.spring.security.jwt.oauth2.dto;
 
 import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import lombok.Data;
+import lombok.NonNull;
 
 import java.util.HashSet;
 import java.util.Set;

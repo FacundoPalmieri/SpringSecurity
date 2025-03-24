@@ -138,7 +138,7 @@ public class RoleController {
             @ApiResponse(responseCode = "404", description = "Permisos requeridos no encontrados."),
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
-    @PostMapping("/create")
+    @PostMapping("/create/role")
     @PreAuthorize("hasRole('DEV')")
     public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleDTO roleDto) {
         Response<RoleResponseDTO> response = roleService.save(roleDto);
@@ -146,6 +146,39 @@ public class RoleController {
     }
 
 
+
+
+    /**
+     * Actualiza un rol en el sistema.
+     * <p>
+     * Requiere el rol <b>DEV</b> para acceder.
+     * </p>
+     *
+     * @param roleDto Datos del rol a crear.
+     * @return ResponseEntity con:
+     *         <ul>
+     *         <li><b>200 OK</b>: Rol actualizado exitosamente.</li>
+     *         <li><b>400 Bad Request</b>: No se encuentran los permisos asociados.</li>
+     *         <li><b>401 Unauthorized</b>: No autenticado.</li>
+     *         <li><b>403 Forbidden</b>: No autorizado para acceder a este recurso.</li>
+     *         <li><b>409 Conflict</b>: Rol existente en el sistema.</li>
+     *         </ul>
+     */
+
+    @Operation(summary = "Actualizar Rol", description = "Actualiza un nuevo rol en el sistema.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "rol actualizado exitosamente."),
+            @ApiResponse(responseCode = "401", description = "No autenticado."),
+            @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
+            @ApiResponse(responseCode = "404", description = "Permisos requeridos no encontrados."),
+            @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
+    })
+    @PatchMapping("/update/role")
+    @PreAuthorize("hasRole('DEV')")
+    public ResponseEntity<Response<RoleResponseDTO>> updateRole(@Valid @RequestBody RoleDTO roleDto) {
+        Response<RoleResponseDTO> response = roleService.update(roleDto);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 
 }

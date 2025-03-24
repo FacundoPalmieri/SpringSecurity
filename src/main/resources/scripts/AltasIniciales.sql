@@ -76,6 +76,8 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.logou
 
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.save.ok', 'Rol creado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.update.ok', 'Rol actualizado correctamente.', 'es_AR');
+
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findAll.ok', 'Permisos recuperados correctamente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findById.ok', 'Permiso encontrado correctamente.', 'es_AR');

@@ -10,6 +10,7 @@ import java.util.Set;
 @Data
 public class RoleDTO {
 
+
     @NotBlank(message = "roleDTO.role.empty")
     private String role;
 

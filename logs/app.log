@@ -508,3 +508,809 @@ com.securitysolution.spring.security.jwt.oauth2.exception.RefreshTokenException:
 2025-03-24T12:03:25.597-03:00  INFO 1824 --- [security-template] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-03-24T12:03:25.599-03:00  INFO 1824 --- [security-template] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-03-24T12:03:25.609-03:00  INFO 1824 --- [security-template] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-03-24T15:32:05.233-03:00  INFO 10268 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Starting SpringsecurityApplication using Java 17.0.11 with PID 10268 (C:\Users\palmi\OneDrive\Documentos\Facu\1- Programación\Instructivos\spring-security-jwt-oauth2\target\classes started by Facundo Palmieri in C:\Users\palmi\OneDrive\Documentos\Facu\1- Programación\Instructivos\spring-security-jwt-oauth2)
+2025-03-24T15:32:05.239-03:00  INFO 10268 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-24T15:32:07.366-03:00  INFO 10268 --- [security-template] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24T15:32:07.517-03:00  INFO 10268 --- [security-template] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 132 ms. Found 8 JPA repository interfaces.
+2025-03-24T15:32:08.597-03:00  INFO 10268 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-24T15:32:08.618-03:00  INFO 10268 --- [security-template] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-24T15:32:08.618-03:00  INFO 10268 --- [security-template] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-03-24T15:32:08.752-03:00  INFO 10268 --- [security-template] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-24T15:32:08.753-03:00  INFO 10268 --- [security-template] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3405 ms
+2025-03-24T15:32:09.113-03:00  INFO 10268 --- [security-template] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24T15:32:09.259-03:00  INFO 10268 --- [security-template] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-03-24T15:32:09.330-03:00  INFO 10268 --- [security-template] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-24T15:32:09.828-03:00  INFO 10268 --- [security-template] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24T15:32:09.883-03:00  INFO 10268 --- [security-template] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-24T15:32:10.189-03:00  INFO 10268 --- [security-template] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fee881
+2025-03-24T15:32:10.194-03:00  INFO 10268 --- [security-template] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-24T15:32:10.313-03:00  WARN 10268 --- [security-template] [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-24T15:32:12.159-03:00  INFO 10268 --- [security-template] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24T15:32:12.327-03:00  INFO 10268 --- [security-template] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24T15:32:12.852-03:00  INFO 10268 --- [security-template] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-24T15:32:14.054-03:00  WARN 10268 --- [security-template] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24T15:32:14.692-03:00  INFO 10268 --- [security-template] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4f578fc2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@26350832, org.springframework.security.web.context.SecurityContextHolderFilter@2a0c76d6, org.springframework.security.web.header.HeaderWriterFilter@2e50ca51, org.springframework.web.filter.CorsFilter@7d1cdebf, org.springframework.security.web.authentication.logout.LogoutFilter@126f428e, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@204d101, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@564b221e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6e5dc02d, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@11f8d64, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@25b7ccfc, com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator@56ed6e17, com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter@58179860, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@208bde64, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@453c10c2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@43e55cfb, org.springframework.security.web.access.ExceptionTranslationFilter@5dd47c88]
+2025-03-24T15:32:15.204-03:00  INFO 10268 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-03-24T15:32:15.219-03:00  INFO 10268 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Started SpringsecurityApplication in 11.191 seconds (process running for 13.655)
+2025-03-24T15:50:04.857-03:00  WARN 10268 --- [security-template] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m54s223ms245µs900ns).
+2025-03-24T15:50:45.707-03:00  INFO 10268 --- [security-template] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-24T15:50:48.594-03:00  INFO 10268 --- [security-template] [http-nio-8080-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 1644 ms
+2025-03-24T15:51:21.720-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T15:51:21.799-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select rl1_0.user_id,rl1_1.id,pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission,rl1_1.role from user_roles rl1_0 join roles rl1_1 on rl1_1.id=rl1_0.role_id left join roles_permissions pl1_0 on rl1_1.id=pl1_0.role_id left join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where rl1_0.user_id=?
+2025-03-24T15:51:22.374-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T15:51:22.423-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : update users set no_expirada=?,no_bloqueada=?,fecha_creacion=?,credenciales_no_expiradas=?,activa=?,intentos_fallidos=?,ultima_actualizacion=?,fecha_bloqueo=?,password=?,token_rest=?,username=? where id=?
+2025-03-24T15:51:22.458-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select flac1_0.valor from intentos_fallidos flac1_0
+2025-03-24T15:51:22.465-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.intentos_fallidos from users us1_0 where us1_0.username=?
+2025-03-24T15:51:22.473-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T15:51:22.478-03:00 ERROR 10268 --- [security-template] [http-nio-8080-exec-6] c.s.s.s.j.o.e.GlobalExceptionHandler     : Intento de inicio de sesión fallido - [Usuario: palmierifacundo@gmail.com] [IP:0:0:0:0:0:0:0:1].
+2025-03-24T15:51:22.479-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T15:51:31.816-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T15:51:31.819-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select rl1_0.user_id,rl1_1.id,pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission,rl1_1.role from user_roles rl1_0 join roles rl1_1 on rl1_1.id=rl1_0.role_id left join roles_permissions pl1_0 on rl1_1.id=pl1_0.role_id left join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where rl1_0.user_id=?
+2025-03-24T15:51:32.335-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T15:51:32.341-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T15:51:32.346-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : update users set no_expirada=?,no_bloqueada=?,fecha_creacion=?,credenciales_no_expiradas=?,activa=?,intentos_fallidos=?,ultima_actualizacion=?,fecha_bloqueo=?,password=?,token_rest=?,username=? where id=?
+2025-03-24T15:51:32.371-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select tc1_0.id,tc1_0.expiracion from token_config tc1_0 order by tc1_0.id limit ?
+2025-03-24T15:51:32.399-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T15:51:32.421-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)
+2025-03-24T15:52:14.650-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-4] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T15:52:14.652-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-4] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:52:14.654-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-4] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:52:14.656-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-4] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:52:14.661-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-4] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T15:54:23.469-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T15:54:23.485-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:54:23.555-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select p1_0.id,p1_0.name,p1_0.permission from permisos p1_0 where p1_0.id=?
+2025-03-24T15:54:23.564-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : insert into roles (role) values (?)
+2025-03-24T15:54:23.590-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : insert into roles_permissions (role_id,permission_id) values (?,?)
+2025-03-24T15:54:23.605-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T15:55:03.770-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T15:55:03.775-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:55:03.780-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:55:03.782-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:55:03.785-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T15:55:03.791-03:00 DEBUG 10268 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:34:38.977-03:00  INFO 17164 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Starting SpringsecurityApplication using Java 17.0.11 with PID 17164 (C:\Users\palmi\OneDrive\Documentos\Facu\1- Programación\Instructivos\spring-security-jwt-oauth2\target\classes started by Facundo Palmieri in C:\Users\palmi\OneDrive\Documentos\Facu\1- Programación\Instructivos\spring-security-jwt-oauth2)
+2025-03-24T17:34:38.983-03:00  INFO 17164 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-24T17:34:41.732-03:00  INFO 17164 --- [security-template] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24T17:34:41.878-03:00  INFO 17164 --- [security-template] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 126 ms. Found 8 JPA repository interfaces.
+2025-03-24T17:34:43.202-03:00  INFO 17164 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-24T17:34:43.222-03:00  INFO 17164 --- [security-template] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-24T17:34:43.224-03:00  INFO 17164 --- [security-template] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-03-24T17:34:43.356-03:00  INFO 17164 --- [security-template] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-24T17:34:43.356-03:00  INFO 17164 --- [security-template] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4247 ms
+2025-03-24T17:34:43.754-03:00  INFO 17164 --- [security-template] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24T17:34:43.925-03:00  INFO 17164 --- [security-template] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-03-24T17:34:44.003-03:00  INFO 17164 --- [security-template] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-24T17:34:44.529-03:00  INFO 17164 --- [security-template] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24T17:34:44.587-03:00  INFO 17164 --- [security-template] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-24T17:34:44.965-03:00  INFO 17164 --- [security-template] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@563263a
+2025-03-24T17:34:44.969-03:00  INFO 17164 --- [security-template] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-24T17:34:45.068-03:00  WARN 17164 --- [security-template] [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-24T17:34:47.136-03:00  INFO 17164 --- [security-template] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24T17:34:47.379-03:00  INFO 17164 --- [security-template] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24T17:34:48.079-03:00  INFO 17164 --- [security-template] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-24T17:34:49.285-03:00  WARN 17164 --- [security-template] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24T17:34:49.882-03:00  INFO 17164 --- [security-template] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@52dbd3d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@31b9108b, org.springframework.security.web.context.SecurityContextHolderFilter@4af32714, org.springframework.security.web.header.HeaderWriterFilter@489ec791, org.springframework.web.filter.CorsFilter@11e323a6, org.springframework.security.web.authentication.logout.LogoutFilter@30a34f07, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@650ee893, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@45144fdf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5225f612, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@347c7b, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@704205ef, com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator@18ee9a8f, com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter@61aaec51, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@794fbf0d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@12bb3666, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@69dc0dd1, org.springframework.security.web.access.ExceptionTranslationFilter@10f03ab0]
+2025-03-24T17:34:50.478-03:00  INFO 17164 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-03-24T17:34:50.493-03:00  INFO 17164 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Started SpringsecurityApplication in 13.089 seconds (process running for 14.878)
+2025-03-24T17:37:28.336-03:00  INFO 17164 --- [security-template] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-24T17:37:29.505-03:00  INFO 17164 --- [security-template] [http-nio-8080-exec-9] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 727 ms
+2025-03-24T17:37:55.235-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:37:55.299-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select rl1_0.user_id,rl1_1.id,pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission,rl1_1.role from user_roles rl1_0 join roles rl1_1 on rl1_1.id=rl1_0.role_id left join roles_permissions pl1_0 on rl1_1.id=pl1_0.role_id left join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where rl1_0.user_id=?
+2025-03-24T17:37:55.756-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:37:55.798-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:37:55.831-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : update users set no_expirada=?,no_bloqueada=?,fecha_creacion=?,credenciales_no_expiradas=?,activa=?,intentos_fallidos=?,ultima_actualizacion=?,fecha_bloqueo=?,password=?,token_rest=?,username=? where id=?
+2025-03-24T17:37:55.885-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select tc1_0.id,tc1_0.expiracion from token_config tc1_0 order by tc1_0.id limit ?
+2025-03-24T17:37:55.905-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:37:55.919-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)
+2025-03-24T17:37:55.945-03:00  WARN 17164 --- [security-template] [http-nio-8080-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1062, SQLState: 23000
+2025-03-24T17:37:55.945-03:00 ERROR 17164 --- [security-template] [http-nio-8080-exec-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'
+2025-03-24T17:37:55.962-03:00 ERROR 17164 --- [security-template] [http-nio-8080-exec-5] c.s.s.s.j.o.e.GlobalExceptionHandler     : Error inesperado: could not execute statement [Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'] [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; SQL [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; constraint [UK_jakfiqlvxpatgjgqsgs310opg]
+
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'] [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; SQL [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; constraint [UK_jakfiqlvxpatgjgqsgs310opg]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.6.jar:6.1.6]
+	at jdk.proxy2/jdk.proxy2.$Proxy153.save(Unknown Source) ~[na:na]
+	at com.securitysolution.spring.security.jwt.oauth2.service.RefreshTokenService.createRefreshToken(RefreshTokenService.java:50) ~[classes/:na]
+	at com.securitysolution.spring.security.jwt.oauth2.service.UserDetailsServiceImp.loginUser(UserDetailsServiceImp.java:174) ~[classes/:na]
+	at com.securitysolution.spring.security.jwt.oauth2.controller.AuthenticationController.login(AuthenticationController.java:62) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.2.4.jar:6.2.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720) ~[spring-aop-6.1.6.jar:6.1.6]
+	at com.securitysolution.spring.security.jwt.oauth2.controller.AuthenticationController$$SpringCGLIB$$0.login(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.20.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.20.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter.doFilterInternal(OAuth2UserFilter.java:118) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator.doFilterInternal(JwtTokenValidator.java:110) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.doFilterInternal(DefaultLogoutPageGeneratingFilter.java:58) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:189) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:175) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181) ~[spring-security-oauth2-client-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'] [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:100) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:175) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:113) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2868) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:670) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:386) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:300) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:219) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:134) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:754) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:738) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:364) ~[spring-orm-6.1.6.jar:6.1.6]
+	at jdk.proxy2/jdk.proxy2.$Proxy132.persist(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:319) ~[spring-orm-6.1.6.jar:6.1.6]
+	at jdk.proxy2/jdk.proxy2.$Proxy132.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.2.5.jar:3.2.5]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:392) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.6.jar:6.1.6]
+	... 136 common frames omitted
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	... 192 common frames omitted
+
+2025-03-24T17:37:55.980-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:38:25.118-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:38:25.122-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select rl1_0.user_id,rl1_1.id,pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission,rl1_1.role from user_roles rl1_0 join roles rl1_1 on rl1_1.id=rl1_0.role_id left join roles_permissions pl1_0 on rl1_1.id=pl1_0.role_id left join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where rl1_0.user_id=?
+2025-03-24T17:38:25.667-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:38:25.673-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:38:25.677-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : update users set no_expirada=?,no_bloqueada=?,fecha_creacion=?,credenciales_no_expiradas=?,activa=?,intentos_fallidos=?,ultima_actualizacion=?,fecha_bloqueo=?,password=?,token_rest=?,username=? where id=?
+2025-03-24T17:38:25.690-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select tc1_0.id,tc1_0.expiracion from token_config tc1_0 order by tc1_0.id limit ?
+2025-03-24T17:38:25.695-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:38:25.698-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)
+2025-03-24T17:39:02.963-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T17:39:02.967-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:39:02.971-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:39:02.971-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:39:02.974-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:39:02.978-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:40:05.508-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T17:40:05.511-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:40:05.517-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:40:05.518-03:00 ERROR 17164 --- [security-template] [http-nio-8080-exec-3] c.s.s.s.j.o.e.GlobalExceptionHandler     : [Clase: RoleService] - [Método: Save] - [Mensaje: Rol DEV ya se encuentra registrado.]
+2025-03-24T17:40:05.520-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:40:26.767-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T17:40:26.770-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:40:26.788-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select p1_0.id,p1_0.name,p1_0.permission from permisos p1_0 where p1_0.id=?
+2025-03-24T17:40:26.805-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : insert into roles_permissions (role_id,permission_id) values (?,?)
+2025-03-24T17:40:26.818-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:40:55.081-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T17:40:55.084-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:40:55.099-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:40:55.102-03:00 DEBUG 17164 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:40:55.105-03:00 ERROR 17164 --- [security-template] [http-nio-8080-exec-5] c.s.s.s.j.o.e.GlobalExceptionHandler     : Error al acceder a la base de datos: [ENTIDAD: roleService] - [ID OBJETO 0] -  [NOMBRE OBJETO:DEV] - [OPERACIÓN:save] -  [CAUSA RAÍZ: org.springframework.dao.InvalidDataAccessApiUsageException: Multiple representations of the same entity [com.securitysolution.spring.security.jwt.oauth2.model.Permission#2] are being merged. Managed: [com.securitysolution.spring.security.jwt.oauth2.model.Permission@1c957f61]; Detached: [com.securitysolution.spring.security.jwt.oauth2.model.Permission@76c563d7]] - [MENSAJE USUARIO: Ocurrió un error al procesar la solicitud en la base de datos. Por favor, intente nuevamente más tarde.]
+2025-03-24T17:41:15.547-03:00  INFO 17164 --- [security-template] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24T17:41:15.550-03:00  INFO 17164 --- [security-template] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-03-24T17:41:15.560-03:00  INFO 17164 --- [security-template] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-03-24T17:43:33.966-03:00  INFO 11864 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Starting SpringsecurityApplication using Java 17.0.11 with PID 11864 (C:\Users\palmi\OneDrive\Documentos\Facu\1- Programación\Instructivos\spring-security-jwt-oauth2\target\classes started by Facundo Palmieri in C:\Users\palmi\OneDrive\Documentos\Facu\1- Programación\Instructivos\spring-security-jwt-oauth2)
+2025-03-24T17:43:33.970-03:00  INFO 11864 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-03-24T17:43:35.405-03:00  INFO 11864 --- [security-template] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24T17:43:35.579-03:00  INFO 11864 --- [security-template] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 152 ms. Found 8 JPA repository interfaces.
+2025-03-24T17:43:36.657-03:00  INFO 11864 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-03-24T17:43:36.671-03:00  INFO 11864 --- [security-template] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-03-24T17:43:36.672-03:00  INFO 11864 --- [security-template] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-03-24T17:43:36.887-03:00  INFO 11864 --- [security-template] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-03-24T17:43:36.888-03:00  INFO 11864 --- [security-template] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2854 ms
+2025-03-24T17:43:37.163-03:00  INFO 11864 --- [security-template] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24T17:43:37.349-03:00  INFO 11864 --- [security-template] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-03-24T17:43:37.419-03:00  INFO 11864 --- [security-template] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-24T17:43:37.877-03:00  INFO 11864 --- [security-template] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24T17:43:37.921-03:00  INFO 11864 --- [security-template] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-24T17:43:38.138-03:00  INFO 11864 --- [security-template] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1be77a76
+2025-03-24T17:43:38.141-03:00  INFO 11864 --- [security-template] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-24T17:43:38.238-03:00  WARN 11864 --- [security-template] [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.7.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-24T17:43:40.621-03:00  INFO 11864 --- [security-template] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24T17:43:40.825-03:00  INFO 11864 --- [security-template] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24T17:43:41.746-03:00  INFO 11864 --- [security-template] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-03-24T17:43:44.508-03:00  WARN 11864 --- [security-template] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-24T17:43:45.589-03:00  INFO 11864 --- [security-template] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@45144fdf, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@57cc7d9e, org.springframework.security.web.context.SecurityContextHolderFilter@62a193e0, org.springframework.security.web.header.HeaderWriterFilter@5a7e0d68, org.springframework.web.filter.CorsFilter@23c07745, org.springframework.security.web.authentication.logout.LogoutFilter@43aa9ccd, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@56ed6e17, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@582ea857, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6f9d1785, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@18c2b4c6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@62a07c01, com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator@52dbd3d, com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter@31b9108b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3597174b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4af32714, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@11e323a6, org.springframework.security.web.access.ExceptionTranslationFilter@8b329ae]
+2025-03-24T17:43:46.622-03:00  INFO 11864 --- [security-template] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2025-03-24T17:43:46.660-03:00  INFO 11864 --- [security-template] [main] c.s.s.s.j.o.SpringsecurityApplication    : Started SpringsecurityApplication in 13.398 seconds (process running for 14.337)
+2025-03-24T17:45:32.678-03:00  INFO 11864 --- [security-template] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-24T17:45:33.178-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:33.229-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select rl1_0.user_id,rl1_1.id,pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission,rl1_1.role from user_roles rl1_0 join roles rl1_1 on rl1_1.id=rl1_0.role_id left join roles_permissions pl1_0 on rl1_1.id=pl1_0.role_id left join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where rl1_0.user_id=?
+2025-03-24T17:45:33.859-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:33.946-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:34.027-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : update users set no_expirada=?,no_bloqueada=?,fecha_creacion=?,credenciales_no_expiradas=?,activa=?,intentos_fallidos=?,ultima_actualizacion=?,fecha_bloqueo=?,password=?,token_rest=?,username=? where id=?
+2025-03-24T17:45:34.104-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select tc1_0.id,tc1_0.expiracion from token_config tc1_0 order by tc1_0.id limit ?
+2025-03-24T17:45:34.176-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:34.199-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)
+2025-03-24T17:45:34.232-03:00  WARN 11864 --- [security-template] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1062, SQLState: 23000
+2025-03-24T17:45:34.233-03:00 ERROR 11864 --- [security-template] [http-nio-8080-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'
+2025-03-24T17:45:34.262-03:00 ERROR 11864 --- [security-template] [http-nio-8080-exec-1] c.s.s.s.j.o.e.GlobalExceptionHandler     : Error inesperado: could not execute statement [Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'] [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; SQL [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; constraint [UK_jakfiqlvxpatgjgqsgs310opg]
+
+org.springframework.dao.DataIntegrityViolationException: could not execute statement [Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'] [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; SQL [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]; constraint [UK_jakfiqlvxpatgjgqsgs310opg]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:550) ~[spring-orm-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:335) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:152) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:164) ~[spring-data-jpa-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223) ~[spring-aop-6.1.6.jar:6.1.6]
+	at jdk.proxy2/jdk.proxy2.$Proxy153.save(Unknown Source) ~[na:na]
+	at com.securitysolution.spring.security.jwt.oauth2.service.RefreshTokenService.createRefreshToken(RefreshTokenService.java:50) ~[classes/:na]
+	at com.securitysolution.spring.security.jwt.oauth2.service.UserDetailsServiceImp.loginUser(UserDetailsServiceImp.java:174) ~[classes/:na]
+	at com.securitysolution.spring.security.jwt.oauth2.controller.AuthenticationController.login(AuthenticationController.java:62) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.security.authorization.method.AuthorizationManagerBeforeMethodInterceptor.invoke(AuthorizationManagerBeforeMethodInterceptor.java:198) ~[spring-security-core-6.2.4.jar:6.2.4]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720) ~[spring-aop-6.1.6.jar:6.1.6]
+	at com.securitysolution.spring.security.jwt.oauth2.controller.AuthenticationController$$SpringCGLIB$$0.login(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.20.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.20.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter.doFilterInternal(OAuth2UserFilter.java:118) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator.doFilterInternal(JwtTokenValidator.java:110) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.doFilterInternal(DefaultLogoutPageGeneratingFilter.java:58) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:189) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:175) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181) ~[spring-security-oauth2-client-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'] [insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)]
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.id.insert.GetGeneratedKeysDelegate.performInsert(GetGeneratedKeysDelegate.java:107) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorPostInsertSingleTable.execute(MutationExecutorPostInsertSingleTable.java:100) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.doStaticInserts(InsertCoordinator.java:175) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.persister.entity.mutation.InsertCoordinator.coordinateInsert(InsertCoordinator.java:113) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:2868) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.action.internal.EntityIdentityInsertAction.execute(EntityIdentityInsertAction.java:81) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.execute(ActionQueue.java:670) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.addResolvedEntityInsertAction(ActionQueue.java:291) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.addInsertAction(ActionQueue.java:272) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.engine.spi.ActionQueue.addAction(ActionQueue.java:322) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.addInsertAction(AbstractSaveEventListener.java:386) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSaveOrReplicate(AbstractSaveEventListener.java:300) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.performSave(AbstractSaveEventListener.java:219) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.AbstractSaveEventListener.saveWithGeneratedId(AbstractSaveEventListener.java:134) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.entityIsTransient(DefaultPersistEventListener.java:175) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.persist(DefaultPersistEventListener.java:93) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:77) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.internal.DefaultPersistEventListener.onPersist(DefaultPersistEventListener.java:54) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionImpl.firePersist(SessionImpl.java:754) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at org.hibernate.internal.SessionImpl.persist(SessionImpl.java:738) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:364) ~[spring-orm-6.1.6.jar:6.1.6]
+	at jdk.proxy2/jdk.proxy2.$Proxy132.persist(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$SharedEntityManagerInvocationHandler.invoke(SharedEntityManagerCreator.java:319) ~[spring-orm-6.1.6.jar:6.1.6]
+	at jdk.proxy2/jdk.proxy2.$Proxy132.persist(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.save(SimpleJpaRepository.java:618) ~[spring-data-jpa-3.2.5.jar:3.2.5]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:516) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:285) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:628) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:168) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:143) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:70) ~[spring-data-commons-3.2.5.jar:3.2.5]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:392) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.1.6.jar:6.1.6]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.1.6.jar:6.1.6]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-6.1.6.jar:6.1.6]
+	... 136 common frames omitted
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1' for key 'UK_jakfiqlvxpatgjgqsgs310opg'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994) ~[mysql-connector-j-8.0.33.jar:8.0.33]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61) ~[HikariCP-5.0.1.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java) ~[HikariCP-5.0.1.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194) ~[hibernate-core-6.4.4.Final.jar:6.4.4.Final]
+	... 192 common frames omitted
+
+2025-03-24T17:45:34.368-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-1] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:45:45.229-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:45.232-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select rl1_0.user_id,rl1_1.id,pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission,rl1_1.role from user_roles rl1_0 join roles rl1_1 on rl1_1.id=rl1_0.role_id left join roles_permissions pl1_0 on rl1_1.id=pl1_0.role_id left join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where rl1_0.user_id=?
+2025-03-24T17:45:45.793-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:45.799-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:45.803-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : update users set no_expirada=?,no_bloqueada=?,fecha_creacion=?,credenciales_no_expiradas=?,activa=?,intentos_fallidos=?,ultima_actualizacion=?,fecha_bloqueo=?,password=?,token_rest=?,username=? where id=?
+2025-03-24T17:45:45.811-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select tc1_0.id,tc1_0.expiracion from token_config tc1_0 order by tc1_0.id limit ?
+2025-03-24T17:45:45.816-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select us1_0.id,us1_0.no_expirada,us1_0.no_bloqueada,us1_0.fecha_creacion,us1_0.credenciales_no_expiradas,us1_0.activa,us1_0.intentos_fallidos,us1_0.ultima_actualizacion,us1_0.fecha_bloqueo,us1_0.password,us1_0.token_rest,us1_0.username from users us1_0 where us1_0.username=?
+2025-03-24T17:45:45.819-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : insert into refresh_token (created_date,expiration_date,refresh_token,id_user) values (?,?,?,?)
+2025-03-24T17:46:02.737-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T17:46:02.739-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:02.740-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:02.743-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:02.745-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:02.749-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:46:57.910-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-8] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T17:46:57.913-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-8] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:57.916-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-8] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:57.918-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-8] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:57.921-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-8] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:46:57.927-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-8] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:47:10.748-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T17:47:10.753-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:47:10.756-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:47:10.758-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:47:10.762-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:47:10.770-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-6] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:48:04.211-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T17:48:04.214-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:48:04.217-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:48:04.220-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:48:04.224-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:48:04.231-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-10] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:48:55.677-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T17:48:55.679-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:48:55.699-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : delete from roles_permissions where role_id=?
+2025-03-24T17:48:55.707-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : insert into roles_permissions (role_id,permission_id) values (?,?)
+2025-03-24T17:48:55.716-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-2] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:49:45.392-03:00 ERROR 11864 --- [security-template] [http-nio-8080-exec-3] c.s.s.s.j.o.e.GlobalExceptionHandler     : Error inesperado: JSON parse error: Unexpected character ('{' (code 123)): was expecting comma to separate Array entries
+
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('{' (code 123)): was expecting comma to separate Array entries
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:161) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:135) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:224) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:178) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:888) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.20.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter.doFilterInternal(OAuth2UserFilter.java:118) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator.doFilterInternal(JwtTokenValidator.java:110) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter.doFilterInternal(DefaultLogoutPageGeneratingFilter.java:58) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:189) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter.doFilter(DefaultLoginPageGeneratingFilter.java:175) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:181) ~[spring-security-oauth2-client-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195) ~[spring-webmvc-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230) ~[spring-security-config-6.2.4.jar:6.2.4]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.1.6.jar:6.1.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.20.jar:10.1.20]
+	at java.base/java.lang.Thread.run(Thread.java:842) ~[na:na]
+Caused by: com.fasterxml.jackson.databind.JsonMappingException: Unexpected character ('{' (code 123)): was expecting comma to separate Array entries
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 9, column: 6] (through reference chain: com.securitysolution.spring.security.jwt.oauth2.dto.RoleDTO["permissionsList"])
+	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:402) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.JsonMappingException.wrapWithPath(JsonMappingException.java:361) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializerBase.wrapAndThrow(BeanDeserializerBase.java:1863) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:394) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2105) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1481) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395) ~[spring-web-6.1.6.jar:6.1.6]
+	... 112 common frames omitted
+Caused by: com.fasterxml.jackson.core.JsonParseException: Unexpected character ('{' (code 123)): was expecting comma to separate Array entries
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 9, column: 6]
+	at com.fasterxml.jackson.core.JsonParser._constructError(JsonParser.java:2477) ~[jackson-core-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportError(ParserMinimalBase.java:750) ~[jackson-core-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.core.base.ParserMinimalBase._reportUnexpectedChar(ParserMinimalBase.java:674) ~[jackson-core-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.core.json.UTF8StreamJsonParser.nextToken(UTF8StreamJsonParser.java:779) ~[jackson-core-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer._deserializeFromArray(CollectionDeserializer.java:350) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.deserialize(CollectionDeserializer.java:244) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.std.CollectionDeserializer.deserialize(CollectionDeserializer.java:28) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129) ~[jackson-databind-2.15.4.jar:2.15.4]
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:392) ~[jackson-databind-2.15.4.jar:2.15.4]
+	... 117 common frames omitted
+
+2025-03-24T17:49:45.400-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-3] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:50:13.283-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T17:50:13.286-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:50:13.296-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select p1_0.id,p1_0.name,p1_0.permission from permisos p1_0 where p1_0.id=?
+2025-03-24T17:50:13.300-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : delete from roles_permissions where role_id=?
+2025-03-24T17:50:13.303-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : insert into roles_permissions (role_id,permission_id) values (?,?)
+2025-03-24T17:50:13.306-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : insert into roles_permissions (role_id,permission_id) values (?,?)
+2025-03-24T17:50:13.314-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-5] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:50:23.255-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0 where r1_0.role=?
+2025-03-24T17:50:23.257-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:50:23.262-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : delete from roles_permissions where role_id=?
+2025-03-24T17:50:23.271-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : insert into roles_permissions (role_id,permission_id) values (?,?)
+2025-03-24T17:50:23.279-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-7] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:50:30.800-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select r1_0.id,r1_0.role from roles r1_0
+2025-03-24T17:50:30.803-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:50:30.806-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:50:30.809-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:50:30.811-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select pl1_0.role_id,pl1_1.id,pl1_1.name,pl1_1.permission from roles_permissions pl1_0 join permisos pl1_1 on pl1_1.id=pl1_0.permission_id where pl1_0.role_id=?
+2025-03-24T17:50:30.820-03:00 DEBUG 11864 --- [security-template] [http-nio-8080-exec-9] org.hibernate.SQL                        : select mc1_0.id,mc1_0.clave,mc1_0.locale,mc1_0.valor from mensajes mc1_0 where mc1_0.clave=? and mc1_0.locale=?
+2025-03-24T17:52:17.800-03:00  INFO 11864 --- [security-template] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24T17:52:17.803-03:00  INFO 11864 --- [security-template] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-03-24T17:52:17.813-03:00  INFO 11864 --- [security-template] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

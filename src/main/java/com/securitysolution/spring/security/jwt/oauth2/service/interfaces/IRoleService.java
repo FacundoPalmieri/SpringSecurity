@@ -48,13 +48,18 @@ public interface IRoleService {
      * Guarda un nuevo rol o actualiza uno existente en el sistema.
      *
      * @param roleDto El objeto {@link RoleDTO} que contiene los datos del rol a guardar.
-     * @return Un objeto {@link Response} que contiene el rol guardado o actualizado como un
-     *         {@link RoleResponseDTO}.
+     * @return Un objeto {@link Response} que contiene el rol guardado como un {@link RoleResponseDTO}.
      */
     Response<RoleResponseDTO> save(RoleDTO roleDto);
 
 
+    /**
+     * Actualiza la lista de permisos para el rol.
+     *
+     * @param roleDto {@link RoleDTO} que contiene la lista de permisos.
+     * @return Un objeto {@link Response} que contiene el rol actualizado como un{@link RoleResponseDTO}
+     */
+    Response<RoleResponseDTO> update (RoleDTO roleDto);
 
-  //  void deleteById(Long id);
 
 }
