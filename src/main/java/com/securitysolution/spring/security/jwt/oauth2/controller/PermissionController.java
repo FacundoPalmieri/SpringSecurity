@@ -26,7 +26,7 @@ import java.util.Optional;
  * <p>
  * Los métodos disponibles son:
  * <ul>
- *   <li><b>GET /api/permissions/get/all</b>: Obtiene el listado completo de permisos.</li>
+ *   <li><b>GET /api/permissions/all</b>: Obtiene el listado completo de permisos.</li>
  *   <li><b>GET /api/permissions/{id}</b>: Obtiene un permiso específico por su ID.</li>
  * </ul>
  * </p>
@@ -36,7 +36,7 @@ import java.util.Optional;
  */
 @RestController
 @PreAuthorize("denyAll()")
-@RequestMapping("/api/permissions")
+@RequestMapping("/api/permission")
 public class PermissionController {
     @Autowired
     private UserRolesConfig userRolesConfig;
@@ -63,7 +63,7 @@ public class PermissionController {
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
-    @GetMapping("get/all")
+    @GetMapping("all")
     @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<List<PermissionResponseDTO>>> getAllPermissions() {
         Response<List<PermissionResponseDTO>> response = permissionService.findAll();

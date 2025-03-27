@@ -30,7 +30,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @PreAuthorize("permitAll()")
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     @Autowired
@@ -86,7 +86,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "Cuenta bloqueada o sin permisos de acceso.")
     })
-    @PostMapping("/refresh-token")
+    @PostMapping("/token/refresh")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Response<RefreshTokenDTO>> refreshToken(@RequestBody @Valid RefreshTokenDTO refreshTokenDTO) {
         Response<RefreshTokenDTO>response = userDetailsService.refreshToken(refreshTokenDTO);
@@ -136,7 +136,7 @@ public class AuthenticationController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Correo enviado exitosamente.")
     })
-    @PostMapping("/request/reset-password")
+    @PostMapping("/password/reset-request")
     public ResponseEntity<Response<String>> requestResetPassword(@RequestParam String email) {
         Response<String> response = userService.createTokenResetPasswordForUser(email);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -157,7 +157,7 @@ public class AuthenticationController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Restablecimiento de contraseña exitoso.")
     })
-    @PostMapping("/reset-password")
+    @PostMapping("/password/reset")
     public ResponseEntity<Response<String>> resetPassword(@Valid @RequestBody ResetPasswordDTO resetPasswordDTO, HttpServletRequest request) {
         Response <String> response = userService.updatePassword(resetPasswordDTO, request);
         return new ResponseEntity<>(response, HttpStatus.OK);

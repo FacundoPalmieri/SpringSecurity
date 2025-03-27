@@ -33,9 +33,10 @@ import java.util.Set;
  * <p>
  * Los métodos disponibles son:
  * <ul>
- *   <li><b>GET /api/roles/get/all</b>: Obtiene el listado completo de roles.</li>
- *   <li><b>GET /api/roles/{id}</b>: Obtiene un rol específico por su ID.</li>
- *   <li><b>POST /api/roles/create</b>: Crea un nuevo rol en el sistema.</li>
+ *   <li><b>GET /api/role/all</b>: Obtiene el listado completo de roles.</li>
+ *   <li><b>GET /api/role/{id}</b>: Obtiene un rol específico por su ID.</li>
+ *   <li><b>POST/api/roles</b>: Crea un nuevo rol en el sistema.</li>
+ *   <li><b>PATCH/api/roles</b>: Actualiza un rol en el sistema..</li>
  * </ul>
  * </p>
  * <p>
@@ -45,7 +46,7 @@ import java.util.Set;
 
 @RestController
 @PreAuthorize("denyAll()")
-@RequestMapping("/api/roles")
+@RequestMapping("/api/role")
 public class RoleController {
     @Autowired
     private UserRolesConfig userRolesConfig;
@@ -77,7 +78,7 @@ public class RoleController {
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
-    @GetMapping("/get/all")
+    @GetMapping("all")
     @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<List<Role>>> getAllRoles() {
         Response<List<Role>> response = roleService.findAll();
@@ -143,7 +144,7 @@ public class RoleController {
             @ApiResponse(responseCode = "404", description = "Permisos requeridos no encontrados."),
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
-    @PostMapping("/create/role")
+    @PostMapping
     @PreAuthorize("hasRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleDTO roleDto) {
         Response<RoleResponseDTO> response = roleService.save(roleDto);
@@ -170,6 +171,8 @@ public class RoleController {
      *         </ul>
      */
 
+
+
     @Operation(summary = "Actualizar Rol", description = "Actualiza un nuevo rol en el sistema.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "rol actualizado exitosamente."),
@@ -178,7 +181,7 @@ public class RoleController {
             @ApiResponse(responseCode = "404", description = "Permisos requeridos no encontrados."),
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
-    @PatchMapping("/update/role")
+    @PatchMapping
     @PreAuthorize("hasRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>> updateRole(@Valid @RequestBody RoleDTO roleDto) {
         Response<RoleResponseDTO> response = roleService.update(roleDto);
