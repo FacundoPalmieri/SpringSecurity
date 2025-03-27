@@ -45,6 +45,8 @@ import java.util.List;
  *   <li><b>PATCH /api/config/session</b>: Actualiza la cantidad de intentos fallidos de sesión.</li>
  *   <li><b>GET /api/config/token</b>: Obtiene la expiración del token.</li>
  *   <li><b>PATCH /api/config/token</b>: Actualiza la expiración del token.</li>
+ *   <li><b>GET /api/config/token/refresh</b>: Obtiene la expiración del refresh token.</li>
+ *   <li><b>PATCH /api/config/token/refresh</b>: Actualiza la expiración del refresh token.</li>
  * </ul>
  * </p>
  * <p>
@@ -249,7 +251,7 @@ public class ConfigController {
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso.")
     })
-    @GetMapping ("Refresh-token/get")
+    @GetMapping("/token/refresh")
     public ResponseEntity<Response<Long>> getRefreshTokenExpiration() {
         Response<Long> response = configService.getRefreshTokenExpiration();
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -278,7 +280,7 @@ public class ConfigController {
             @ApiResponse(responseCode = "401", description = "No autenticado."),
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso.")
     })
-    @PatchMapping("refresh-token/update")
+    @PatchMapping("/token/refresh")
     public ResponseEntity<Response<Long>> updateRefreshTokenExpiration(@Valid @RequestBody RefreshTokenConfigDTO refreshTokenConfigDTO) {
         Response<Long> response = configService.updateRefreshTokenExpiration(refreshTokenConfigDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);

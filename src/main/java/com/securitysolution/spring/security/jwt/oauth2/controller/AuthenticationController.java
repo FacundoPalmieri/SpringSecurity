@@ -20,9 +20,12 @@ import jakarta.validation.Valid;
  *
  * Este controlador expone las siguientes operaciones:
  * <ul>
- *     <li><b>/login</b>: Inicia sesión autenticando las credenciales del usuario y devuelve un token en caso de autenticación exitosa.</li>
- *     <li><b>/request/reset-password</b>: Solicita el restablecimiento de la contraseña enviando un correo electrónico con un enlace de redireccionamiento.</li>
- *     <li><b>/reset-password</b>: Restablece la contraseña del usuario utilizando el token recibido en el correo electrónico.</li>
+ *     <li><b>/api/auth/login</b>: Inicia sesión autenticando las credenciales del usuario y devuelve un token en caso de autenticación exitosa.</li>
+ *     <li><b>/api/auth/token/refresh</b>: Actualiza el refresh token de un usuario.</li>
+ *     <li><b>/api/auth/logout</b>: cierra la sesión del usuario eliminado el refresh token.</li>
+ *     <li><b>/api/auth/password/reset-request</b>: Solicita el restablecimiento de la contraseña enviando un correo con una URL de redireccionamiento.</li>
+ *     <li><b>/api/auth/password/reset-request</b>: Solicita el restablecimiento de la contraseña enviando un correo con una URL de redireccionamiento.</li>
+ *     <li><b>/api/auth/password/reset</b>: Restablece la contraseña del usuario utilizando el token recibido en el correo electrónico.</li>
  * </ul>
  *
  * El controlador depende de los servicios {@link UserDetailsServiceImp} para la autenticación de usuario y
