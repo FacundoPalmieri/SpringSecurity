@@ -111,7 +111,9 @@ public class RoleController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>> getRoleById(@Valid @PathVariable Long id) {
-        Response<RoleResponseDTO> response = roleService.getById(id);
+        Response<RoleResponseDTO> response = roleService.
+
+                getById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -142,7 +144,7 @@ public class RoleController {
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
     @PostMapping("/create/role")
-    @PreAuthorize("hasRole(userRolesConfig.devRole)")
+    @PreAuthorize("hasRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleDTO roleDto) {
         Response<RoleResponseDTO> response = roleService.save(roleDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
