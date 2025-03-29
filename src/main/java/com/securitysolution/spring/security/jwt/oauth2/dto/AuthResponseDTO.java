@@ -1,14 +1,21 @@
 package com.securitysolution.spring.security.jwt.oauth2.dto;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.securitysolution.spring.security.jwt.oauth2.model.Role;
+import lombok.Builder;
+import lombok.Data;
+import java.util.Set;
+/**
+ * DTO  que representa la respuesta de autenticación cuando un usuario inicia sesión en el sistema.
+ *
+ * Contiene información del usuario autenticado junto con el jwt y el refreshToken
+ */
+@Data
+@Builder
+public class AuthResponseDTO {
 
-import java.util.List;
-
-/*Cuando una clase se declara como un registro, el compilador de Java genera automáticamente
-ciertos métodos como el constructor, los métodos equals(), hashCode() y toString(),
-basados en los componentes de datos declarados en la clase.*/
-@JsonPropertyOrder({"username", "message", "jwt", "status"})
-public record AuthResponseDTO (String username, String message, String jwt, String refreshToken, List<String> roleAndPermission, boolean status)  {
-
-
+    private Long idUser;
+    private String username;
+    private Set<Role> roles; // Lista de Roles
+    private String jwt;
+    private String refreshToken;
 }

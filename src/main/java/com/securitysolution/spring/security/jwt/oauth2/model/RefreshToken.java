@@ -19,7 +19,6 @@ public class RefreshToken {
     @Column(nullable = false, unique = true)
     private String refreshToken;
 
-
     @OneToOne(targetEntity = UserSec.class)
     @JoinColumn(name = "id_user", nullable = false)
     private UserSec user;

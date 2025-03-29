@@ -61,8 +61,9 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "403", description = "Cuenta bloqueada o sin permisos de acceso.")
     })
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody @Valid AuthLoginRequestDTO userRequest) {
-        return new ResponseEntity<>(this.userDetailsService.loginUser(userRequest), HttpStatus.OK);
+    public ResponseEntity<Response<AuthResponseDTO>> login(@RequestBody @Valid AuthLoginRequestDTO userRequest) {
+        Response<AuthResponseDTO> response = this.userDetailsService.loginUser(userRequest);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
