@@ -68,7 +68,7 @@ import java.util.stream.Collectors;
 public class UserDetailsServiceImp implements UserDetailsService {
 
     @Autowired
-    private IUserRepository userRepo;
+    private IUserRepository userRepository;
 
     @Autowired
     JwtUtils jwtUtils;
@@ -105,7 +105,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 
         //Se cuenta con usuario de tipo Usersec y se necesita devolver un tipo UserDetails
         //Se recupera el usuario de la bd
-        UserSec userSec = userRepo.findUserEntityByUsername(username)
+        UserSec userSec = userRepository.findUserEntityByUsername(username)
                 .orElseThrow(()-> new UserNameNotFoundException(username));
 
         //Spring Security maneja permisos con GrantedAuthority

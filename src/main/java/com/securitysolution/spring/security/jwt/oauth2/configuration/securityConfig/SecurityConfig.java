@@ -3,6 +3,7 @@ import com.securitysolution.spring.security.jwt.oauth2.repository.IUserRepositor
 import com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.JwtTokenValidator;
 import com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.filter.OAuth2UserFilter;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
+import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IRefreshTokenService;
 import com.securitysolution.spring.security.jwt.oauth2.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,9 @@ public class SecurityConfig {
     @Autowired
     private IMessageService messageService;
 
+    @Autowired
+    private IRefreshTokenService refreshTokenService;
+
 
     /**
      * Configura el filtro de seguridad de la aplicación.
@@ -56,7 +60,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/holaseg",true)) //Redirección luego de autenticación.
                 //sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtTokenValidator(jwtUtils, messageService), BasicAuthenticationFilter.class)
-                .addFilterBefore(new OAuth2UserFilter(jwtUtils,userRepository,messageService), BasicAuthenticationFilter.class)
+                .addFilterBefore(new OAuth2UserFilter(jwtUtils,userRepository,messageService,refreshTokenService), BasicAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> oauth2
                       .defaultSuccessUrl("/holaseg",true))//Redirección luego de autenticación.
                 .build();
