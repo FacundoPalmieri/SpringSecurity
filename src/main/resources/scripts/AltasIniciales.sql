@@ -77,10 +77,12 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userDetailServiceImpl.logou
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.save.ok', 'Rol creado correctamente.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.update.ok', 'Rol actualizado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.getAll.user.ok', 'Roles encontrado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleService.getById.user.ok', 'Rol encontrado correctamente.', 'es_AR');
 
 
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findAll.ok', 'Permisos recuperados correctamente.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.findById.ok', 'Permiso encontrado correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.getAll.ok', 'Permisos recuperados correctamente.', 'es_AR');
+INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionService.getById.ok', 'Permiso encontrado correctamente.', 'es_AR');
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.log', 'Error al acceder a la base de datos: [ENTIDAD: {0}] - [ID OBJETO {1}] -  [NOMBRE OBJETO:{2}] - [OPERACIÓN:{3}] -  [CAUSA RAÍZ: {4}] - [MENSAJE USUARIO: {5}]', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('exception.database.user', 'Ocurrió un error al procesar la solicitud en la base de datos. Por favor, intente nuevamente más tarde.', 'es_AR');
@@ -145,8 +147,7 @@ INSERT INTO Mensajes (clave, valor, locale) VALUES ('userSecUpdateDTO.id.empty',
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.role.empty', 'El nombre del rol no puede estar vacío.', 'es_AR');
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.permission.empty', 'El rol debe contar con al menos un permiso.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.findAll.user.ok', 'Roles encontrado correctamente.', 'es_AR');
-INSERT INTO Mensajes (clave, valor, locale) VALUES ('roleDTO.findById.user.ok', 'Rol encontrado correctamente.', 'es_AR');
+
 
 INSERT INTO Mensajes (clave, valor, locale) VALUES ('permissionDTO.name.empty', 'El nombre del permiso no puede estar vacío.', 'es_AR');
 

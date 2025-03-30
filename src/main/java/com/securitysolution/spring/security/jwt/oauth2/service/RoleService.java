@@ -80,11 +80,11 @@ public class RoleService implements IRoleService {
        try{
            List<Role> roleList =  roleRepository.findAll();
 
-           String messageUser = messageService.getMessage("roleDTO.findAll.user.ok", null, LocaleContextHolder.getLocale());
+           String messageUser = messageService.getMessage("roleService.getAll.user.ok", null, LocaleContextHolder.getLocale());
            return new Response<>(true, messageUser, roleList);
 
        }catch(DataAccessException | CannotCreateTransactionException e){
-           throw new DataBaseException(e,"roleService", 0L, "", "findAll");
+           throw new DataBaseException(e,"roleService", 0L, "", "getAll");
 
        }
     }
@@ -116,7 +116,7 @@ public class RoleService implements IRoleService {
               if(role.isPresent()){
                   RoleResponseDTO dto = convertToDTOResponse(role.get());
 
-                  String messageUser = messageService.getMessage("roleDTO.findById.user.ok", null, LocaleContextHolder.getLocale());
+                  String messageUser = messageService.getMessage("roleService.getById.user.ok", null, LocaleContextHolder.getLocale());
                   return new Response<>(true, messageUser, dto);
               }else{
                   throw new RoleNotFoundException("",id, "","RoleService", "getById");
@@ -153,7 +153,7 @@ public class RoleService implements IRoleService {
                     new RoleNotFoundException("",id,"","RoleService", "getByIdInternal"));
 
         }catch(DataAccessException | CannotCreateTransactionException e){
-            throw new DataBaseException(e,"roleService", id, "", "findById");
+            throw new DataBaseException(e,"roleService", id, "", "getById");
 
         }
     }
