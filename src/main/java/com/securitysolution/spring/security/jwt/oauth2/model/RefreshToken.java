@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Data
+@Table(name = "refresh_tokens")
 public class RefreshToken {
 
     @Id
@@ -20,7 +21,7 @@ public class RefreshToken {
     private String refreshToken;
 
     @OneToOne(targetEntity = UserSec.class)
-    @JoinColumn(name = "id_user", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserSec user;
 
     private LocalDateTime expirationDate;

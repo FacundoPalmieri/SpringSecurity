@@ -1,5 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RefreshTokenDTO;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.RefreshTokenException;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.CannotCreateTransactionException;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -71,12 +74,12 @@ public class RefreshTokenService implements IRefreshTokenService {
     public void validateRefreshToken(RefreshToken refreshToken, RefreshTokenDTO refreshTokenDTO) {
         //Valída el código
         if(!refreshTokenDTO.getRefreshToken().equals(refreshToken.getRefreshToken())){
-            throw new RefreshTokenException(refreshTokenDTO.getUser_id(),"UserDetailServiceImpl", "validateRefreshToken", "userDetailServiceImpl.refreshToken.invalidCode");
+            throw new RefreshTokenException(refreshTokenDTO.getUser_id(),"RefreshTokenService", "validateRefreshToken", "userDetailServiceImpl.refreshToken.invalidCode");
         }
 
         //Valida la vigencia
         if(refreshToken.getExpirationDate().isBefore(LocalDateTime.now())){
-            throw new RefreshTokenException(refreshToken.getUser().getId(), "UserDetailServiceImpl","validateRefreshToken","userDetailServiceImpl.refreshToken.refreshTokenExpired");
+            throw new RefreshTokenException(refreshToken.getUser().getId(), "RefreshTokenService","validateRefreshToken","userDetailServiceImpl.refreshToken.refreshTokenExpired");
         }
     }
 
@@ -98,10 +101,24 @@ public class RefreshTokenService implements IRefreshTokenService {
            RefreshToken refreshTokenDB = refreshTokenRepository.findByRefreshToken(refreshToken).orElseThrow(()-> new RefreshTokenException(0L,"Refresh Token Service", "deleteRefreshToken", "refreshTokenService.deleteRefreshToken"));
            refreshTokenRepository.delete(refreshTokenDB);
         }catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "userService",0L, "", "deleteRefreshToken");
+            throw new DataBaseException(e, "RefreshTokenService",0L, "", "deleteRefreshToken");
         }
     }
 
+    /**
+     * Elimina el Refresh Token correspondiente al ID del usuario proporcionado.
+     *
+     * @param userId el ID del usuario.
+     */
+    @Transactional
+    @Override
+    public void deleteRefreshToken(Long userId) {
+        try{
+            refreshTokenRepository.deleteByUserId(userId);
+        }catch (DataAccessException | CannotCreateTransactionException e) {
+            throw new DataBaseException(e, "RefreshTokenService",userId, "", "deleteRefreshToken");
+        }
+    }
 
 
     /**
@@ -122,7 +139,7 @@ public class RefreshTokenService implements IRefreshTokenService {
             return refreshTokenRepository.findByUser_Id(id).orElseThrow(()-> new RefreshTokenException(id, "Refresh Token Service", "getRefreshTokenByUserId", "No se encontró refreshToken asociado al usuario."));
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "userService",id, "Nulo", "getRefreshTokenByUserId");
+            throw new DataBaseException(e, "RefreshTokenService",id, "Nulo", "getRefreshTokenByUserId");
         }
     }
 
