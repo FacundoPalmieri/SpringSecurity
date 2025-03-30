@@ -17,7 +17,7 @@ public class MessageConfig {
     private Long id;
 
     /**Clave única del mensaje.*/
-    @Column(unique = true, nullable = false)
+    @Column(name = "message_key",unique = true, nullable = false)
     private String key;
 
     /**Valor que representa el mensaje*/
