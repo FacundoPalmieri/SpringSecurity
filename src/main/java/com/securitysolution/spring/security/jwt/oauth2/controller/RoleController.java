@@ -4,7 +4,6 @@ import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
-import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IPermissionService;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IRoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,10 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 
 /**
@@ -81,7 +77,7 @@ public class RoleController {
     @GetMapping("all")
     @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<List<Role>>> getAllRoles() {
-        Response<List<Role>> response = roleService.findAll();
+        Response<List<Role>> response = roleService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

@@ -21,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,8 +39,8 @@ import java.util.stream.Collectors;
 
  * Métodos disponibles:
  * <ul>
- *   <li>{@link UserService#findAll()}: Recupera la lista de todos los usuarios del sistema.</li>
- *   <li>{@link UserService#findById(Long)}: Busca un usuario por su identificador único.</li>
+ *   <li>{@link IUserService#getAll()}: Recupera la lista de todos los usuarios del sistema.</li>
+ *   <li>{@link IUserService#getById(Long)}: Busca un usuario por su identificador único.</li>
  *   <li>{@link UserService#save(UserSecCreateDTO)}: Guarda un nuevo usuario en la base de datos.</li>
  *   <li>{@link UserService#update(UserSecUpdateDTO)}: Actualiza la información de un usuario existente.</li>
  *   <li>{@link UserService#encriptPassword(String)}: Encripta una contraseña utilizando el algoritmo BCrypt.</li>
@@ -103,7 +102,7 @@ public class UserService implements IUserService {
      * @throws DataBaseException Si ocurre un error en la consulta a la base de datos.
      */
     @Override
-    public Response<List<UserSecResponseDTO>> findAll() {
+    public Response<List<UserSecResponseDTO>> getAll() {
         try {
             List<UserSec> userList = userRepository.findAll();
 
@@ -137,7 +136,7 @@ public class UserService implements IUserService {
      * @throws DataBaseException     Si ocurre un error al acceder a la base de datos.
      */
     @Override
-    public Response<UserSecResponseDTO> findById(Long id) {
+    public Response<UserSecResponseDTO> getById(Long id) {
         try {
             Optional<UserSec> user = userRepository.findById(id);
             if (user.isPresent()) {
@@ -155,7 +154,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserSec findByUsername(String username) {
+    public UserSec getByUsername(String username) {
         try {
            return userRepository.findUserEntityByUsername(username).orElseThrow(() -> new UserNotFoundException("", "UserService", "findByUsername", 0L));
 
@@ -606,8 +605,7 @@ public class UserService implements IUserService {
     private void validateNotDevRole(UserSecCreateDTO userSecCreateDto) {
         //Obtener los roles mediante el ID del DTO
         for (Long id : userSecCreateDto.getRolesList()) {
-            Role role = roleService.findById(id)
-                    .orElseThrow(() -> new RoleNotFoundException("", id, "Rol no encontrado", "UserService", "validateNotDevRole"));
+            Role role = roleService.getByIdInternal(id);
 
             //Valída que la creación no sea a un rol DEV
             if (role.getRole().equals("Dev") || role.getRole().equals("DEV")) {
@@ -682,8 +680,7 @@ public class UserService implements IUserService {
 
         //Obtener los roles mediante el ID del DTO
         for (Long id : userSecUpdateDto.getRolesList()) {
-            Role role = roleService.findById(id)
-                    .orElseThrow(() -> new RoleNotFoundException("", id, "Rol no encontrado", "UserService", "validateNotDevRole"));
+            Role role = roleService.getByIdInternal(id);
 
             //Valída que la actualización no sea a un rol DEV
             if (role.getRole().equals("Dev") || role.getRole().equals("DEV")) {
@@ -760,8 +757,7 @@ public class UserService implements IUserService {
         //Obtener los roles mediante el ID del DTO
         Set<Role> roleList = new HashSet<>();
         for(Long id : userSecUpdateDTO.getRolesList()) {
-            Role role = roleService.findById(id)
-                    .orElseThrow(() -> new RoleNotFoundException("",id,"Rol no encontrado","UserService", "validateNotDevRole"));
+            Role role = roleService.getByIdInternal(id);
             roleList.add(role);
         }
 
@@ -882,9 +878,7 @@ public class UserService implements IUserService {
     private Set<Role> getRolesForUser(Set<Long> rolesList) {
         Set<Role> validRoles = new HashSet<>();
         for (Long id : rolesList) {
-            Role foundRole = roleService.findById(id).orElseThrow(() ->
-                    new RoleNotFoundUserCreationException("",id, "Rol no encontrado", "UserService", "getRolesForUser")
-            );
+            Role foundRole = roleService.getByIdInternal(id);
             validRoles.add(foundRole);
         }
         return validRoles;

@@ -169,11 +169,11 @@ public class UserDetailsServiceImp implements UserDetailsService {
             RefreshToken refreshToken = refreshTokenService.createRefreshToken(username);
 
             //Obtiene Datos del usuario desde la base de datos.
-            UserSec userSec = userService.findByUsername(username);
+            UserSec userSec = userService.getByUsername(username);
 
             //Construye el DTO para respuesta
             AuthResponseDTO authResponseDTO = AuthResponseDTO.builder()
-                    .id(userSec.getId())
+                    .idUser(userSec.getId())
                     .username(userSec.getUsername())
                     .roles(userSec.getRolesList().stream()
                             .map(role -> new Role(role.getId(), role.getRole(), role.getPermissionsList()))

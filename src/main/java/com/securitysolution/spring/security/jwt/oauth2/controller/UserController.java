@@ -67,7 +67,7 @@ public class UserController {
     @GetMapping("all")
     @PreAuthorize("hasAnyRole(@userRolesConfig.adminRole)")
     public ResponseEntity<Response<List<UserSecResponseDTO>>> getAllUsers() {
-        Response<List<UserSecResponseDTO>> response = userService.findAll();
+        Response<List<UserSecResponseDTO>> response = userService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -98,7 +98,7 @@ public class UserController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole(@userRolesConfig.adminRole)")
     public ResponseEntity<Response<UserSecResponseDTO>> getUserById(@PathVariable Long id) {
-        Response<UserSecResponseDTO>response = userService.findById(id);
+        Response<UserSecResponseDTO>response = userService.getById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

@@ -3,7 +3,6 @@ package com.securitysolution.spring.security.jwt.oauth2.controller;
 import com.securitysolution.spring.security.jwt.oauth2.configuration.appConfig.UserRolesConfig;
 import com.securitysolution.spring.security.jwt.oauth2.dto.PermissionResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IPermissionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Controlador encargado de gestionar los permisos en el sistema. Proporciona operaciones para obtener
@@ -66,7 +64,7 @@ public class PermissionController {
     @GetMapping("all")
     @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
     public ResponseEntity<Response<List<PermissionResponseDTO>>> getAllPermissions() {
-        Response<List<PermissionResponseDTO>> response = permissionService.findAll();
+        Response<List<PermissionResponseDTO>> response = permissionService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
