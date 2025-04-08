@@ -3,13 +3,10 @@ package com.securitysolution.spring.security.jwt.oauth2.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-/**
- * @author [Facundo Palmieri]
- */
-@Data
-public class RefreshTokenDTO {
 
-    private String jwt;
+@Data
+public class RefreshTokenRequestDTO {
+
 
     @NotNull(message = "refreshTokenDTO.refreshEmpty")
     private String refreshToken;

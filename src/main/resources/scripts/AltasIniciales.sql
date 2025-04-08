@@ -155,9 +155,9 @@ INSERT INTO message_config (message_key, value, locale) VALUES ('tokenDTO.expira
 
 INSERT INTO message_config (message_key, value, locale) VALUES ('FailedLoginAttemptsDTO.value.empty', 'La cantidad de inicios de sesión no puede estar vacía.', 'es_AR');
 
-INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenDTO.refreshEmpty', 'El campo RefreshToken está vacío.', 'es_AR');
-INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenDTO.userIdEmpty', 'El ID del usuario no puede ser nulo.', 'es_AR');
-INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenDTO.usernameEmpty', 'El username no puede ser nulo.', 'es_AR');
+INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenRequestDTO.refreshEmpty', 'El campo RefreshToken está vacío.', 'es_AR');
+INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenRequestDTO.userIdEmpty', 'El ID del usuario no puede ser nulo.', 'es_AR');
+INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenRequestDTO.usernameEmpty', 'El username no puede ser nulo.', 'es_AR');
 
 INSERT INTO message_config (message_key, value, locale) VALUES ('refreshTokenConfigDTO.invalidExpiration', 'El tiempo de expiración debe ser mayor o igual a 1.', 'es_AR');
 

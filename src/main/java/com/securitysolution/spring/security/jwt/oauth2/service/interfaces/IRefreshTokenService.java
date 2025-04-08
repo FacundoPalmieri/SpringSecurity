@@ -1,6 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.service.interfaces;
 
-import com.securitysolution.spring.security.jwt.oauth2.dto.RefreshTokenDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.RefreshTokenRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.model.RefreshToken;
 
 /**
@@ -42,9 +42,9 @@ public interface IRefreshTokenService {
      * También verifica si el Refresh Token ha expirado.
      *
      * @param refreshToken El objeto RefreshToken almacenado en la base de datos que se va a validar.
-     * @param refreshTokenDTO El objeto RefreshTokenDTO que contiene el Refresh Token enviado por el cliente.
+     * @param refreshTokenRequestDTO El objeto RefreshTokenRequestDTO que contiene el Refresh Token enviado por el cliente.
      */
-    void validateRefreshToken(RefreshToken refreshToken, RefreshTokenDTO refreshTokenDTO);
+    void validateRefreshToken(RefreshToken refreshToken, RefreshTokenRequestDTO refreshTokenRequestDTO);
 
 
 }

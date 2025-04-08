@@ -1,7 +1,7 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 import com.securitysolution.spring.security.jwt.oauth2.configuration.appConfig.UserRolesConfig;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.dto.RoleDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.RoleRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IPermissionService;
@@ -121,7 +121,7 @@ public class RoleController {
      * Requiere el rol <b>DEV</b> para acceder.
      * </p>
      *
-     * @param roleDto Datos del rol a crear.
+     * @param roleRequestDto Datos del rol a crear.
      * @return ResponseEntity con:
      *         <ul>
      *         <li><b>200 OK</b>: Rol creado exitosamente.</li>
@@ -142,8 +142,8 @@ public class RoleController {
     })
     @PostMapping
     @PreAuthorize("hasRole(@userRolesConfig.devRole)")
-    public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleDTO roleDto) {
-        Response<RoleResponseDTO> response = roleService.save(roleDto);
+    public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleRequestDTO roleRequestDto) {
+        Response<RoleResponseDTO> response = roleService.save(roleRequestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -156,7 +156,7 @@ public class RoleController {
      * Requiere el rol <b>DEV</b> para acceder.
      * </p>
      *
-     * @param roleDto Datos del rol a crear.
+     * @param roleRequestDto Datos del rol a crear.
      * @return ResponseEntity con:
      *         <ul>
      *         <li><b>200 OK</b>: Rol actualizado exitosamente.</li>
@@ -179,8 +179,8 @@ public class RoleController {
     })
     @PatchMapping
     @PreAuthorize("hasRole(@userRolesConfig.devRole)")
-    public ResponseEntity<Response<RoleResponseDTO>> updateRole(@Valid @RequestBody RoleDTO roleDto) {
-        Response<RoleResponseDTO> response = roleService.update(roleDto);
+    public ResponseEntity<Response<RoleResponseDTO>> updateRole(@Valid @RequestBody RoleRequestDTO roleRequestDto) {
+        Response<RoleResponseDTO> response = roleService.update(roleRequestDto);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
