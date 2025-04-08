@@ -276,8 +276,11 @@ public class UserDetailsServiceImp implements UserDetailsService {
         //Generar un nuevo refresh Token y guarda en la base.
         RefreshToken refreshTokenNew =  refreshTokenService.createRefreshToken(refreshTokenDTO.getUsername());
 
-        // Obtener la autenticación actual desde el contexto de seguridad de Spring
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // Obtiene datos del usuario para generar el objeto userDetails.
+        UserDetails userDetails = this.loadUserByUsername(refreshTokenDTO.getUsername());
+
+        // Crea un objeto authentication.
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
         //Genera un nuevo JWT.
         String jwt = jwtUtils.createToken(authentication);
