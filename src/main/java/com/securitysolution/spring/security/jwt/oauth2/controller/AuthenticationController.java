@@ -149,7 +149,7 @@ public class AuthenticationController {
     /**
      * Restablece la contraseña del usuario utilizando el token recibido en el correo electrónico.
      *
-     * @param resetPasswordDTO Objeto que contiene el nuevo password del usuario y el token recibido por correo electrónico.
+     * @param resetPasswordRequestDTO Objeto que contiene el nuevo password del usuario y el token recibido por correo electrónico.
      * @param request Solicitud HTTP que contiene detalles de la petición
      * @return ResponseEntity con:
      *      <ul>
@@ -161,8 +161,8 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "200", description = "Restablecimiento de contraseña exitoso.")
     })
     @PostMapping("/password/reset")
-    public ResponseEntity<Response<String>> resetPassword(@Valid @RequestBody ResetPasswordDTO resetPasswordDTO, HttpServletRequest request) {
-        Response <String> response = userService.updatePassword(resetPasswordDTO, request);
+    public ResponseEntity<Response<String>> resetPassword(@Valid @RequestBody ResetPasswordRequestDTO resetPasswordRequestDTO, HttpServletRequest request) {
+        Response <String> response = userService.updatePassword(resetPasswordRequestDTO, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

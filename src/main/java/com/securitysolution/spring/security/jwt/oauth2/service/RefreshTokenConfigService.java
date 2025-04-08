@@ -1,6 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
-import com.securitysolution.spring.security.jwt.oauth2.dto.RefreshTokenConfigDTO;
+import com.securitysolution.spring.security.jwt.oauth2.dto.RefreshTokenConfigRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
 import com.securitysolution.spring.security.jwt.oauth2.exception.RefreshTokenConfigNotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.RefreshTokenConfig;
@@ -59,13 +59,13 @@ public class RefreshTokenConfigService implements IRefreshTokenConfigService {
     /**
      * Actualiza la expiración del Refresh Token en días
      *
-     * @param refreshTokenConfigDTO El nuevo valor de la duración de expiración del token en días.
+     * @param refreshTokenConfigRequestDTO El nuevo valor de la duración de expiración del token en días.
      * @return El tiempo de expiración actualizado.
      */
     @Override
-    public int updateExpiration(RefreshTokenConfigDTO refreshTokenConfigDTO) {
+    public int updateExpiration(RefreshTokenConfigRequestDTO refreshTokenConfigRequestDTO) {
         try{
-            return refreshTokenConfigRepository.update(refreshTokenConfigDTO.expiration());
+            return refreshTokenConfigRepository.update(refreshTokenConfigRequestDTO.expiration());
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "RefreshTokenConfigService", 1L, "RefreshToken", "getExpiration");
