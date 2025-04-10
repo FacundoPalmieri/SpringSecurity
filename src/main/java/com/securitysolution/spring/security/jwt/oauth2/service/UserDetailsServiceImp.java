@@ -289,7 +289,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
         RefreshTokenResponseDTO refreshTokenResponse = new RefreshTokenResponseDTO();
         refreshTokenResponse.setRefreshToken(refreshTokenNew.getRefreshToken());
         refreshTokenResponse.setJwt(jwt);
-        refreshTokenResponse.setUser_id(refreshTokenRequestDTO.getUser_id());
+        refreshTokenResponse.setIdUser(refreshTokenRequestDTO.getUser_id());
         refreshTokenResponse.setUsername(refreshTokenRequestDTO.getUsername());
 
         //Descifra la clave del mensaje.
