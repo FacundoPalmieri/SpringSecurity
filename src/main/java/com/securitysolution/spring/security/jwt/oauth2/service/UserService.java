@@ -110,11 +110,11 @@ public class UserService implements IUserService {
             for (UserSec userSec : userList) {
                 userSecResponseDTOList.add(convertToDTO(userSec));
             }
-            String messageUser = messageService.getMessage("userService.findAll.ok", null, LocaleContextHolder.getLocale());
+            String messageUser = messageService.getMessage("userService.getAll.ok", null, LocaleContextHolder.getLocale());
             return new Response<>(true, messageUser, userSecResponseDTOList);
 
         } catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "userService", 0L, "", "findAll");
+            throw new DataBaseException(e, "userService", 0L, "", "getAll");
         }
     }
 
@@ -142,24 +142,24 @@ public class UserService implements IUserService {
             if (user.isPresent()) {
                 UserSecResponseDTO dto = convertToDTO(user.get());
 
-                String messageUser = messageService.getMessage("userService.findById.ok.user", null, LocaleContextHolder.getLocale());
+                String messageUser = messageService.getMessage("userService.getById.ok.user", null, LocaleContextHolder.getLocale());
 
                 return new Response<>(true, messageUser, dto);
             } else {
-                throw new UserNotFoundException("", "UserService", "FindById", id);
+                throw new UserNotFoundException("", "UserService", "getById", id);
             }
         } catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "userService", id, "", "findById");
+            throw new DataBaseException(e, "userService", id, "", "getById");
         }
     }
 
     @Override
     public UserSec getByUsername(String username) {
         try {
-           return userRepository.findUserEntityByUsername(username).orElseThrow(() -> new UserNotFoundException("", "UserService", "findByUsername", 0L));
+           return userRepository.findUserEntityByUsername(username).orElseThrow(() -> new UserNotFoundException("", "UserService", "getByUsername", 0L));
 
         }catch (DataAccessException | CannotCreateTransactionException e) {
-            throw new DataBaseException(e, "userService", 0L, "", "findByUsername");
+            throw new DataBaseException(e, "userService", 0L, "", "getByUsername");
         }
 
     }
