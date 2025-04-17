@@ -4,6 +4,8 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.securitysolution.spring.security.jwt.oauth2.exception.LogLevel;
+import com.securitysolution.spring.security.jwt.oauth2.exception.UnauthorizedException;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -110,17 +112,22 @@ public class JwtUtils {
      */
     public DecodedJWT validateToken(String token) {
 
-        // Algoritmo y clave secreta para la validación
-        Algorithm algorithm = Algorithm.HMAC256(this.privateKey);
+        try{
+            // Algoritmo y clave secreta para la validación
+            Algorithm algorithm = Algorithm.HMAC256(this.privateKey);
 
-        // Configurar el verificador del token con el emisor esperado
-        JWTVerifier verifier = JWT.require(algorithm)
-                .withIssuer(this.userGenerator)
-                .build(); //usa patrón builder
+            // Configurar el verificador del token con el emisor esperado
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer(this.userGenerator)
+                    .build(); //usa patrón builder
 
-        // Si el token es válido, se decodifica y se devuelve el objeto DecodedJWT
-        DecodedJWT decodedJWT = verifier.verify(token);
-        return decodedJWT;
+            // Si el token es válido, se decodifica y se devuelve el objeto DecodedJWT
+            DecodedJWT decodedJWT = verifier.verify(token);
+            return decodedJWT;
+        }catch (Exception e){
+            throw new UnauthorizedException("","jwtUtils.validateToken.error", null, "jwtUtils.validateToken.error", null,"","JwtUtils","UserService", LogLevel.ERROR);
+        }
+
     }
 
 

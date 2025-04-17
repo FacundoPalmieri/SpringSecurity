@@ -2,9 +2,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.dto.PermissionResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
-import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.PermissionNotFoundException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.PermissionNotFoundRoleCreationException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IPermissionRepository;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IMessageService;
@@ -32,7 +30,7 @@ import java.util.Optional;
  * </p>
  * <p>
  * Este servicio maneja las excepciones de acceso a la base de datos o de transacción lanzando la excepción
- * {@link DataBaseException}, y en caso de no encontrar un permiso, lanza {@link PermissionNotFoundException}.
+ * {@link DataBaseException}, y en caso de no encontrar un permiso, lanza {@link NotFoundException}.
  * </p>
  */
 
@@ -91,13 +89,13 @@ public class PermissionService implements IPermissionService {
 
      * </p>
      * <p>
-     * Si el permiso no se encuentra, lanza una excepción {@link PermissionNotFoundException}.
+     * Si el permiso no se encuentra, lanza una excepción {@link NotFoundException}.
      * En caso de error de acceso a la base de datos o de transacción, lanza una excepción {@link DataBaseException}.
      * </p>
      *
      * @param id El identificador único del permiso a buscar.
      * @return Un objeto {@link Response} que contiene el permiso en formato {@link PermissionResponseDTO}.
-     * @throws PermissionNotFoundException Si no se encuentra un permiso con el ID especificado.
+     * @throws NotFoundException Si no se encuentra un permiso con el ID especificado.
      * @throws DataBaseException Si ocurre un error de acceso a la base de datos o de transacción.
      */
     @Override
@@ -111,7 +109,7 @@ public class PermissionService implements IPermissionService {
                 String messageUser = messageService.getMessage("permissionService.getById.ok", null, LocaleContextHolder.getLocale());
                 return new Response<>(true, messageUser, permissionResponseDTO);
             }else{
-                throw new PermissionNotFoundException("",id,"PermissionService", "getById");
+                throw new NotFoundException("","exception.permissionNotFound.user",null,"exception.permissionNotFound.log",id," ", "PermissionService","getById", LogLevel.ERROR);
             }
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e,"PermissionService", id,"","getById");
@@ -142,7 +140,7 @@ public class PermissionService implements IPermissionService {
     public Permission getByIdInternal(Long id) {
         try{
             return permissionRepository.findById(id).orElseThrow(()->
-                    new PermissionNotFoundRoleCreationException("",id,"PermissionService", "getByIdInternal"));
+                    new BadRequestException("","exception.permissionNotFoundRoleCreationException.user", null,"exception.permissionNotFoundRoleCreationException.log", id, "","PermissionService", "getByIdInternal", LogLevel.ERROR));
         }catch(DataAccessException | CannotCreateTransactionException e){
             throw new DataBaseException(e,"PermissionService", id, "","getByIdInternal");
 

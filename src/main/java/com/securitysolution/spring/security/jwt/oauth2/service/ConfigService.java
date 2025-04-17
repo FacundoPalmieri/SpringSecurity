@@ -2,9 +2,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
-import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.RefreshTokenConfigNotFoundException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.TokenConfigNotFoundException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -204,8 +202,7 @@ public class ConfigService implements IConfigService {
             return new Response<>(true, userMessage, tokenConfigRequestDTO.expiration());
         }
 
-        throw new TokenConfigNotFoundException(0L,"ConfigService", "updateTokenExpiration");
-
+        throw new NotFoundException("","exception.tokenConfigNotFoundException.user",null,"exception.tokenConfigNotFoundException.log",null,"","ConfigService", "updateTokenExpiration",LogLevel.ERROR);
         /*
         //Recuperar valor actualizado y convertirlo a minutos
         Long expiration = tokenService.getExpiration();
@@ -262,9 +259,7 @@ public class ConfigService implements IConfigService {
            String userMessage = messageService.getMessage("config.updateExpirationRefreshToken.ok", new Object[]{refreshTokenConfigRequestDTO.expiration()}, LocaleContextHolder.getLocale());
            return new Response<>(true, userMessage, refreshTokenConfigRequestDTO.expiration());
        }
-
-       throw new RefreshTokenConfigNotFoundException(0L,"ConfigService","updateRefreshTokenExpiration");
-
+       throw new NotFoundException("","exception.refreshTokenConfigNotFoundException.user",null, "exception.refreshTokenConfigNotFoundException.log",0L,"","ConfigService","updateRefreshTokenExpiration",LogLevel.ERROR);
     }
 
 }

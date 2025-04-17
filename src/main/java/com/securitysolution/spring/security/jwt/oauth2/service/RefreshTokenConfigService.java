@@ -2,7 +2,8 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.dto.RefreshTokenConfigRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.RefreshTokenConfigNotFoundException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.LogLevel;
+import com.securitysolution.spring.security.jwt.oauth2.exception.NotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.RefreshTokenConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IRefreshTokenConfigRepository;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IRefreshTokenConfigService;
@@ -49,8 +50,7 @@ public class RefreshTokenConfigService implements IRefreshTokenConfigService {
                 return optional.get().getExpiration();
             }
 
-            throw new RefreshTokenConfigNotFoundException(0L, "Refresh Token Config Service", "getExpiration");
-
+            throw new NotFoundException("","exception.refreshTokenConfigNotFoundException.user",null,"exception.refreshTokenConfigNotFoundException.log", 0L, "","Refresh Token Config Service", "getExpiration", LogLevel.ERROR);
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "RefreshTokenConfigService", 1L, "RefreshToken", "getExpiration");
         }

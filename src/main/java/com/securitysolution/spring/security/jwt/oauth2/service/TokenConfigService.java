@@ -1,7 +1,8 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.TokenConfigNotFoundException;
+import com.securitysolution.spring.security.jwt.oauth2.exception.LogLevel;
+import com.securitysolution.spring.security.jwt.oauth2.exception.NotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.TokenConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.ITokenRepository;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenConfigService;
@@ -40,6 +41,7 @@ public class TokenConfigService implements ITokenConfigService {
      *
      * @return Un {@link Long} que representa la fecha de expiración del token.
      * @throws DataBaseException Si ocurre un error de acceso a la base de datos o de transacción.
+     * @throws NotFoundException Si no encuentra valor.
      */
     @Override
     public Long getExpiration() {
@@ -48,10 +50,7 @@ public class TokenConfigService implements ITokenConfigService {
             if(optional.isPresent()){
                 return optional.get().getExpiration();
             }
-
-            throw new TokenConfigNotFoundException(0L, "Token Config Service","getExpiration");
-
-
+            throw new NotFoundException("","exception.tokenConfigNotFoundException.user",null,"exception.tokenConfigNotFoundException.log",null,"","Token Config Service","getExpiration", LogLevel.ERROR);
         }catch (DataAccessException | CannotCreateTransactionException e) {
             throw new DataBaseException(e, "TokenConfigService", 1L, "", "getExpiration");
         }
