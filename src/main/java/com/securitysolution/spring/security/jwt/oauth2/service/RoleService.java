@@ -3,6 +3,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleResponseDTO;
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.Permission;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
@@ -119,7 +120,7 @@ public class RoleService implements IRoleService {
                   String messageUser = messageService.getMessage("roleService.getById.user.ok", null, LocaleContextHolder.getLocale());
                   return new Response<>(true, messageUser, dto);
               }else{
-                  throw new NotFoundException("", "exception.roleNotFound.user",null,"exception.roleNotFound.log",id,"","RoleService", "getById",LogLevel.ERROR);
+                  throw new NotFoundException("", "exception.roleNotFound.user",null,"exception.roleNotFound.log",id,"","RoleService", "getById", LogLevel.ERROR);
               }
 
         }catch(DataAccessException | CannotCreateTransactionException e){

@@ -1,5 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.exception;
 
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.http.HttpStatus;

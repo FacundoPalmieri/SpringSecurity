@@ -2,6 +2,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.*;
@@ -202,7 +203,7 @@ public class ConfigService implements IConfigService {
             return new Response<>(true, userMessage, tokenConfigRequestDTO.expiration());
         }
 
-        throw new NotFoundException("","exception.tokenConfigNotFoundException.user",null,"exception.tokenConfigNotFoundException.log",null,"","ConfigService", "updateTokenExpiration",LogLevel.ERROR);
+        throw new NotFoundException("","exception.tokenConfigNotFoundException.user",null,"exception.tokenConfigNotFoundException.log",null,"","ConfigService", "updateTokenExpiration", LogLevel.ERROR);
         /*
         //Recuperar valor actualizado y convertirlo a minutos
         Long expiration = tokenService.getExpiration();

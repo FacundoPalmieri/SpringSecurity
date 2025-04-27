@@ -1,6 +1,5 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 
-import com.securitysolution.spring.security.jwt.oauth2.configuration.appConfig.UserRolesConfig;
 import com.securitysolution.spring.security.jwt.oauth2.dto.PermissionResponseDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.IPermissionService;
@@ -36,8 +35,7 @@ import java.util.List;
 @PreAuthorize("denyAll()")
 @RequestMapping("/api/permission")
 public class PermissionController {
-    @Autowired
-    private UserRolesConfig userRolesConfig;
+
 
     @Autowired
     private IPermissionService permissionService;
@@ -62,7 +60,7 @@ public class PermissionController {
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
     @GetMapping("all")
-    @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
+    @PreAuthorize("hasAnyRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
     public ResponseEntity<Response<List<PermissionResponseDTO>>> getAllPermissions() {
         Response<List<PermissionResponseDTO>> response = permissionService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -92,7 +90,7 @@ public class PermissionController {
             @ApiResponse(responseCode = "404", description = "Permiso no encontrado.")
     })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole(@userRolesConfig.devRole)")
+    @PreAuthorize("hasAnyRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
     public ResponseEntity<Response<PermissionResponseDTO>> getPermissionById(@PathVariable Long id) {
         Response<PermissionResponseDTO> response = permissionService.getById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);

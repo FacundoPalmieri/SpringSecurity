@@ -1,4 +1,4 @@
-package com.securitysolution.spring.security.jwt.oauth2.exception;
+package com.securitysolution.spring.security.jwt.oauth2.enums;
 
 /**
  * @author [Facundo Palmieri]

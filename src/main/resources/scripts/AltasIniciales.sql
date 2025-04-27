@@ -5,9 +5,9 @@ Insert into permissions (permission,name) values ('Update','Update');
 Insert into permissions (permission,name) values ('Delete', 'Delete');
 
 -- Creamos Roles --
-Insert into roles (role) values('USER');
-Insert into roles (role) values('ADMIN');
-Insert into roles (role) values ('DEV');
+Insert into roles (role) values('Usuario');
+Insert into roles (role) values('Administrador');
+Insert into roles (role) values ('Desarrollador');
 
 
 -- Asociamos Roles y permisos-

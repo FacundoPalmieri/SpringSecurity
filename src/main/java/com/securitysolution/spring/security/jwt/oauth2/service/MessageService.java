@@ -1,7 +1,7 @@
 package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.securitysolution.spring.security.jwt.oauth2.exception.DataBaseException;
-import com.securitysolution.spring.security.jwt.oauth2.exception.LogLevel;
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import com.securitysolution.spring.security.jwt.oauth2.exception.NotFoundException;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.repository.IMessageRepository;

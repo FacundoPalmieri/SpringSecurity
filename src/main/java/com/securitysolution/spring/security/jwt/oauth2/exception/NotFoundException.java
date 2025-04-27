@@ -1,6 +1,7 @@
 package com.securitysolution.spring.security.jwt.oauth2.exception;
 
 
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
  */
 
 public class NotFoundException extends AppException {
-    public NotFoundException(String message, String userMessageKey,Object[] userArgs,String logMessageKey, Long id, String value, String clase, String method,LogLevel logLevel) {
+    public NotFoundException(String message, String userMessageKey, Object[] userArgs, String logMessageKey, Long id, String value, String clase, String method, LogLevel logLevel) {
         super(message, userMessageKey,userArgs,logMessageKey, id, value, clase, method, logLevel);
     }
 

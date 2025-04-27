@@ -2,6 +2,7 @@ package com.securitysolution.spring.security.jwt.oauth2.service;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import com.securitysolution.spring.security.jwt.oauth2.exception.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.Role;
 import com.securitysolution.spring.security.jwt.oauth2.model.UserSec;

@@ -4,7 +4,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.securitysolution.spring.security.jwt.oauth2.exception.LogLevel;
+import com.securitysolution.spring.security.jwt.oauth2.enums.LogLevel;
 import com.securitysolution.spring.security.jwt.oauth2.exception.UnauthorizedException;
 import com.securitysolution.spring.security.jwt.oauth2.service.interfaces.ITokenConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
