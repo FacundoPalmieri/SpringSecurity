@@ -1,4 +1,5 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
+import com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.annotations.OnlyDevelopers;
 import com.securitysolution.spring.security.jwt.oauth2.dto.Response;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleRequestDTO;
 import com.securitysolution.spring.security.jwt.oauth2.dto.RoleResponseDTO;
@@ -73,7 +74,7 @@ public class RoleController {
             @ApiResponse(responseCode = "403", description = "No autorizado para acceder a este recurso."),
     })
     @GetMapping("all")
-    @PreAuthorize("hasAnyRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
+    @OnlyDevelopers
     public ResponseEntity<Response<List<Role>>> getAllRoles() {
         Response<List<Role>> response = roleService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -104,7 +105,7 @@ public class RoleController {
             @ApiResponse(responseCode = "404", description = "Rol no encontrado."),
     })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
+    @OnlyDevelopers
     public ResponseEntity<Response<RoleResponseDTO>> getRoleById(@Valid @PathVariable Long id) {
         Response<RoleResponseDTO> response = roleService.
 
@@ -139,7 +140,7 @@ public class RoleController {
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
     @PostMapping
-    @PreAuthorize("hasAnyRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
+    @OnlyDevelopers
     public ResponseEntity<Response<RoleResponseDTO>>createRole(@Valid @RequestBody RoleRequestDTO roleRequestDto) {
         Response<RoleResponseDTO> response = roleService.save(roleRequestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -176,7 +177,7 @@ public class RoleController {
             @ApiResponse(responseCode = "409", description = "Rol existente en el sistema.")
     })
     @PatchMapping
-    @PreAuthorize("hasAnyRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
+    @OnlyDevelopers
     public ResponseEntity<Response<RoleResponseDTO>> updateRole(@Valid @RequestBody RoleRequestDTO roleRequestDto) {
         Response<RoleResponseDTO> response = roleService.update(roleRequestDto);
         return new ResponseEntity<>(response, HttpStatus.OK);

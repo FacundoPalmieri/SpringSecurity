@@ -1,5 +1,6 @@
 package com.securitysolution.spring.security.jwt.oauth2.controller;
 
+import com.securitysolution.spring.security.jwt.oauth2.configuration.securityConfig.annotations.OnlyDevelopers;
 import com.securitysolution.spring.security.jwt.oauth2.dto.*;
 import com.securitysolution.spring.security.jwt.oauth2.model.MessageConfig;
 import com.securitysolution.spring.security.jwt.oauth2.service.ConfigService;
@@ -53,7 +54,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/config")
-@PreAuthorize("hasRole(T(com.securitysolution.spring.security.jwt.oauth2.enums.UserRole).Desarrollador.name())")
+@OnlyDevelopers
 public class ConfigController {
     @Autowired
     private ConfigService configService;
